@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F7F9F7;color:#263238;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#1F6BB8}
+a:hover{color:#103F43}
+input,select,textarea,button{font:inherit}
+:focus-visible{outline:3px solid #2677C9;outline-offset:3px}
+h1,h2,h3,p{text-wrap:pretty}
+@keyframes wpZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes wpSpin{to{transform:rotate(360deg)}}
+@keyframes wpFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</helmet>
+
+<sc-if value="{{ isPublic }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <button type="button" onClick="{{ skipToMain }}" style="position:absolute;left:-9999px;top:8px;z-index:100;background:#103F43;color:#fff;border:0;padding:12px 18px;font-weight:600" style-focus="left:12px">Skip to main content</button>
+
+  <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#FFF6E0;border-bottom:1px solid #E9CF95;color:#6B4200;font:500 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">
+      <div style="max-width:1280px;margin:0 auto;padding:8px clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center">
+        <strong style="font-weight:700">PRE-LAUNCH REVIEW</strong>
+        <span>Items tagged TO CONFIRM need business approval. Phone area code (602) is an Arizona code; the address is in Charlotte, NC. Verify both before launch.</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,0.97);border-bottom:1px solid #D9E2E0;box-shadow:{{ headerShadow }};transition:box-shadow 200ms ease">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px);height:{{ headerH }};display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="#/" aria-label="Whitaker Plumbing, home" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#103F43;flex-shrink:0">
+        <span aria-hidden="true" style="position:relative;width:30px;height:30px;background:#103F43;border-radius:3px;flex-shrink:0">
+          <span style="position:absolute;left:6px;top:8px;width:18px;height:4px;background:#36B7A5"></span>
+          <span style="position:absolute;left:13px;top:8px;width:4px;height:15px;background:#36B7A5"></span>
+        </span>
+        <span style="font:800 19px/1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;white-space:nowrap">Whitaker <span style="font-weight:600;color:#2E6E6A">Plumbing</span></span>
+      </a>
+
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="display:flex;align-items:center;gap:4px">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+            <a href="{{ item.href }}" aria-current="{{ item.current }}" style="position:relative;display:flex;align-items:center;height:44px;padding:0 12px;text-decoration:none;font:500 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:{{ item.color }};white-space:nowrap" style-hover="color:#103F43">
+              {{ item.label }}
+              <sc-if value="{{ item.active }}"><span aria-hidden="true" style="position:absolute;left:12px;right:12px;bottom:6px;height:2px;background:#36B7A5"></span></sc-if>
+            </a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;height:44px;padding:0 14px;border:1.5px solid #103F43;border-radius:4px;color:#103F43;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap" style-hover="background:#E5F3F0;color:#103F43">{{ callLabel }}</a>
+          <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;height:44px;padding:0 18px;background:#1F6BB8;border-radius:4px;color:#FFFFFF;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap" style-hover="background:#185A9C;color:#FFFFFF">Request Service</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:8px">
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;height:44px;padding:0 14px;border:1.5px solid #103F43;border-radius:4px;color:#103F43;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">Call</a>
+          <button type="button" ref="{{ menuBtnRef }}" onClick="{{ toggleMenu }}" aria-expanded="{{ menuExpanded }}" aria-controls="mobile-menu" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;background:#103F43;color:#fff;border:0;border-radius:4px;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer">
+            <span aria-hidden="true" style="display:flex;flex-direction:column;gap:4px;width:16px">
+              <span style="height:2px;background:#fff;transition:transform 200ms ease;transform:{{ bar1 }}"></span>
+              <span style="height:2px;background:#fff;transition:opacity 150ms ease;opacity:{{ bar2 }}"></span>
+              <span style="height:2px;background:#fff;transition:transform 200ms ease;transform:{{ bar3 }}"></span>
+            </span>
+            {{ menuLabel }}
+          </button>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ menuVisible }}">
+      <div id="mobile-menu" style="border-top:1px solid #D9E2E0;background:#FFFFFF;box-shadow:0 18px 30px rgba(16,63,67,0.12);animation:wpFade 180ms ease both">
+        <nav aria-label="Main" style="max-width:1280px;margin:0 auto;padding:8px clamp(20px,4vw,56px) 20px">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+            <a href="{{ item.href }}" aria-current="{{ item.current }}" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-bottom:1px solid #E6ECEA;text-decoration:none;font:600 18px/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;color:{{ item.color }}">
+              {{ item.label }}<span aria-hidden="true" style="color:#36B7A5">→</span>
+            </a>
+          </sc-for>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+            <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;justify-content:center;height:52px;background:#1F6BB8;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif">Request Service</a>
+            <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;height:52px;border:1.5px solid #103F43;color:#103F43;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif">Call +1 (602) 833-3185</a>
+          </div>
+        </nav>
+      </div>
+    </sc-if>
+  </header>
+
+  <main id="main" ref="{{ mainRef }}" tabIndex="-1" style="flex:1;outline:none">
+
+    <!-- HOME -->
+    <sc-if value="{{ is.home }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Home">
+        <section aria-labelledby="hero-title" style="position:relative;overflow:hidden">
+          <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(#E3ECEA 1px,transparent 1px),linear-gradient(90deg,#E3ECEA 1px,transparent 1px);background-size:64px 64px;opacity:0.55;mask-image:linear-gradient(90deg,#000 0%,transparent 55%);-webkit-mask-image:linear-gradient(90deg,#000 0%,transparent 55%)"></div>
+          <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(36px,6vw,88px) clamp(20px,4vw,56px) clamp(48px,7vw,104px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(36px,5vw,72px)">
+            <div style="flex:1 1 460px;min-width:0;max-width:640px">
+              <p style="display:flex;align-items:center;gap:10px;margin:0 0 22px;font:600 14px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#2E6E6A;letter-spacing:0.02em">
+                <span aria-hidden="true" style="width:28px;height:2px;background:#36B7A5"></span>Residential Plumbing Services
+              </p>
+              <h1 id="hero-title" style="margin:0;font:800 clamp(40px,6.2vw,84px)/1.0 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#103F43">Plumbing Problems?<br>Let’s Get Them Sorted.</h1>
+              <p style="margin:24px 0 0;max-width:520px;font:400 clamp(17px,1.4vw,19px)/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Leaks, slow drains, damaged pipes or a water heater acting up. Explore the services we list, then call or send a request describing the problem.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+                <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 26px;background:#1F6BB8;color:#fff;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif;transition:background 160ms ease,transform 160ms ease" style-hover="background:#185A9C;color:#fff" style-active="transform:translateY(1px)">Request Service <span aria-hidden="true">→</span></a>
+                <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:54px;padding:0 22px;border:1.5px solid #103F43;color:#103F43;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif;background:#fff;white-space:nowrap" style-hover="background:#E5F3F0;color:#103F43">Call +1 (602) 833-3185</a>
+              </div>
+              <p style="margin:18px 0 0;font:400 15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">The request form takes a couple of minutes: describe the issue and choose a preferred appointment time.</p>
+            </div>
+            <div style="flex:1.15 1 420px;min-width:0;position:relative">
+              <div aria-hidden="true" style="position:absolute;right:-18px;top:-18px;width:62%;height:70%;background:#E5F3F0;border:1px solid #BFE0D9"></div>
+              <div aria-hidden="true" style="position:absolute;left:-14px;bottom:28%;width:2px;height:120px;background:#36B7A5"></div>
+              <div role="img" aria-label="Photo placeholder: a plumber working on pipework beneath a residential sink" style="position:relative;aspect-ratio:{{ heroRatio }};overflow:hidden;clip-path:polygon(0 0,100% 0,100% 100%,14% 100%,0 86%);background:#CFE3DF">
+                <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#C9DFDA 0 14px,#D8E9E5 14px 28px);animation:wpZoom 14s ease-in-out infinite alternate"></div>
+                <span style="position:absolute;right:16px;bottom:16px;max-width:78%;padding:7px 11px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">hero photo · plumber under a residential sink, natural light (not the owner unless approved)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="svc-title" style="background:#FFFFFF;border-top:1px solid #D9E2E0;border-bottom:1px solid #D9E2E0">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px)">
+            <div style="flex:1 1 340px;min-width:0;max-width:460px;display:flex;flex-direction:column;gap:28px">
+              <div>
+                <p style="margin:0 0 14px;font:600 14px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#2E6E6A">Services</p>
+                <h2 id="svc-title" style="margin:0;font:800 clamp(30px,3.6vw,48px)/1.08 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Find the service that fits your problem.</h2>
+                <p style="margin:18px 0 0;font:400 17px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Four service categories cover the most common household plumbing issues. If you’re not sure which one applies, describe it in your own words.</p>
+              </div>
+              <div role="img" aria-label="Photo placeholder: close-up of pipe fittings and plumbing tools" style="position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#D5E7E3 0 12px,#E3EFEC 12px 24px);overflow:hidden">
+                <span style="position:absolute;left:14px;bottom:14px;max-width:80%;padding:6px 10px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">photo · copper fittings + pipe wrench, close-up</span>
+              </div>
+              <a href="#/services" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#1F6BB8;text-decoration:underline;text-underline-offset:5px" style-hover="color:#103F43">Explore Services <span aria-hidden="true">→</span></a>
+            </div>
+            <ol style="flex:1.4 1 460px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid #103F43">
+              <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+                <li style="border-bottom:1px solid #D9E2E0">
+                  <a href="{{ s.href }}" style="display:grid;grid-template-columns:56px minmax(0,1fr) 32px;gap:8px 16px;align-items:start;padding:28px 12px 28px 0;text-decoration:none;color:#263238;transition:background 180ms ease,padding 180ms ease" style-hover="background:#F2F8F6;padding-left:12px;color:#263238">
+                    <span style="font:600 14px/1.9 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">{{ s.n }}</span>
+                    <span style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                      <span style="font:700 clamp(21px,2vw,26px)/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;color:#103F43">{{ s.title }}</span>
+                      <span style="font:400 16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ s.short }}</span>
+                      <span style="font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#1F6BB8;margin-top:4px">Learn More<span style="position:absolute;left:-9999px"> about {{ s.title }}</span></span>
+                    </span>
+                    <span aria-hidden="true" style="font:500 22px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#36B7A5">→</span>
+                  </a>
+                </li>
+              </sc-for>
+            </ol>
+          </div>
+        </section>
+
+        <section aria-labelledby="why-title">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(36px,6vw,88px)">
+            <div style="flex:1 1 400px;min-width:0;position:relative;min-height:340px">
+              <div role="img" aria-label="Photo placeholder: a plumber inspecting a water heater in a residential utility room" style="position:absolute;inset:0;overflow:hidden;background:#CFE3DF">
+                <div style="position:absolute;inset:-4%;background:repeating-linear-gradient(135deg,#C9DFDA 0 14px,#D8E9E5 14px 28px);animation:wpZoom 18s ease-in-out infinite alternate"></div>
+                <span style="position:absolute;left:16px;top:16px;max-width:78%;padding:6px 10px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">photo · water heater inspection, utility room</span>
+              </div>
+              <div aria-hidden="true" style="position:absolute;right:-1px;bottom:-1px;width:38%;height:38%;border-right:10px solid #F7F9F7;border-bottom:10px solid #F7F9F7"></div>
+            </div>
+            <div style="flex:1 1 440px;min-width:0;padding:8px 0">
+              <p style="margin:0 0 14px;font:600 14px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#2E6E6A">Why Whitaker Plumbing</p>
+              <h2 id="why-title" style="margin:0;font:800 clamp(30px,3.6vw,48px)/1.08 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Clear Communication. Practical Plumbing Help.</h2>
+              <dl style="margin:40px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:0 36px">
+                <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+                  <div style="border-top:1px solid #C9D6D3;padding:22px 0 26px">
+                    <dt style="display:flex;align-items:center;gap:10px;font:700 18px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43"><span aria-hidden="true" style="width:8px;height:8px;background:#36B7A5;flex-shrink:0"></span>{{ b.t }}</dt>
+                    <dd style="margin:10px 0 0;font:400 16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ b.d }}</dd>
+                  </div>
+                </sc-for>
+              </dl>
+              <sc-if value="{{ flags }}"><p style="margin:8px 0 0;padding:10px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Licensing, insurance or experience can appear here only once the business provides verifiable details.</p></sc-if>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="area-title" style="background:#E5F3F0;border-top:1px solid #C7E3DD;border-bottom:1px solid #C7E3DD">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(32px,5vw,80px)">
+            <div style="flex:1 1 360px;min-width:0;max-width:520px">
+              <h2 id="area-title" style="margin:0;font:800 clamp(28px,3.2vw,42px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Check Our Service Areas</h2>
+              <p style="margin:16px 0 0;font:400 17px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#2F4246">Before you send a request, check whether your city or ZIP code is listed. If it isn’t, call and we can confirm.</p>
+              <a href="#/service-areas" style="display:inline-flex;align-items:center;gap:10px;min-height:50px;margin-top:26px;padding:0 22px;background:#103F43;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#0B2F32;color:#fff">Check Service Areas <span aria-hidden="true">→</span></a>
+            </div>
+            <div style="flex:1 1 380px;min-width:0;position:relative;background:#F7FBFA;border:1px solid #BFE0D9;padding:28px;min-height:220px;background-image:linear-gradient(#DCEDE9 1px,transparent 1px),linear-gradient(90deg,#DCEDE9 1px,transparent 1px);background-size:28px 28px">
+              <div aria-hidden="true" style="position:absolute;left:28px;right:28px;top:50%;height:2px;background:#36B7A5;opacity:0.55"></div>
+              <div aria-hidden="true" style="position:absolute;left:58%;top:28px;bottom:28px;width:2px;background:#36B7A5;opacity:0.55"></div>
+              <div style="position:relative;background:#FFFFFF;border:1px solid #C7E3DD;padding:20px 22px;max-width:360px">
+                <p style="margin:0;font:600 13px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">Service locations</p>
+                <p style="margin:8px 0 0;font:600 17px/1.45 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Service locations are being confirmed. Contact us to check coverage for your address.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="faq-prev-title">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,96px)">
+            <div style="flex:1 1 300px;min-width:0;max-width:400px">
+              <h2 id="faq-prev-title" style="margin:0;font:800 clamp(28px,3.2vw,42px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Questions before you call?</h2>
+              <a href="#/about/faqs" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:18px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#1F6BB8;text-decoration:underline;text-underline-offset:5px" style-hover="color:#103F43">View All FAQs <span aria-hidden="true">→</span></a>
+            </div>
+            <div style="flex:1.6 1 460px;min-width:0;border-top:1px solid #103F43">
+              <sc-for list="{{ faqHome }}" as="f" hint-placeholder-count="4">
+                <div style="border-bottom:1px solid #D9E2E0">
+                  <h3 style="margin:0">
+                    <button type="button" id="{{ f.btnId }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:16px 0;background:none;border:0;text-align:left;cursor:pointer;font:700 18px/1.35 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">
+                      <span>{{ f.q }}</span>
+                      <span aria-hidden="true" style="position:relative;width:20px;height:20px;flex-shrink:0">
+                        <span style="position:absolute;left:3px;right:3px;top:9px;height:2px;background:#1F6BB8"></span>
+                        <span style="position:absolute;top:3px;bottom:3px;left:9px;width:2px;background:#1F6BB8;transition:transform 200ms ease;transform:{{ f.vRot }}"></span>
+                      </span>
+                    </button>
+                  </h3>
+                  <sc-if value="{{ f.open }}">
+                    <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 40px 22px 0;animation:wpFade 200ms ease both">
+                      <p style="margin:0;font:400 16px/1.65 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ f.a }}</p>
+                      <sc-if value="{{ f.showTag }}"><p style="display:inline-block;margin:12px 0 0;padding:4px 8px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace">{{ f.tag }}</p></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="close-title" style="position:relative;overflow:hidden;background:#103F43;color:#FFFFFF">
+          <div aria-hidden="true" style="position:absolute;right:-120px;top:-160px;width:560px;height:560px;border:1.5px solid rgba(54,183,165,0.35);border-radius:50%"></div>
+          <div aria-hidden="true" style="position:absolute;right:-60px;top:-100px;width:440px;height:440px;border:1.5px solid rgba(54,183,165,0.22);border-radius:50%"></div>
+          <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,56px)">
+            <h2 id="close-title" style="margin:0;max-width:760px;font:800 clamp(36px,5vw,68px)/1.02 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em">Tell Us What’s Going On.</h2>
+            <p style="margin:20px 0 0;max-width:560px;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#CFE4E0">Describe your plumbing issue and share a convenient time for us to contact you.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
+              <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 26px;background:#FFFFFF;color:#103F43;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#E5F3F0;color:#103F43">Request Service <span aria-hidden="true">→</span></a>
+              <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:54px;padding:0 22px;border:1.5px solid #FFFFFF;color:#FFFFFF;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap" style-hover="background:rgba(255,255,255,0.1);color:#fff">Call +1 (602) 833-3185</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- SERVICES -->
+    <sc-if value="{{ is.services }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Services">
+        <section style="border-bottom:1px solid #D9E2E0">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,56px) clamp(40px,5vw,72px);display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(28px,5vw,72px)">
+            <div style="flex:1.4 1 460px;min-width:0">
+              <h1 style="margin:0;font:800 clamp(40px,6vw,80px)/1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#103F43">Plumbing Services</h1>
+              <p style="margin:22px 0 0;max-width:560px;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Review the services below, then send a request describing your issue. Choosing a service from this page fills it in on the form for you.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+                <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;background:#1F6BB8;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#185A9C;color:#fff">Request Service <span aria-hidden="true">→</span></a>
+              </div>
+              <nav aria-label="Service categories" style="margin-top:36px;display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+                  <a href="{{ s.href }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid #C9D6D3;border-radius:999px;background:#fff;color:#103F43;text-decoration:none;font:500 15px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="border-color:#103F43;color:#103F43"><span style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">{{ s.n }}</span>{{ s.title }}</a>
+                </sc-for>
+              </nav>
+            </div>
+            <div role="img" aria-label="Photo placeholder: drain-cleaning equipment beside a kitchen sink" style="flex:1 1 300px;min-width:0;max-width:440px;position:relative;aspect-ratio:5/4;background:repeating-linear-gradient(135deg,#D5E7E3 0 12px,#E3EFEC 12px 24px);clip-path:polygon(0 0,86% 0,100% 14%,100% 100%,0 100%)">
+              <span style="position:absolute;left:14px;bottom:14px;max-width:80%;padding:6px 10px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">photo · tools laid out on a work mat</span>
+            </div>
+          </div>
+        </section>
+
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+          <section id="{{ s.id }}" aria-labelledby="{{ s.hid }}" style="background:{{ s.bg }};border-bottom:1px solid #D9E2E0;scroll-margin-top:96px">
+            <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;flex-direction:{{ s.dir }};align-items:center;gap:clamp(32px,6vw,88px)">
+              <div style="flex:1 1 420px;min-width:0;max-width:580px">
+                <p style="margin:0 0 14px;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">{{ s.n }} / 04</p>
+                <h2 id="{{ s.hid }}" style="margin:0;font:800 clamp(30px,3.6vw,46px)/1.06 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">{{ s.title }}</h2>
+                <p style="margin:18px 0 0;font:400 17px/1.65 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ s.long }}</p>
+                <h3 style="margin:28px 0 10px;font:700 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#103F43">Common signs</h3>
+                <ul style="margin:0;padding:0;list-style:none;border-top:1px solid #C9D6D3">
+                  <sc-for list="{{ s.signs }}" as="sign" hint-placeholder-count="3">
+                    <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid #DFE7E5;font:400 16px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238"><span aria-hidden="true" style="width:7px;height:7px;background:#36B7A5;flex-shrink:0;transform:translateY(-2px)"></span>{{ sign }}</li>
+                  </sc-for>
+                </ul>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:28px">
+                  <a href="{{ s.requestHref }}" onClick="{{ s.select }}" style="display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;background:#1F6BB8;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#185A9C;color:#fff">Request {{ s.title }} <span aria-hidden="true">→</span></a>
+                  <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:44px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#103F43;text-decoration:underline;text-underline-offset:5px">or call +1 (602) 833-3185</a>
+                </div>
+              </div>
+              <div role="img" aria-label="{{ s.alt }}" style="flex:1 1 380px;min-width:0;position:relative;aspect-ratio:{{ s.ratio }};overflow:hidden;background:#CFE3DF">
+                <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#C9DFDA 0 14px,#D8E9E5 14px 28px);transition:transform 600ms ease" style-hover="transform:scale(1.03)"></div>
+                <span style="position:absolute;left:16px;bottom:16px;max-width:80%;padding:6px 10px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">{{ s.img }}</span>
+              </div>
+            </div>
+          </section>
+        </sc-for>
+
+        <section aria-labelledby="other-title" style="background:#FFFFFF;border-bottom:1px solid #D9E2E0">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px 56px;align-items:center">
+            <div>
+              <h2 id="other-title" style="margin:0;font:700 24px/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Other plumbing issues</h2>
+              <p style="margin:10px 0 0;font:400 16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">If your problem isn’t listed, choose “Other Plumbing Issue” on the form and describe it. We’ll let you know whether it’s something we can help with.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+              <a href="#/contact?service=other" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#1F6BB8;text-decoration:underline;text-underline-offset:5px">Request help with another issue <span aria-hidden="true">→</span></a>
+              <sc-if value="{{ flags }}"><p style="margin:0;padding:6px 10px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Additional services, once the business lists them</p></sc-if>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="bridge-title" style="background:#E5F3F0">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 48px">
+            <div style="flex:1 1 440px;min-width:0;max-width:680px">
+              <h2 id="bridge-title" style="margin:0;font:800 clamp(30px,4vw,54px)/1.05 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Not Sure Which Service You Need?</h2>
+              <p style="margin:18px 0 0;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#2F4246">You don’t need to diagnose it. Tell us what you’re seeing, hearing or smelling, and where in the house it’s happening.</p>
+            </div>
+            <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 26px;background:#103F43;color:#fff;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#0B2F32;color:#fff">Describe Your Plumbing Issue <span aria-hidden="true">→</span></a>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ABOUT -->
+    <sc-if value="{{ is.about }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="About / FAQs">
+        <section>
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,56px) clamp(56px,7vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,6vw,88px);align-items:start">
+            <div>
+              <p style="margin:0 0 18px;font:600 14px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#2E6E6A">About Whitaker Plumbing</p>
+              <h1 style="margin:0;font:800 clamp(40px,5.6vw,76px)/1.0 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#103F43">Straightforward Plumbing Help.</h1>
+            </div>
+            <div style="padding-top:clamp(0px,3vw,48px)">
+              <p style="margin:0;font:400 19px/1.65 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Whitaker Plumbing is a small plumbing business handling leak repairs, drain cleaning, pipe repairs and water heater services. You can reach the business directly by phone or email, or send a service request through this website.</p>
+              <sc-if value="{{ flags }}"><p style="margin:18px 0 0;padding:10px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Approved company story, owner photo and any credentials. Neutral description shown until supplied.</p></sc-if>
+            </div>
+          </div>
+          <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+            <div role="img" aria-label="Photo placeholder: a clean residential utility space with visible pipework" style="position:relative;aspect-ratio:{{ wideRatio }};background:repeating-linear-gradient(135deg,#D5E7E3 0 14px,#E3EFEC 14px 28px)">
+              <span style="position:absolute;left:16px;bottom:16px;max-width:80%;padding:6px 10px;background:#F7F9F7;color:#103F43;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">wide photo · clean residential utility room, pipework visible</span>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="how-title">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,4vw,56px)">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 48px">
+              <h2 id="how-title" style="margin:0;font:800 clamp(28px,3.4vw,44px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">How service requests work</h2>
+              <p style="margin:0;max-width:440px;font:400 16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Prefer to talk it through? <a href="tel:+16028333185" onClick="{{ trackCall }}" style="font-weight:600">Call +1 (602) 833-3185</a> instead. Submitting a request does not confirm an appointment.</p>
+            </div>
+            <ol style="list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0">
+              <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+                <li style="position:relative;padding:0 24px 28px 0">
+                  <div aria-hidden="true" style="display:flex;align-items:center;margin-bottom:22px">
+                    <span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:2px solid #103F43;border-radius:50%;background:#F7F9F7;font:700 15px/1 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43;flex-shrink:0">{{ st.n }}</span>
+                    <span style="flex:1;height:2px;background:#36B7A5;margin-left:10px"></span>
+                  </div>
+                  <h3 style="margin:0;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ st.t }}</h3>
+                  <p style="margin:8px 0 0;font:400 15.5px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ st.d }}</p>
+                </li>
+              </sc-for>
+            </ol>
+          </div>
+        </section>
+
+        <section id="faqs" aria-labelledby="faq-title" style="background:#FFFFFF;border-top:1px solid #D9E2E0;border-bottom:1px solid #D9E2E0;scroll-margin-top:96px">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,96px)">
+            <div style="flex:1 1 280px;min-width:0;max-width:380px">
+              <h2 id="faq-title" style="margin:0;font:800 clamp(28px,3.4vw,44px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Frequently asked questions</h2>
+              <div style="display:flex;gap:8px;margin-top:22px;flex-wrap:wrap">
+                <button type="button" onClick="{{ expandAll }}" style="min-height:44px;padding:0 14px;border:1px solid #C9D6D3;background:#fff;border-radius:4px;color:#103F43;font:500 14px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="border-color:#103F43">Expand all</button>
+                <button type="button" onClick="{{ collapseAll }}" style="min-height:44px;padding:0 14px;border:1px solid #C9D6D3;background:#fff;border-radius:4px;color:#103F43;font:500 14px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="border-color:#103F43">Collapse all</button>
+              </div>
+            </div>
+            <div style="flex:1.7 1 480px;min-width:0;border-top:1px solid #103F43">
+              <sc-for list="{{ faqAll }}" as="f" hint-placeholder-count="8">
+                <div style="border-bottom:1px solid #D9E2E0">
+                  <h3 style="margin:0">
+                    <button type="button" id="{{ f.btnId }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:16px 0;background:none;border:0;text-align:left;cursor:pointer;font:700 18px/1.35 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">
+                      <span>{{ f.q }}</span>
+                      <span aria-hidden="true" style="position:relative;width:20px;height:20px;flex-shrink:0">
+                        <span style="position:absolute;left:3px;right:3px;top:9px;height:2px;background:#1F6BB8"></span>
+                        <span style="position:absolute;top:3px;bottom:3px;left:9px;width:2px;background:#1F6BB8;transition:transform 200ms ease;transform:{{ f.vRot }}"></span>
+                      </span>
+                    </button>
+                  </h3>
+                  <sc-if value="{{ f.open }}">
+                    <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 40px 22px 0;animation:wpFade 200ms ease both">
+                      <p style="margin:0;font:400 16px/1.65 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">{{ f.a }}</p>
+                      <sc-if value="{{ f.showTag }}"><p style="display:inline-block;margin:12px 0 0;padding:4px 8px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace">{{ f.tag }}</p></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="about-contact-title">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px)">
+            <h2 id="about-contact-title" style="margin:0 0 28px;font:800 clamp(26px,3vw,38px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Get in touch</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));border-top:1px solid #103F43">
+              <div style="padding:22px 24px 22px 0;border-bottom:1px solid #D9E2E0">
+                <p style="margin:0;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">Phone</p>
+                <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-block;margin-top:10px;font:700 21px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43;text-decoration:none" style-hover="color:#1F6BB8">+1 (602) 833-3185</a>
+              </div>
+              <div style="padding:22px 24px 22px 0;border-bottom:1px solid #D9E2E0;min-width:0">
+                <p style="margin:0;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">Email</p>
+                <a href="mailto:asher.whitaker@gmail.com" style="display:inline-block;margin-top:10px;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43;text-decoration:none;overflow-wrap:anywhere" style-hover="color:#1F6BB8">asher.whitaker@gmail.com</a>
+              </div>
+              <div style="padding:22px 0;border-bottom:1px solid #D9E2E0;display:flex;align-items:center">
+                <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;background:#1F6BB8;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#185A9C;color:#fff">Request Service <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+            <sc-if value="{{ flags }}"><p style="margin:16px 0 0;padding:8px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;display:inline-block">TO CONFIRM · Publish 600 E Trade St, Charlotte, NC 28202 only after the business approves it.</p></sc-if>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- SERVICE AREAS -->
+    <sc-if value="{{ is.areas }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Service Areas">
+        <section>
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,56px) clamp(48px,6vw,88px);display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,88px);align-items:flex-start">
+            <div style="flex:1 1 420px;min-width:0;max-width:600px">
+              <h1 style="margin:0;font:800 clamp(40px,5.6vw,76px)/1.0 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#103F43">Check Our Service Areas</h1>
+              <p style="margin:22px 0 0;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Check your city or ZIP code before you send a request. If your location isn’t listed, contact us and we’ll confirm whether we can help.</p>
+            </div>
+            <form onSubmit="{{ checkArea }}" noValidate="" style="flex:1 1 380px;min-width:0;background:#FFFFFF;border:1px solid #D9E2E0;padding:clamp(22px,3vw,32px)">
+              <label for="area-q" style="display:block;font:700 18px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Check your location</label>
+              <p id="area-help" style="margin:6px 0 14px;font:400 15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">Enter a city, town or 5-digit ZIP code.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <input id="area-q" type="text" autoComplete="postal-code" maxLength="60" value="{{ areaQuery }}" onChange="{{ onAreaQuery }}" aria-describedby="area-help area-result" aria-invalid="{{ areaInvalid }}" style="flex:1 1 200px;min-width:0;height:50px;padding:0 14px;border:1.5px solid {{ areaBorder }};border-radius:4px;background:#fff;font-size:16px;color:#263238" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                <button type="submit" style="height:50px;padding:0 22px;background:#103F43;color:#fff;border:0;border-radius:4px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="background:#0B2F32">Check</button>
+              </div>
+              <div id="area-result" role="status" aria-live="polite">
+                <sc-if value="{{ areaHasResult }}">
+                  <div style="margin-top:16px;padding:14px 16px;border-left:4px solid {{ areaTone }};background:{{ areaBg }};animation:wpFade 200ms ease both">
+                    <p style="margin:0;font:600 15.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">{{ areaText }}</p>
+                    <sc-if value="{{ areaShowActions }}">
+                      <p style="margin:6px 0 0;font:400 15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E"><a href="tel:+16028333185" onClick="{{ trackCall }}" style="font-weight:600">Call +1 (602) 833-3185</a> or <a href="#/contact" style="font-weight:600">send a request</a> and mention your location.</p>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section aria-labelledby="dir-title" style="background:#FFFFFF;border-top:1px solid #D9E2E0;border-bottom:1px solid #D9E2E0">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px)">
+            <h2 id="dir-title" style="margin:0;font:800 clamp(26px,3vw,38px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Listed service locations</h2>
+            <sc-if value="{{ hasAreas }}">
+              <ul style="list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));border-top:1px solid #103F43">
+                <sc-for list="{{ areas }}" as="a">
+                  <li style="padding:18px 0;border-bottom:1px solid #D9E2E0;font:600 17px/1.4 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ a.name }}</li>
+                </sc-for>
+              </ul>
+            </sc-if>
+            <sc-if value="{{ noAreas }}" hint-placeholder-val="{{ true }}">
+              <div style="margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;padding:28px;border:1px solid #C7E3DD;background:#E5F3F0">
+                <p style="margin:0;max-width:620px;font:500 17px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#1E3438">No service locations are listed yet. Please contact Whitaker Plumbing to check whether your area is covered.</p>
+                <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border:1.5px solid #103F43;color:#103F43;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;background:#fff;white-space:nowrap" style-hover="background:#F7F9F7;color:#103F43">Call +1 (602) 833-3185</a>
+              </div>
+              <sc-if value="{{ flags }}"><p style="margin:14px 0 0;padding:8px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;display:inline-block">TO CONFIRM · Approved cities / ZIP codes. The lookup checks this list only, never distance from the address.</p></sc-if>
+            </sc-if>
+          </div>
+        </section>
+
+        <section aria-labelledby="area-cta-title" style="background:#103F43;color:#fff">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 48px">
+            <div style="flex:1 1 420px;min-width:0">
+              <h2 id="area-cta-title" style="margin:0;font:800 clamp(30px,4vw,52px)/1.05 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em">Not Sure If We Cover Your Area?</h2>
+              <p style="margin:16px 0 0;max-width:520px;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#CFE4E0">Call, or send a request with your city or ZIP code and we’ll let you know.</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px">
+              <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px;background:#fff;color:#103F43;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#E5F3F0;color:#103F43">Request Service</a>
+              <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:54px;padding:0 22px;border:1.5px solid #fff;color:#fff;border-radius:4px;text-decoration:none;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap" style-hover="background:rgba(255,255,255,0.1);color:#fff">Call +1 (602) 833-3185</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- CONTACT -->
+    <sc-if value="{{ is.contact }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Contact / Request Service">
+        <div style="max-width:1280px;margin:0 auto;padding:clamp(36px,5vw,72px) clamp(20px,4vw,56px) clamp(64px,8vw,112px)">
+          <h1 style="margin:0;max-width:820px;font:800 clamp(38px,5.4vw,72px)/1.0 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#103F43">Request Plumbing Service</h1>
+          <p style="margin:20px 0 0;max-width:620px;font:400 18px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Tell us a little about the issue, how to reach you, and a time that works for you.</p>
+          <p style="margin:8px 0 0;max-width:620px;font:400 15.5px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">This form sends a service request. It does not book or confirm an appointment.</p>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(28px,4vw,56px);margin-top:clamp(28px,4vw,48px)">
+            <div style="flex:1.7 1 520px;min-width:0">
+              <div role="status" aria-live="polite" style="position:absolute;left:-9999px">{{ liveMsg }}</div>
+
+              <sc-if value="{{ submitted }}">
+                <div ref="{{ successRef }}" tabIndex="-1" style="background:#FFFFFF;border:1px solid #D9E2E0;border-top:4px solid #1E7B4F;padding:clamp(24px,4vw,44px);outline:none;animation:wpFade 280ms ease both">
+                  <div aria-hidden="true" style="width:44px;height:44px;border-radius:50%;background:#E3F2E9;display:flex;align-items:center;justify-content:center">
+                    <span style="width:18px;height:10px;border-left:3px solid #1E7B4F;border-bottom:3px solid #1E7B4F;transform:rotate(-45deg) translate(2px,-2px)"></span>
+                  </div>
+                  <h2 style="margin:20px 0 0;font:800 clamp(26px,3vw,36px)/1.15 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#103F43">Your service request has been received.</h2>
+                  <p style="margin:12px 0 0;font:400 17px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Your request has been recorded. Whitaker Plumbing will follow up using the contact details you provided. This is not an appointment confirmation.</p>
+                  <dl style="margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:0 24px;border-top:1px solid #D9E2E0">
+                    <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="4">
+                      <div style="padding:14px 0;border-bottom:1px solid #E6ECEA">
+                        <dt style="font:600 12.5px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E">{{ r.k }}</dt>
+                        <dd style="margin:6px 0 0;font:600 16px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238;overflow-wrap:anywhere">{{ r.v }}</dd>
+                      </div>
+                    </sc-for>
+                  </dl>
+                  <sc-if value="{{ flags }}"><p style="margin:18px 0 0;padding:8px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Follow-up process and timing. No response time is promised until approved.</p></sc-if>
+                  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
+                    <a href="#/" style="display:inline-flex;align-items:center;min-height:50px;padding:0 22px;background:#103F43;color:#fff;border-radius:4px;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#0B2F32;color:#fff">Back to Home</a>
+                    <button type="button" onClick="{{ newRequest }}" style="min-height:50px;padding:0 20px;border:1.5px solid #103F43;background:#fff;color:#103F43;border-radius:4px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="background:#E5F3F0">Submit another request</button>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+                <form onSubmit="{{ submit }}" noValidate="" aria-describedby="req-note" style="background:#FFFFFF;border:1px solid #D9E2E0;padding:clamp(20px,3.5vw,40px);display:flex;flex-direction:column;gap:32px">
+                  <p id="req-note" style="margin:0;font:400 14.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">Fields marked <span aria-hidden="true" style="color:#B42318;font-weight:700">*</span> are required.</p>
+
+                  <sc-if value="{{ showSummary }}">
+                    <div ref="{{ summaryRef }}" tabIndex="-1" role="alert" aria-labelledby="sum-title" style="border:2px solid #B42318;background:#FDF1F0;padding:18px 20px;outline:none">
+                      <h2 id="sum-title" style="margin:0;font:700 18px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#8A1C12">{{ summaryTitle }}</h2>
+                      <ul style="margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
+                        <sc-for list="{{ errList }}" as="e">
+                          <li style="color:#8A1C12"><button type="button" onClick="{{ e.focus }}" style="padding:4px 0;background:none;border:0;color:#8A1C12;text-decoration:underline;text-underline-offset:3px;font:500 15px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;text-align:left">{{ e.text }}</button></li>
+                        </sc-for>
+                      </ul>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ netError }}">
+                    <div role="alert" style="border:2px solid #B42318;background:#FDF1F0;padding:16px 18px">
+                      <p style="margin:0;font:700 16px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#8A1C12">We couldn’t send your request.</p>
+                      <p style="margin:6px 0 0;font:400 15px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;color:#5A1A13">Your details are still here. Check your connection and try again, or <a href="tel:+16028333185" onClick="{{ trackCall }}" style="color:#8A1C12;font-weight:600">call +1 (602) 833-3185</a>.</p>
+                    </div>
+                  </sc-if>
+
+                  <fieldset style="border:0;margin:0;padding:0;min-width:0">
+                    <legend style="padding:0;margin-bottom:18px;display:flex;align-items:center;gap:10px;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43"><span aria-hidden="true" style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">01</span>Your contact details</legend>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+                      <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1">
+                        <label for="f-name" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Name <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <input id="f-name" name="name" type="text" autoComplete="name" maxLength="80" required="" value="{{ form.name }}" onChange="{{ on.name }}" onBlur="{{ blur.name }}" aria-invalid="{{ inv.name }}" aria-describedby="{{ desc.name }}" style="height:50px;padding:0 14px;border:1.5px solid {{ bc.name }};border-radius:4px;background:#fff;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                        <sc-if value="{{ has.name }}"><p id="e-name" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.name }}</p></sc-if>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <label for="f-phone" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Phone <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <input id="f-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength="30" required="" value="{{ form.phone }}" onChange="{{ on.phone }}" onBlur="{{ blur.phone }}" aria-invalid="{{ inv.phone }}" aria-describedby="{{ desc.phone }}" style="height:50px;padding:0 14px;border:1.5px solid {{ bc.phone }};border-radius:4px;background:#fff;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                        <p id="h-phone" style="margin:0;font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">The best number to reach you on.</p>
+                        <sc-if value="{{ has.phone }}"><p id="e-phone" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.phone }}</p></sc-if>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <label for="f-email" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Email <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <input id="f-email" name="email" type="email" inputMode="email" autoComplete="email" maxLength="120" required="" value="{{ form.email }}" onChange="{{ on.email }}" onBlur="{{ blur.email }}" aria-invalid="{{ inv.email }}" aria-describedby="{{ desc.email }}" style="height:50px;padding:0 14px;border:1.5px solid {{ bc.email }};border-radius:4px;background:#fff;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                        <sc-if value="{{ has.email }}"><p id="e-email" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.email }}</p></sc-if>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset style="border:0;border-top:1px solid #E6ECEA;margin:0;padding:28px 0 0;min-width:0">
+                    <legend style="float:left;width:100%;padding:0;margin-bottom:18px;display:flex;align-items:center;gap:10px;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43"><span aria-hidden="true" style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">02</span>Plumbing issue</legend>
+                    <div style="clear:both;display:flex;flex-direction:column;gap:20px">
+                      <div style="display:flex;flex-direction:column;gap:6px;max-width:440px">
+                        <label for="f-service" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Service type <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <select id="f-service" name="service" required="" value="{{ form.service }}" onChange="{{ on.service }}" onBlur="{{ blur.service }}" aria-invalid="{{ inv.service }}" aria-describedby="{{ desc.service }}" style="height:50px;padding:0 40px 0 14px;border:1.5px solid {{ bc.service }};border-radius:4px;background:#fff linear-gradient(45deg,transparent 50%,#103F43 50%) no-repeat right 20px center/6px 6px;appearance:none;-webkit-appearance:none;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                          <option value="">Choose a service</option>
+                          <sc-for list="{{ svcOptions }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                        </select>
+                        <p id="h-service" style="margin:0;font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">Not sure? Pick the closest match or “Other Plumbing Issue.”</p>
+                        <sc-if value="{{ has.service }}"><p id="e-service" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.service }}</p></sc-if>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <label for="f-issue" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Describe the issue <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <p id="h-issue" style="margin:0;font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">What you’re noticing, where it is, and when it started.</p>
+                        <textarea id="f-issue" name="issue" rows="5" maxLength="1500" required="" value="{{ form.issue }}" onChange="{{ on.issue }}" onBlur="{{ blur.issue }}" aria-invalid="{{ inv.issue }}" aria-describedby="{{ desc.issue }}" style="min-height:132px;padding:12px 14px;border:1.5px solid {{ bc.issue }};border-radius:4px;background:#fff;font-size:16px;line-height:1.5;color:#263238;width:100%;resize:vertical" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none"></textarea>
+                        <div style="display:flex;justify-content:space-between;gap:12px">
+                          <sc-if value="{{ has.issue }}"><p id="e-issue" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.issue }}</p></sc-if>
+                          <span aria-hidden="true" style="margin-left:auto;font:400 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E">{{ issueCount }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset style="border:0;border-top:1px solid #E6ECEA;margin:0;padding:28px 0 0;min-width:0">
+                    <legend style="float:left;width:100%;padding:0;margin-bottom:18px;display:flex;align-items:center;gap:10px;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43"><span aria-hidden="true" style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">03</span>Location and preferred time</legend>
+                    <div style="clear:both;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <label for="f-location" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">City or ZIP code <span aria-hidden="true" style="color:#B42318">*</span></label>
+                        <input id="f-location" name="location" type="text" autoComplete="postal-code" maxLength="80" required="" value="{{ form.location }}" onChange="{{ on.location }}" onBlur="{{ blur.location }}" aria-invalid="{{ inv.location }}" aria-describedby="{{ desc.location }}" style="height:50px;padding:0 14px;border:1.5px solid {{ bc.location }};border-radius:4px;background:#fff;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                        <p id="h-location" style="margin:0;font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">A general location helps us check coverage. No street address needed yet.</p>
+                        <sc-if value="{{ has.location }}"><p id="e-location" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.location }}</p></sc-if>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <label for="f-date" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Preferred date <span style="font-weight:400;color:#5B6A6E">(optional)</span></label>
+                        <input id="f-date" name="date" type="date" min="{{ today }}" value="{{ form.date }}" onChange="{{ on.date }}" onBlur="{{ blur.date }}" aria-invalid="{{ inv.date }}" aria-describedby="{{ desc.date }}" style="height:50px;padding:0 14px;border:1.5px solid {{ bc.date }};border-radius:4px;background:#fff;font-size:16px;color:#263238;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+                        <sc-if value="{{ has.date }}"><p id="e-date" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.date }}</p></sc-if>
+                      </div>
+                      <div role="radiogroup" aria-labelledby="l-window" aria-describedby="{{ desc.window }}" aria-required="true" style="grid-column:1/-1;display:flex;flex-direction:column;gap:8px">
+                        <span id="l-window" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Preferred time of day <span aria-hidden="true" style="color:#B42318">*</span></span>
+                        <div style="display:flex;flex-wrap:wrap;gap:10px">
+                          <sc-for list="{{ windows }}" as="w" hint-placeholder-count="3">
+                            <label style="position:relative;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 18px 0 14px;border:1.5px solid {{ w.border }};background:{{ w.bg }};border-radius:4px;cursor:pointer;font:500 15.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">
+                              <input type="radio" id="{{ w.id }}" name="window" value="{{ w.v }}" checked="{{ w.checked }}" onChange="{{ w.pick }}" style="width:18px;height:18px;margin:0;accent-color:#1F6BB8">
+                              {{ w.l }}
+                            </label>
+                          </sc-for>
+                        </div>
+                        <sc-if value="{{ has.window }}"><p id="e-window" style="margin:0;display:flex;gap:6px;font:500 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#B42318"><span aria-hidden="true" style="font-weight:700">!</span>{{ err.window }}</p></sc-if>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset style="border:0;border-top:1px solid #E6ECEA;margin:0;padding:28px 0 0;min-width:0">
+                    <legend style="float:left;width:100%;padding:0;margin-bottom:18px;display:flex;align-items:center;gap:10px;font:700 19px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43"><span aria-hidden="true" style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#2E6E6A">04</span>Additional information</legend>
+                    <div style="clear:both;display:flex;flex-direction:column;gap:6px">
+                      <label for="f-extra" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Anything else we should know? <span style="font-weight:400;color:#5B6A6E">(optional)</span></label>
+                      <p id="h-extra" style="margin:0;font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">For example: access instructions, pets at home, or whether you rent.</p>
+                      <textarea id="f-extra" name="extra" rows="3" maxLength="1500" value="{{ form.extra }}" onChange="{{ on.extra }}" aria-describedby="h-extra" style="min-height:96px;padding:12px 14px;border:1.5px solid #B7C6C3;border-radius:4px;background:#fff;font-size:16px;line-height:1.5;color:#263238;width:100%;resize:vertical" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none"></textarea>
+                    </div>
+                  </fieldset>
+
+                  <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+                    <label for="f-company">Company (leave blank)</label>
+                    <input id="f-company" name="company" type="text" tabIndex="-1" autoComplete="off" value="{{ form.company }}" onChange="{{ on.company }}">
+                  </div>
+
+                  <div style="display:flex;flex-direction:column;gap:16px;border-top:1px solid #E6ECEA;padding-top:24px">
+                    <p style="margin:0;font:400 14.5px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">We use these details only to respond to your service request. Read the <a href="#/privacy">privacy notice</a>.</p>
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px">
+                      <button type="submit" disabled="{{ submitting }}" aria-busy="{{ busyAttr }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;background:{{ submitBg }};color:#fff;border:0;border-radius:4px;font:600 17px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:{{ submitCursor }};transition:background 160ms ease" style-hover="background:#185A9C">
+                        <sc-if value="{{ submitting }}"><span aria-hidden="true" style="width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:wpSpin 800ms linear infinite"></span></sc-if>
+                        {{ submitLabel }}
+                      </button>
+                      <a href="tel:+16028333185" onClick="{{ trackCall }}" style="font:600 15.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#103F43">Prefer to call? +1 (602) 833-3185</a>
+                    </div>
+                  </div>
+                </form>
+              </sc-if>
+            </div>
+
+            <aside aria-label="Contact details" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:20px;position:{{ asidePos }};top:104px">
+              <div style="background:#103F43;color:#fff;padding:28px">
+                <p style="margin:0;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#9FD6CC">Call directly</p>
+                <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:block;margin-top:12px;font:800 clamp(22px,2.2vw,28px)/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;color:#fff;text-decoration:none;letter-spacing:-0.01em" style-hover="color:#CFE4E0">+1 (602) 833-3185</a>
+                <p style="margin:18px 0 0;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#9FD6CC">Email</p>
+                <a href="mailto:asher.whitaker@gmail.com" style="display:block;margin-top:10px;font:600 16.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#fff;overflow-wrap:anywhere" style-hover="color:#CFE4E0">asher.whitaker@gmail.com</a>
+                <sc-if value="{{ flags }}"><p style="margin:18px 0 0;padding:8px 10px;border:1px dashed #E9CF95;color:#FFE7B0;font:500 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Business hours and emergency availability</p></sc-if>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #D9E2E0;padding:26px">
+                <h2 style="margin:0;font:700 18px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Helpful details to include</h2>
+                <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ tips }}" as="t" hint-placeholder-count="4">
+                    <li style="display:flex;gap:10px;font:400 15.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E"><span aria-hidden="true" style="width:6px;height:6px;margin-top:9px;background:#36B7A5;flex-shrink:0"></span>{{ t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+              <div style="background:#E5F3F0;border:1px solid #C7E3DD;padding:22px 26px">
+                <h2 style="margin:0;font:700 16px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">After you submit</h2>
+                <p style="margin:8px 0 0;font:400 15px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;color:#2F4246">You’ll see a confirmation once your request is recorded. Whitaker Plumbing will then contact you to discuss the issue and timing.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- PRIVACY -->
+    <sc-if value="{{ is.privacy }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Privacy notice" style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,56px) clamp(64px,8vw,112px)">
+        <h1 style="margin:0;font:800 clamp(36px,5vw,60px)/1.05 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#103F43">Privacy notice</h1>
+        <p style="margin:22px 0 0;font:400 17px/1.7 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">The service request form collects your name, phone, email, service type, issue description, general location and preferred time. This information is used to respond to your request.</p>
+        <p style="margin:14px 0 0;font:400 17px/1.7 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238">Questions about your information: <a href="mailto:asher.whitaker@gmail.com">asher.whitaker@gmail.com</a>.</p>
+        <sc-if value="{{ flags }}"><p style="margin:22px 0 0;padding:10px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Full privacy policy, data retention and deletion terms, reviewed by the business before launch.</p></sc-if>
+      </div>
+    </sc-if>
+  </main>
+
+  <footer style="background:#0C3235;color:#D6E8E4;padding-bottom:{{ footerPad }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,56px) 28px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px 48px">
+        <div>
+          <a href="#/" aria-label="Whitaker Plumbing, home" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff">
+            <span aria-hidden="true" style="position:relative;width:30px;height:30px;background:#F7F9F7;border-radius:3px">
+              <span style="position:absolute;left:6px;top:8px;width:18px;height:4px;background:#103F43"></span>
+              <span style="position:absolute;left:13px;top:8px;width:4px;height:15px;background:#103F43"></span>
+            </span>
+            <span style="font:800 19px/1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em">Whitaker Plumbing</span>
+          </a>
+          <p style="margin:16px 0 0;max-width:280px;font:400 15px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:#B9D3CE">Leak repairs, drain cleaning, pipe repairs and water heater services.</p>
+        </div>
+        <nav aria-label="Footer">
+          <p style="margin:0 0 12px;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8FC9BE">Pages</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+            <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+              <li><a href="{{ item.href }}" style="display:inline-flex;align-items:center;min-height:36px;color:#EAF4F2;text-decoration:none;font:500 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="color:#fff;text-decoration:underline">{{ item.label }}</a></li>
+            </sc-for>
+          </ul>
+        </nav>
+        <div>
+          <p style="margin:0 0 12px;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8FC9BE">Contact</p>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:block;font:700 18px/1.4 Manrope,ui-sans-serif,system-ui,sans-serif;color:#fff;text-decoration:none" style-hover="text-decoration:underline;color:#fff">+1 (602) 833-3185</a>
+          <a href="mailto:asher.whitaker@gmail.com" style="display:block;margin-top:6px;font:500 15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#EAF4F2;overflow-wrap:anywhere" style-hover="color:#fff">asher.whitaker@gmail.com</a>
+          <sc-if value="{{ flags }}"><p style="margin:12px 0 0;font:500 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#FFE1A3">TO CONFIRM · Address shown only once approved: 600 E Trade St, Charlotte, NC 28202</p></sc-if>
+        </div>
+        <div>
+          <p style="margin:0 0 12px;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8FC9BE">Get help</p>
+          <a href="#/contact" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;background:#fff;color:#103F43;border-radius:4px;text-decoration:none;font:600 15.5px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="background:#E5F3F0;color:#103F43">Request Service</a>
+          <div style="margin-top:12px"><a href="#/service-areas" style="display:inline-flex;align-items:center;min-height:36px;color:#EAF4F2;font:500 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="color:#fff">Check service areas</a></div>
+        </div>
+      </div>
+      <div style="margin-top:44px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font:400 14px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#B9D3CE">
+        <span>© {{ year }} Whitaker Plumbing</span>
+        <a href="#/privacy" style="color:#EAF4F2" style-hover="color:#fff">Privacy notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showStickyBar }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(255,255,255,0.98);border-top:1px solid #D9E2E0;box-shadow:0 -6px 18px rgba(16,63,67,0.08);padding:10px clamp(16px,4vw,32px) calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;height:48px;border:1.5px solid #103F43;border-radius:4px;color:#103F43;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif">Call</a>
+      <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;justify-content:center;height:48px;background:#1F6BB8;border-radius:4px;color:#fff;text-decoration:none;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif">Request Service</a>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- ADMIN -->
+<sc-if value="{{ is.adminLogin }}">
+  <div data-screen-label="Admin login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;background:#EEF3F2;background-image:linear-gradient(#E1E9E7 1px,transparent 1px),linear-gradient(90deg,#E1E9E7 1px,transparent 1px);background-size:48px 48px">
+    <main style="width:100%;max-width:420px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;color:#103F43">
+        <span aria-hidden="true" style="position:relative;width:30px;height:30px;background:#103F43;border-radius:3px">
+          <span style="position:absolute;left:6px;top:8px;width:18px;height:4px;background:#36B7A5"></span>
+          <span style="position:absolute;left:13px;top:8px;width:4px;height:15px;background:#36B7A5"></span>
+        </span>
+        <span style="font:800 18px/1 Manrope,ui-sans-serif,system-ui,sans-serif">Whitaker Plumbing <span style="font-weight:600;color:#5B6A6E">· Admin</span></span>
+      </div>
+      <form onSubmit="{{ login }}" noValidate="" style="background:#fff;border:1px solid #D9E2E0;padding:32px;display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 40px rgba(16,63,67,0.06)">
+        <h1 style="margin:0;font:800 26px/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Sign in to manage leads</h1>
+        <sc-if value="{{ loginErr }}"><p role="alert" style="margin:0;padding:12px 14px;border:2px solid #B42318;background:#FDF1F0;color:#8A1C12;font:500 14.5px/1.45 Inter,ui-sans-serif,system-ui,sans-serif">{{ loginErr }}</p></sc-if>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="a-email" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif">Email</label>
+          <input id="a-email" type="email" autoComplete="username" value="{{ loginEmail }}" onChange="{{ onLoginEmail }}" style="height:48px;padding:0 14px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:16px" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="a-pass" style="font:600 15px/1.3 Inter,ui-sans-serif,system-ui,sans-serif">Password</label>
+          <input id="a-pass" type="password" autoComplete="current-password" value="{{ loginPass }}" onChange="{{ onLoginPass }}" style="height:48px;padding:0 14px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:16px" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+        </div>
+        <button type="submit" disabled="{{ loggingIn }}" style="height:50px;background:#103F43;color:#fff;border:0;border-radius:4px;font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="background:#0B2F32">{{ loginLabel }}</button>
+        <p style="margin:0;padding:10px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">DEMO ENVIRONMENT · Password: demo. Production auth is handled server-side with secure sessions; every /api/admin endpoint checks the session.</p>
+      </form>
+      <a href="#/" style="display:inline-flex;margin-top:18px;min-height:44px;align-items:center;font:500 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">← Back to public website</a>
+    </main>
+  </div>
+</sc-if>
+
+<sc-if value="{{ is.adminApp }}">
+  <div style="min-height:100vh;display:flex;flex-direction:{{ adminDir }};background:#F3F6F5">
+    <sc-if value="{{ wideAdmin }}">
+      <aside style="width:236px;flex-shrink:0;background:#103F43;color:#fff;padding:22px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 8px 22px">
+          <span aria-hidden="true" style="position:relative;width:26px;height:26px;background:#F7F9F7;border-radius:3px">
+            <span style="position:absolute;left:5px;top:7px;width:16px;height:3px;background:#103F43"></span>
+            <span style="position:absolute;left:11px;top:7px;width:3px;height:13px;background:#103F43"></span>
+          </span>
+          <span style="font:800 16px/1.1 Manrope,ui-sans-serif,system-ui,sans-serif">Whitaker<br><span style="font-weight:600;color:#9FD6CC;font-size:13px">Lead manager</span></span>
+        </div>
+        <nav aria-label="Admin" style="display:flex;flex-direction:column;gap:4px">
+          <a href="#/admin/leads" aria-current="page" style="display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 12px;background:rgba(255,255,255,0.1);border-radius:4px;color:#fff;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">Leads <span style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:#36B7A5;color:#06282A;padding:4px 7px;border-radius:999px">{{ newCount }}</span></a>
+        </nav>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:4px">
+          <a href="#/" style="display:flex;align-items:center;min-height:44px;padding:0 12px;color:#CFE4E0;font:500 14.5px/1 Inter,ui-sans-serif,system-ui,sans-serif" style-hover="color:#fff">View public site</a>
+          <button type="button" onClick="{{ logout }}" style="display:flex;align-items:center;min-height:44px;padding:0 12px;background:none;border:1px solid rgba(255,255,255,0.25);border-radius:4px;color:#fff;font:500 14.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;text-align:left" style-hover="background:rgba(255,255,255,0.08)">Sign out</button>
+        </div>
+      </aside>
+    </sc-if>
+    <sc-if value="{{ narrowAdmin }}">
+      <header style="background:#103F43;color:#fff;padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <a href="#/admin/leads" style="color:#fff;text-decoration:none;font:800 16px/1 Manrope,ui-sans-serif,system-ui,sans-serif">Whitaker · Leads</a>
+        <button type="button" onClick="{{ logout }}" style="min-height:44px;padding:0 14px;background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:#fff;font:500 14px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Sign out</button>
+      </header>
+    </sc-if>
+
+    <main style="flex:1;min-width:0;padding:clamp(18px,3vw,36px)">
+      <div style="margin-bottom:18px;padding:8px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">DEMO DATA · Sample records stored in this browser only. Production reads real leads from the protected API.</div>
+
+      <sc-if value="{{ is.adminLeads }}">
+        <div data-screen-label="Admin leads">
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px">
+            <div>
+              <h1 style="margin:0;font:800 clamp(26px,3vw,34px)/1.1 Manrope,ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;color:#103F43">Service requests</h1>
+              <p style="margin:6px 0 0;font:400 15px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ totalText }}</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ statusTabs }}" as="t" hint-placeholder-count="6">
+                <button type="button" aria-pressed="{{ t.pressed }}" onClick="{{ t.pick }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};border-radius:999px;font:500 14px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer">{{ t.label }}<span style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;opacity:0.85">{{ t.count }}</span></button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;background:#fff;border:1px solid #D9E2E0;padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px">
+            <div style="display:flex;flex-direction:column;gap:5px;grid-column:span 2;min-width:0">
+              <label for="q" style="font:600 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Search name, phone or email</label>
+              <input id="q" type="search" value="{{ q }}" onChange="{{ onQ }}" style="height:44px;padding:0 12px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label for="fs" style="font:600 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Service</label>
+              <select id="fs" value="{{ fService }}" onChange="{{ onFService }}" style="height:44px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;background:#fff">
+                <option value="">All services</option>
+                <sc-for list="{{ svcOptions }}" as="o"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label for="so" style="font:600 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Sort</label>
+              <select id="so" value="{{ sort }}" onChange="{{ onSort }}" style="height:44px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;background:#fff">
+                <option value="new">Newest first</option>
+                <option value="old">Oldest first</option>
+              </select>
+            </div>
+          </div>
+
+          <sc-if value="{{ adminLoading }}">
+            <div role="status" style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;padding:20px;display:flex;flex-direction:column;gap:12px">
+              <span style="position:absolute;left:-9999px">Loading leads</span>
+              <sc-for list="{{ skeleton }}" as="sk"><div style="height:18px;background:linear-gradient(90deg,#EDF2F1,#E1E9E7,#EDF2F1);border-radius:3px;width:{{ sk }}"></div></sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showEmpty }}">
+            <div style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;padding:40px 24px;text-align:center">
+              <p style="margin:0;font:700 18px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">No requests match these filters.</p>
+              <button type="button" onClick="{{ clearFilters }}" style="margin-top:14px;min-height:44px;padding:0 16px;border:1.5px solid #103F43;background:#fff;color:#103F43;border-radius:4px;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Clear filters</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showTable }}">
+            <div style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font:400 14.5px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;min-width:820px">
+                <caption style="position:absolute;left:-9999px">Service requests, {{ sortText }}</caption>
+                <thead>
+                  <tr style="background:#F7F9F7;text-align:left">
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0" aria-sort="{{ ariaSort }}">Received</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Customer</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Contact</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Service</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Location</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ pageLeads }}" as="l" hint-placeholder-count="8">
+                    <tr style="border-bottom:1px solid #E6ECEA" style-hover="background:#F7FBFA">
+                      <td style="padding:14px 16px;color:#3B4A4E;white-space:nowrap">{{ l.created }}</td>
+                      <td style="padding:14px 16px"><a href="{{ l.href }}" style="font-weight:600;color:#1F6BB8">{{ l.name }}</a><div style="font:400 12.5px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E;margin-top:3px">{{ l.id }}</div></td>
+                      <td style="padding:14px 16px;color:#263238"><div>{{ l.phone }}</div><div style="color:#5B6A6E;font-size:13.5px">{{ l.email }}</div></td>
+                      <td style="padding:14px 16px;color:#263238">{{ l.service }}</td>
+                      <td style="padding:14px 16px;color:#263238">{{ l.location }}</td>
+                      <td style="padding:14px 16px"><span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:{{ l.sBg }};color:{{ l.sFg }};font:600 12.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:{{ l.sFg }}"></span>{{ l.status }}</span></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showCards }}">
+            <ul style="list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ pageLeads }}" as="l" hint-placeholder-count="6">
+                <li>
+                  <a href="{{ l.href }}" style="display:block;background:#fff;border:1px solid #D9E2E0;padding:16px;text-decoration:none;color:#263238" style-hover="border-color:#103F43;color:#263238">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                      <span style="font:700 16.5px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ l.name }}</span>
+                      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:{{ l.sBg }};color:{{ l.sFg }};font:600 12px/1 Inter,ui-sans-serif,system-ui,sans-serif;white-space:nowrap"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:{{ l.sFg }}"></span>{{ l.status }}</span>
+                    </div>
+                    <div style="margin-top:6px;font:400 14.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif">{{ l.service }} · {{ l.location }}</div>
+                    <div style="margin-top:2px;font:400 13.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ l.created }} · {{ l.phone }}</div>
+                  </a>
+                </li>
+              </sc-for>
+            </ul>
+          </sc-if>
+
+          <sc-if value="{{ showPager }}">
+            <nav aria-label="Pagination" style="margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+              <span style="font:400 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ rangeText }}</span>
+              <div style="display:flex;gap:8px">
+                <button type="button" onClick="{{ prevPage }}" disabled="{{ atFirst }}" style="min-height:44px;padding:0 16px;border:1.5px solid #B7C6C3;background:#fff;border-radius:4px;color:#103F43;font:600 14.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;opacity:{{ prevOpacity }}">← Previous</button>
+                <button type="button" onClick="{{ nextPage }}" disabled="{{ atLast }}" style="min-height:44px;padding:0 16px;border:1.5px solid #B7C6C3;background:#fff;border-radius:4px;color:#103F43;font:600 14.5px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;opacity:{{ nextOpacity }}">Next →</button>
+              </div>
+            </nav>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.adminLead }}">
+        <div data-screen-label="Admin lead detail">
+          <a href="#/admin/leads" style="display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">← All requests</a>
+          <sc-if value="{{ leadMissing }}">
+            <div style="margin-top:12px;background:#fff;border:1px solid #D9E2E0;padding:32px">
+              <h1 style="margin:0;font:800 24px/1.2 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Request not found</h1>
+              <p style="margin:8px 0 0;color:#3B4A4E">It may have been removed. Return to the list to continue.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ leadFound }}">
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px">
+              <div style="flex:2 1 480px;min-width:0;background:#fff;border:1px solid #D9E2E0">
+                <div style="padding:22px 24px;border-bottom:1px solid #E6ECEA;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
+                  <div>
+                    <p style="margin:0;font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E">{{ lead.id }} · received {{ lead.created }}</p>
+                    <h1 style="margin:8px 0 0;font:800 clamp(24px,3vw,32px)/1.15 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ lead.name }}</h1>
+                  </div>
+                  <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:{{ lead.sBg }};color:{{ lead.sFg }};font:600 13px/1 Inter,ui-sans-serif,system-ui,sans-serif"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:{{ lead.sFg }}"></span>{{ lead.status }}</span>
+                </div>
+                <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+                  <sc-for list="{{ leadFields }}" as="d" hint-placeholder-count="6">
+                    <div style="padding:16px 24px;border-bottom:1px solid #EEF2F1;grid-column:{{ d.span }}">
+                      <dt style="font:600 12.5px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ d.k }}</dt>
+                      <dd style="margin:6px 0 0;font:400 15.5px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;color:#263238;white-space:pre-wrap;overflow-wrap:anywhere">
+                        <sc-if value="{{ d.isLink }}"><a href="{{ d.href }}" style="font-weight:600">{{ d.v }}</a></sc-if>
+                        <sc-if value="{{ d.isText }}">{{ d.v }}</sc-if>
+                      </dd>
+                    </div>
+                  </sc-for>
+                </dl>
+              </div>
+              <div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:16px">
+                <form onSubmit="{{ saveStatus }}" style="background:#fff;border:1px solid #D9E2E0;padding:20px;display:flex;flex-direction:column;gap:12px">
+                  <label for="st" style="font:700 16px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Update status</label>
+                  <select id="st" value="{{ statusDraft }}" onChange="{{ onStatusDraft }}" style="height:46px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15.5px;background:#fff">
+                    <sc-for list="{{ statuses }}" as="s"><option value="{{ s }}">{{ s }}</option></sc-for>
+                  </select>
+                  <button type="submit" disabled="{{ statusUnchanged }}" style="height:46px;background:{{ saveBg }};color:#fff;border:0;border-radius:4px;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Save status</button>
+                  <div role="status" aria-live="polite">
+                    <sc-if value="{{ statusMsg }}"><p style="margin:0;padding:10px 12px;background:#E3F2E9;color:#14532D;font:500 14px/1.4 Inter,ui-sans-serif,system-ui,sans-serif;border-left:3px solid #1E7B4F">{{ statusMsg }}</p></sc-if>
+                  </div>
+                  <p style="margin:0;font:400 12.5px/1.45 Inter,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">Internal workflow status. Not shown to the customer.</p>
+                </form>
+                <div style="background:#fff;border:1px solid #D9E2E0;padding:20px">
+                  <h2 style="margin:0;font:700 16px/1.3 Manrope,ui-sans-serif,system-ui,sans-serif;color:#103F43">Notification</h2>
+                  <p style="margin:8px 0 0;font:400 14.5px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Email provider not configured. The lead is stored; notification outcome is recorded separately so delivery can be retried once a provider is set up.</p>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <a href="{{ lead.tel }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:#103F43;color:#fff;border-radius:4px;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">Call customer</a>
+                  <a href="{{ lead.mail }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid #103F43;color:#103F43;border-radius:4px;text-decoration:none;font:600 15px/1 Inter,ui-sans-serif,system-ui,sans-serif">Email customer</a>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showContentFlags&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Review&quot;},&quot;apiMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;success&quot;,&quot;network-error&quot;,&quot;server-validation&quot;],&quot;default&quot;:&quot;success&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo backend&quot;}}">
+const SERVICES = [
+  { id: 'leak', n: '01', title: 'Leak Repairs', short: 'Dripping fixtures, damp cabinets, water stains, or a water meter that keeps moving when everything is off.', long: 'For water showing up where it shouldn’t: under a sink, around a toilet base, behind a wall or through a ceiling. Tell us where you see water and how long it has been happening.', signs: ['Water under sinks or around fixtures', 'Stains or soft spots on walls and ceilings', 'Higher water use without a clear cause'], img: 'photo · plumber examining a visible leak under a sink', alt: 'Photo placeholder: a plumber examining a leak beneath a sink' },
+  { id: 'drain', n: '02', title: 'Drain Cleaning', short: 'Slow sinks, standing water in tubs and showers, gurgling drains or clogs that keep coming back.', long: 'For drains that empty slowly, back up or keep clogging. Let us know which fixtures are affected and whether more than one drain is slow.', signs: ['Water draining slowly or backing up', 'Gurgling sounds from drains', 'Clogs that return after plunging'], img: 'photo · drain-cleaning equipment at a kitchen drain', alt: 'Photo placeholder: drain-cleaning equipment in use at a kitchen drain' },
+  { id: 'pipe', n: '03', title: 'Pipe Repairs', short: 'Cracked, corroded, noisy or damaged water supply and drain pipes.', long: 'For pipes that are visibly damaged, corroded, noisy or affecting water pressure. Photos aren’t required. A description of what you see or hear is enough to start.', signs: ['Visible corrosion, cracks or drips at joints', 'Banging or rattling when water runs', 'Low pressure at one or more fixtures'], img: 'photo · close-up of copper fittings and a pipe wrench', alt: 'Photo placeholder: copper pipe fittings and a pipe wrench' },
+  { id: 'heater', n: '04', title: 'Water Heater Services', short: 'No hot water, inconsistent temperature, unusual noises, or water around the tank.', long: 'For water heaters that stop producing hot water, run out quickly, make unusual noises or leak. If you know the heater type (tank or tankless, gas or electric), include it.', signs: ['No hot water, or it runs out quickly', 'Rumbling or popping from the tank', 'Water pooling near the heater'], img: 'photo · tank water heater inspected in a utility room', alt: 'Photo placeholder: a tank water heater being inspected in a utility room' }
+];
+const SVC = { leak: 'Leak Repairs', drain: 'Drain Cleaning', pipe: 'Pipe Repairs', heater: 'Water Heater Services', other: 'Other Plumbing Issue' };
+const SVC_OPTIONS = Object.keys(SVC).map(v => ({ v, l: SVC[v] }));
+const STATUSES = ['New', 'Contacted', 'In Progress', 'Completed', 'Closed'];
+const STATUS_STYLE = { 'New': ['#E3EEFA', '#174F87'], 'Contacted': ['#DDF1EC', '#0E5048'], 'In Progress': ['#FFF1D6', '#784600'], 'Completed': ['#E1F1E7', '#17603C'], 'Closed': ['#ECEFEF', '#3F4A4D'] };
+const APPROVED_AREAS = [];
+const WINDOWS = [{ v: 'morning', l: 'Morning' }, { v: 'afternoon', l: 'Afternoon' }, { v: 'flexible', l: 'Flexible' }];
+const LABELS = { name: 'Name', phone: 'Phone', email: 'Email', service: 'Service type', issue: 'Issue description', location: 'City or ZIP code', date: 'Preferred date', window: 'Preferred time of day' };
+const ORDER = ['name', 'phone', 'email', 'service', 'issue', 'location', 'date', 'window'];
+const HELP = { phone: 'h-phone', service: 'h-service', issue: 'h-issue', location: 'h-location' };
+const EMPTY = { name: '', phone: '', email: '', service: '', issue: '', location: '', date: '', window: '', extra: '', company: '' };
+const FAQS = [
+  { q: 'Which plumbing services do you offer?', a: 'Requests can be made for leak repairs, drain cleaning, pipe repairs and water heater services. If your issue doesn’t fit one of these, choose “Other Plumbing Issue” and describe it.' },
+  { q: 'Which locations do you serve?', pending: true },
+  { q: 'How can I request service?', a: 'Call +1 (602) 833-3185 or use the service request form on this website. No account is needed.' },
+  { q: 'What information should I provide?', a: 'Your name, phone and email, the type of service, a short description of the problem, your city or ZIP code, and a preferred time of day.' },
+  { q: 'Can I request a preferred appointment time?', a: 'Yes. The form asks for a preferred date and time of day. Sending a request does not confirm an appointment.' },
+  { q: 'How will I know my request has been received?', a: 'A confirmation appears on screen once your request has been recorded.' },
+  { q: 'Do you provide emergency plumbing services?', pending: true },
+  { q: 'What are your business hours?', pending: true }
+];
+const LEADS_KEY = 'wp-leads-demo-v1';
+const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const fmt = iso => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const track = (name, data) => { try { (window.dataLayer = window.dataLayer || []).push({ event: name, ...(data || {}) }); } catch (e) {} };
+
+function seedLeads() {
+  const rows = [
+    ['Maria Delgado', '(704) 555-0142', 'maria.d@example.com', 'leak', 'Water dripping from the ceiling below the upstairs bathroom.', '28203', 'New', 2],
+    ['James Okafor', '(704) 555-0187', 'jokafor@example.com', 'heater', 'No hot water since last night. Gas tank heater, about 10 years old.', '28205', 'New', 5],
+    ['Priya Raman', '(980) 555-0119', 'priya.raman@example.com', 'drain', 'Kitchen sink drains very slowly, gurgles when the dishwasher runs.', '28209', 'Contacted', 20],
+    ['Tom Brennan', '(704) 555-0163', 'tbrennan@example.com', 'pipe', 'Pipes bang loudly when the washing machine stops filling.', '28204', 'In Progress', 30],
+    ['Lena Fischer', '(704) 555-0108', 'lena.f@example.com', 'other', 'Outdoor spigot won’t shut off fully.', '28207', 'New', 44],
+    ['Marcus Hill', '(980) 555-0131', 'mhill@example.com', 'leak', 'Damp cabinet floor under bathroom vanity.', '28202', 'Completed', 70],
+    ['Grace Liu', '(704) 555-0176', 'grace.liu@example.com', 'drain', 'Shower drain backing up, rental unit. Property manager approves.', '28208', 'Contacted', 96],
+    ['Daniel Ortiz', '(704) 555-0124', 'dortiz@example.com', 'heater', 'Popping noise from water heater, small puddle at base.', '28210', 'Closed', 130],
+    ['Aisha Bello', '(980) 555-0155', 'aisha.bello@example.com', 'pipe', 'Low water pressure in upstairs bathroom only.', '28211', 'New', 150],
+    ['Kevin Park', '(704) 555-0199', 'kpark@example.com', 'leak', 'Toilet base leaking after flush.', '28206', 'In Progress', 180],
+    ['Robert Nguyen', '+44 20 7946 0958', 'r.nguyen@example.com', 'drain', 'Basement floor drain smells and drains slowly.', '28212', 'Completed', 230],
+    ['Sofia Marino', '(704) 555-0110', 'sofia.m@example.com', 'other', 'Garbage disposal hums but doesn’t spin.', '28203', 'Closed', 300]
+  ];
+  const now = Date.now();
+  return rows.map((r, i) => ({ id: 'WP-' + (1100 - i), name: r[0], phone: r[1], email: r[2], service: r[3], issue: r[4], location: r[5], status: r[6], created: new Date(now - r[7] * 3600e3).toISOString(), date: '', window: ['morning', 'afternoon', 'flexible'][i % 3], extra: '' }));
+}
+
+class Component extends DCLogic {
+  state = {
+    w: typeof window !== 'undefined' ? window.innerWidth : 1280,
+    scrolled: false, menuOpen: false,
+    route: { name: 'home' },
+    faqOpen: { 'h0': true, 'a0': true },
+    form: { ...EMPTY }, errors: {}, touched: {}, showSummary: false, serverErr: false, netError: false,
+    submitting: false, submitted: null, liveMsg: '',
+    areaQuery: '', areaResult: null,
+    authed: false, loginEmail: '', loginPass: '', loginErr: '', loggingIn: false,
+    leads: [], adminLoading: false, q: '', fStatus: '', fService: '', sort: 'new', page: 0,
+    statusDraft: '', statusMsg: ''
+  };
+  summaryRef = React.createRef(); successRef = React.createRef(); mainRef = React.createRef(); menuBtnRef = React.createRef();
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onScroll = () => { const s = window.scrollY > 8; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) { this.setState({ menuOpen: false }); this.menuBtnRef.current && this.menuBtnRef.current.focus(); } };
+    this.onHash = () => this.route(false);
+    window.addEventListener('resize', this.onResize); window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKey); window.addEventListener('hashchange', this.onHash);
+    let form = { ...EMPTY };
+    try { const d = JSON.parse(sessionStorage.getItem('wp-draft') || 'null'); if (d) form = { ...form, ...d, company: '' }; } catch (e) {}
+    let leads; try { leads = JSON.parse(localStorage.getItem(LEADS_KEY) || 'null'); } catch (e) {}
+    if (!Array.isArray(leads)) { leads = seedLeads(); this.saveLeads(leads); }
+    this.setState({ form, leads, authed: sessionStorage.getItem('wp-admin') === '1' }, () => this.route(true));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKey); window.removeEventListener('hashchange', this.onHash);
+  }
+  saveLeads(leads) { try { localStorage.setItem(LEADS_KEY, JSON.stringify(leads)); } catch (e) {} }
+  saveDraft(form) { try { const { company, ...rest } = form; sessionStorage.setItem('wp-draft', JSON.stringify(rest)); } catch (e) {} }
+
+  parse() {
+    const raw = (window.location.hash || '#/').replace(/^#/, '');
+    const [path, q] = raw.split('?');
+    const p = path.split('/').filter(Boolean);
+    const params = new URLSearchParams(q || '');
+    let name = 'home', anchor = null, id = null;
+    if (p[0] === 'services') { name = 'services'; anchor = p[1] || null; }
+    else if (p[0] === 'about') { name = 'about'; anchor = p[1] || null; }
+    else if (p[0] === 'service-areas') name = 'service-areas';
+    else if (p[0] === 'contact') name = 'contact';
+    else if (p[0] === 'privacy') name = 'privacy';
+    else if (p[0] === 'admin') { if (p[1] === 'login') name = 'admin-login'; else if (p[1] === 'leads' && p[2]) { name = 'admin-lead'; id = p[2]; } else name = 'admin-leads'; }
+    return { name, anchor, id, service: params.get('service') };
+  }
+  route(initial) {
+    const r = this.parse();
+    if ((r.name === 'admin-leads' || r.name === 'admin-lead') && !this.state.authed) { window.location.replace('#/admin/login'); return; }
+    if (r.name === 'admin-login' && this.state.authed) { window.location.replace('#/admin/leads'); return; }
+    const prev = this.state.route;
+    const upd = { route: r, menuOpen: false };
+    if (r.name === 'contact' && r.service && SVC[r.service] && !this.state.submitted) {
+      const form = { ...this.state.form, service: r.service };
+      upd.form = form; this.saveDraft(form);
+      const errors = { ...this.state.errors }; delete errors.service; upd.errors = errors;
+      track('service_category_selected', { service: r.service });
+    }
+    if (r.name === 'admin-leads' && prev.name !== 'admin-leads' && prev.name !== 'admin-lead') {
+      upd.adminLoading = true; clearTimeout(this.loadT);
+      this.loadT = setTimeout(() => this.setState({ adminLoading: false }), 550);
+    }
+    if (r.name === 'admin-lead') {
+      const l = this.state.leads.find(x => x.id === r.id);
+      upd.statusDraft = l ? l.status : ''; upd.statusMsg = '';
+    }
+    this.setState(upd, () => {
+      requestAnimationFrame(() => {
+        const el = r.anchor && document.getElementById(r.anchor);
+        if (el) { const y = el.getBoundingClientRect().top + window.scrollY - (this.state.w < 960 ? 64 : 80); window.scrollTo({ top: y, behavior: initial ? 'auto' : 'smooth' }); }
+        else if (!initial && (prev.name !== r.name || prev.id !== r.id)) window.scrollTo({ top: 0, behavior: 'auto' });
+        if (!initial && !r.anchor && prev.name !== r.name) { const h = document.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+      });
+    });
+  }
+
+  validateField(k, v) {
+    const s = (v || '').trim();
+    if (k === 'name') { if (!s) return 'Enter your name.'; if (s.length < 2) return 'Name should be at least 2 characters.'; }
+    if (k === 'phone') {
+      if (!s) return 'Enter a phone number so we can reach you.';
+      if (!/^\+?[\d\s().\-]+$/.test(s)) return 'Use digits, spaces, brackets, dashes or a leading +.';
+      const d = s.replace(/\D/g, ''); if (d.length < 7 || d.length > 15) return 'Enter a phone number with 7 to 15 digits.';
+    }
+    if (k === 'email') { if (!s) return 'Enter your email address.'; if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s)) return 'Enter an email address like name@example.com.'; }
+    if (k === 'service' && !SVC[s]) return 'Choose a service type, or “Other Plumbing Issue.”';
+    if (k === 'issue') { if (!s) return 'Describe the issue in a few words.'; if (s.length < 10) return 'Add a little more detail (at least 10 characters).'; }
+    if (k === 'location') { if (!s) return 'Enter your city, town or ZIP code.'; if (s.length < 2) return 'Enter a city, town or 5-digit ZIP code.'; }
+    if (k === 'date' && s && s < today()) return 'Choose today or a later date.';
+    if (k === 'window' && !s) return 'Choose a preferred time of day.';
+    return '';
+  }
+  validateAll(form) { const e = {}; ORDER.forEach(k => { const m = this.validateField(k, form[k]); if (m) e[k] = m; }); return e; }
+
+  setField(k, v) {
+    const form = { ...this.state.form, [k]: v };
+    const errors = { ...this.state.errors };
+    if (errors[k] || this.state.touched[k]) { const m = this.validateField(k, v); if (m) errors[k] = m; else delete errors[k]; }
+    if (!this.started && k !== 'company') { this.started = true; track('form_start'); }
+    this.setState({ form, errors, netError: false }); this.saveDraft(form);
+  }
+  blurField(k) {
+    const errors = { ...this.state.errors }; const m = this.validateField(k, this.state.form[k]);
+    if (m && this.state.form[k]) errors[k] = m; else if (!m) delete errors[k];
+    this.setState({ errors, touched: { ...this.state.touched, [k]: true } });
+  }
+  focusField(k) { const el = document.getElementById(k === 'window' ? 'w-morning' : 'f-' + k); if (el) { el.focus(); const y = el.getBoundingClientRect().top + window.scrollY - 140; window.scrollTo({ top: y, behavior: 'smooth' }); } }
+
+  async submit(e) {
+    e.preventDefault();
+    if (this.state.submitting) return;
+    const form = Object.fromEntries(Object.entries(this.state.form).map(([k, v]) => [k, typeof v === 'string' ? v.trim() : v]));
+    const errors = this.validateAll(form);
+    if (Object.keys(errors).length) {
+      track('form_validation_failed', { fields: Object.keys(errors).join(',') });
+      this.setState({ errors, showSummary: true, serverErr: false, netError: false, liveMsg: 'There are problems with ' + Object.keys(errors).length + ' fields.' }, () => this.summaryRef.current && this.summaryRef.current.focus());
+      return;
+    }
+    if (form.company) { this.setState({ submitted: { id: '—', form }, liveMsg: 'Your service request has been received.' }); return; }
+    this.setState({ submitting: true, showSummary: false, netError: false, form, liveMsg: 'Sending your request…' });
+    const mode = this.props.apiMode ?? 'success';
+    try {
+      const res = await new Promise((resolve, reject) => setTimeout(() => {
+        if (mode === 'network-error') return reject(new Error('network'));
+        if (mode === 'server-validation') return resolve({ ok: false, errors: { location: 'We couldn’t recognise this location. Enter a city name or a 5-digit ZIP code.' } });
+        const id = 'WP-' + (1101 + Math.floor(Math.random() * 8900));
+        const lead = { id, ...form, status: 'New', created: new Date().toISOString(), notification: 'not_configured' };
+        delete lead.company;
+        const leads = [lead, ...this.state.leads]; this.saveLeads(leads); this.setState({ leads });
+        resolve({ ok: true, id });
+      }, 1100));
+      if (!res.ok) { this.setState({ submitting: false, errors: res.errors, showSummary: true, serverErr: true, liveMsg: 'The request needs a correction.' }, () => this.summaryRef.current && this.summaryRef.current.focus()); return; }
+      track('service_request_submitted', { service: form.service });
+      try { sessionStorage.removeItem('wp-draft'); } catch (e) {}
+      this.setState({ submitting: false, submitted: { id: res.id, form }, liveMsg: 'Your service request has been received.' }, () => { window.scrollTo({ top: 0, behavior: 'smooth' }); this.successRef.current && this.successRef.current.focus({ preventScroll: true }); });
+    } catch (err) {
+      this.setState({ submitting: false, netError: true, liveMsg: 'We couldn’t send your request. Your details are still in the form.' });
+    }
+  }
+
+  checkArea(e) {
+    e.preventDefault();
+    const s = this.state.areaQuery.trim();
+    if (!s) return this.setState({ areaResult: { kind: 'error', text: 'Enter a city, town or ZIP code to check.' } });
+    const hit = APPROVED_AREAS.find(a => a.name.toLowerCase() === s.toLowerCase() || (a.zips || []).includes(s));
+    if (hit) return this.setState({ areaResult: { kind: 'ok', text: 'This location is listed as a service area.' } });
+    if (/^\d{5}$/.test(s)) return this.setState({ areaResult: { kind: 'info', text: 'Please contact us to confirm service availability.' } });
+    this.setState({ areaResult: { kind: 'info', text: 'We couldn’t verify that location. Contact us to check.' } });
+  }
+
+  login(e) {
+    e.preventDefault();
+    const { loginEmail, loginPass } = this.state;
+    if (!loginEmail.trim() || !loginPass) return this.setState({ loginErr: 'Enter your email and password.' });
+    this.setState({ loggingIn: true, loginErr: '' });
+    setTimeout(() => {
+      if (loginPass !== 'demo') return this.setState({ loggingIn: false, loginErr: 'Email or password is incorrect.' });
+      sessionStorage.setItem('wp-admin', '1');
+      this.setState({ authed: true, loggingIn: false, loginPass: '' }, () => { window.location.hash = '#/admin/leads'; });
+    }, 600);
+  }
+
+  renderVals() {
+    const st = this.state, r = st.route, w = st.w;
+    const flags = this.props.showContentFlags ?? true;
+    const narrow = w < 960, wide = !narrow;
+    const isAdmin = r.name.startsWith('admin');
+    const pub = { home: 'home', services: 'services', about: 'about', 'service-areas': 'areas', contact: 'contact', privacy: 'privacy' };
+    const is = { home: r.name === 'home', services: r.name === 'services', about: r.name === 'about', areas: r.name === 'service-areas', contact: r.name === 'contact', privacy: r.name === 'privacy', adminLogin: r.name === 'admin-login', adminApp: r.name === 'admin-leads' || r.name === 'admin-lead', adminLeads: r.name === 'admin-leads', adminLead: r.name === 'admin-lead' };
+    const navDefs = [['Home', '#/', 'home'], ['Services', '#/services', 'services'], ['About / FAQs', '#/about', 'about'], ['Service Areas', '#/service-areas', 'service-areas'], ['Contact', '#/contact', 'contact']];
+    const nav = navDefs.map(([label, href, key]) => { const a = r.name === key; return { label, href, active: a, current: a ? 'page' : undefined, color: a ? '#103F43' : '#3B4A4E' }; });
+    const trackCall = () => track('phone_click');
+    const trackRequest = () => track('request_service_click');
+
+    const faqItems = (prefix, list) => list.map((f, i) => {
+      const key = prefix + i, open = !!st.faqOpen[key];
+      return { q: f.q, a: f.pending ? 'Answer to be provided by Whitaker Plumbing.' : f.a, open, expanded: open ? 'true' : 'false', vRot: open ? 'scaleY(0)' : 'scaleY(1)', btnId: 'fq-' + key, panelId: 'fp-' + key, toggle: () => this.setState(s => ({ faqOpen: { ...s.faqOpen, [key]: !s.faqOpen[key] } })), showTag: flags, tag: f.pending ? 'TO CONFIRM · Answer pending business approval' : 'DRAFT · Describes website behaviour; approve before launch' };
+    });
+    const visibleFaqs = FAQS.filter(f => flags || !f.pending);
+
+    const form = st.form, errors = st.errors;
+    const on = {}, blur = {}, err = {}, has = {}, inv = {}, bc = {}, desc = {};
+    Object.keys(EMPTY).forEach(k => { on[k] = e => this.setField(k, e.target.value); blur[k] = () => this.blurField(k); });
+    ORDER.forEach(k => {
+      err[k] = errors[k] || ''; has[k] = !!errors[k]; inv[k] = errors[k] ? 'true' : 'false';
+      const valid = !errors[k] && st.touched[k] && form[k] && !this.validateField(k, form[k]);
+      bc[k] = errors[k] ? '#B42318' : valid ? '#1E7B4F' : '#B7C6C3';
+      desc[k] = [HELP[k], errors[k] ? 'e-' + k : null].filter(Boolean).join(' ') || undefined;
+    });
+    const errKeys = ORDER.filter(k => errors[k]);
+    const errList = errKeys.map(k => ({ text: LABELS[k] + ': ' + errors[k], focus: () => this.focusField(k) }));
+    const sub = st.submitted;
+    const winLabel = (WINDOWS.find(x => x.v === (sub && sub.form.window)) || {}).l || '—';
+    const receipt = sub ? [
+      { k: 'Reference', v: sub.id },
+      { k: 'Service', v: SVC[sub.form.service] || '—' },
+      { k: 'Location', v: sub.form.location },
+      { k: 'Preferred time', v: (sub.form.date ? new Date(sub.form.date + 'T12:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ', ' : '') + winLabel }
+    ] : [];
+
+    const ar = st.areaResult;
+    const tone = ar ? { error: ['#B42318', '#FDF1F0'], ok: ['#1E7B4F', '#E3F2E9'], info: ['#1F6BB8', '#EAF2FB'] }[ar.kind] : ['#B7C6C3', '#fff'];
+
+    let leads = st.leads.slice();
+    const counts = { '': leads.length }; STATUSES.forEach(s => counts[s] = leads.filter(l => l.status === s).length);
+    const qq = st.q.trim().toLowerCase();
+    if (qq) leads = leads.filter(l => [l.name, l.email, l.phone, l.phone.replace(/\D/g, ''), l.id].some(v => (v || '').toLowerCase().includes(qq)));
+    if (st.fStatus) leads = leads.filter(l => l.status === st.fStatus);
+    if (st.fService) leads = leads.filter(l => l.service === st.fService);
+    leads.sort((a, b) => st.sort === 'new' ? b.created.localeCompare(a.created) : a.created.localeCompare(b.created));
+    const PER = 8, pages = Math.max(1, Math.ceil(leads.length / PER)), page = Math.min(st.page, pages - 1);
+    const mapLead = l => ({ ...l, created: fmt(l.created), service: SVC[l.service] || l.service, href: '#/admin/leads/' + l.id, sBg: STATUS_STYLE[l.status][0], sFg: STATUS_STYLE[l.status][1], tel: 'tel:' + l.phone.replace(/[^\d+]/g, ''), mail: 'mailto:' + l.email });
+    const pageLeads = leads.slice(page * PER, page * PER + PER).map(mapLead);
+    const raw = is.adminLead ? st.leads.find(l => l.id === r.id) : null;
+    const lead = raw ? mapLead(raw) : {};
+    const leadFields = raw ? [
+      { k: 'Phone', v: raw.phone, href: lead.tel, isLink: true },
+      { k: 'Email', v: raw.email, href: lead.mail, isLink: true },
+      { k: 'Service', v: lead.service, isText: true },
+      { k: 'Location', v: raw.location, isText: true },
+      { k: 'Preferred time', v: (raw.date ? raw.date + ', ' : '') + ((WINDOWS.find(x => x.v === raw.window) || {}).l || '—'), isText: true },
+      { k: 'Received', v: lead.created, isText: true },
+      { k: 'Issue description', v: raw.issue, isText: true, span: '1 / -1' },
+      { k: 'Additional details', v: raw.extra || 'None provided', isText: true, span: '1 / -1' }
+    ] : [];
+    const busy = st.adminLoading;
+
+    return {
+      flags, isPublic: !isAdmin, is, nav, wide, narrow, trackCall, trackRequest,
+      headerH: narrow ? '64px' : '76px', headerShadow: st.scrolled ? '0 6px 20px rgba(16,63,67,0.07)' : 'none',
+      callLabel: w >= 1220 ? 'Call +1 (602) 833-3185' : 'Call',
+      menuVisible: narrow && st.menuOpen, menuExpanded: st.menuOpen ? 'true' : 'false', menuLabel: st.menuOpen ? 'Close' : 'Menu',
+      bar1: st.menuOpen ? 'translateY(6px) rotate(45deg)' : 'none', bar2: st.menuOpen ? 0 : 1, bar3: st.menuOpen ? 'translateY(-6px) rotate(-45deg)' : 'none',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      skipToMain: () => { const m = this.mainRef.current; if (m) m.focus(); },
+      mainRef: this.mainRef, menuBtnRef: this.menuBtnRef,
+      heroRatio: w < 720 ? '4 / 3' : '4 / 4.4', wideRatio: w < 720 ? '4 / 3' : '21 / 8',
+      services: SERVICES.map((s, i) => ({ ...s, href: '#/services/' + s.id, hid: 'svc-' + s.id, requestHref: '#/contact?service=' + s.id, dir: i % 2 ? 'row-reverse' : 'row', bg: i % 2 ? '#FFFFFF' : '#F7F9F7', ratio: i === 0 ? '4 / 4' : '4 / 3', select: () => track('service_category_selected', { service: s.id }) })),
+      benefits: [
+        { t: 'Describe it your way', d: 'The request form asks plain questions, so you can explain the problem without plumbing terminology.' },
+        { t: 'Call or send a request', d: 'Phone directly or submit a request online. No account needed.' },
+        { t: 'An organised request', d: 'Your issue, location and preferred time arrive together, so the follow-up conversation can start from the details.' },
+        { t: 'Clear service information', d: 'Each service lists common signs to help you choose, or pick “Other” and describe it.' }
+      ],
+      faqHome: faqItems('h', visibleFaqs.slice(0, 4)), faqAll: faqItems('a', visibleFaqs),
+      expandAll: () => { const o = { ...st.faqOpen }; visibleFaqs.forEach((_, i) => o['a' + i] = true); this.setState({ faqOpen: o }); },
+      collapseAll: () => { const o = { ...st.faqOpen }; visibleFaqs.forEach((_, i) => o['a' + i] = false); this.setState({ faqOpen: o }); },
+      steps: [
+        { n: '1', t: 'Tell us about the issue', d: 'Choose a service type and describe what’s happening in your own words.' },
+        { n: '2', t: 'Share your contact and general location', d: 'Your name, phone, email and city or ZIP code.' },
+        { n: '3', t: 'Provide a preferred time', d: 'Pick a date if you have one and a time of day that suits you.' },
+        { n: '4', t: 'Submit your request', d: 'You’ll see a confirmation once it’s recorded. This doesn’t book an appointment.' }
+      ],
+      areaQuery: st.areaQuery, onAreaQuery: e => this.setState({ areaQuery: e.target.value, areaResult: null }), checkArea: e => this.checkArea(e),
+      areaHasResult: !!ar, areaText: ar ? ar.text : '', areaTone: tone[0], areaBg: tone[1], areaShowActions: !!ar && ar.kind !== 'error',
+      areaInvalid: ar && ar.kind === 'error' ? 'true' : 'false', areaBorder: ar && ar.kind === 'error' ? '#B42318' : '#B7C6C3',
+      hasAreas: APPROVED_AREAS.length > 0, noAreas: APPROVED_AREAS.length === 0, areas: APPROVED_AREAS,
+      form, on, blur, err, has, inv, bc, desc, today: today(), svcOptions: SVC_OPTIONS,
+      windows: WINDOWS.map(x => { const c = form.window === x.v; return { ...x, id: 'w-' + x.v, checked: c, border: c ? '#1F6BB8' : (errors.window ? '#B42318' : '#B7C6C3'), bg: c ? '#EAF2FB' : '#fff', pick: () => { this.setField('window', x.v); } }; }),
+      issueCount: (form.issue || '').length + ' / 1500',
+      showSummary: st.showSummary && errKeys.length > 0, summaryRef: this.summaryRef, errList,
+      summaryTitle: st.serverErr ? 'Please check the highlighted field' : 'Please fix ' + errKeys.length + (errKeys.length === 1 ? ' problem' : ' problems') + ' before sending',
+      netError: st.netError, submitting: st.submitting, busyAttr: st.submitting ? 'true' : 'false',
+      submitLabel: st.submitting ? 'Sending request…' : st.netError ? 'Try again' : 'Send Service Request',
+      submitBg: st.submitting ? '#5D87B3' : '#1F6BB8', submitCursor: st.submitting ? 'progress' : 'pointer',
+      submit: e => this.submit(e), submitted: !!sub, notSubmitted: !sub, receipt, successRef: this.successRef, liveMsg: st.liveMsg,
+      newRequest: () => { const f = { ...EMPTY }; this.saveDraft(f); this.started = false; this.setState({ submitted: null, form: f, errors: {}, touched: {}, liveMsg: '' }); },
+      tips: ['Where the problem is (kitchen, bathroom, basement, outside)', 'What you notice: water, noise, smell, slow drainage', 'When it started and whether it’s getting worse', 'Whether you own or rent the property'],
+      asidePos: narrow ? 'static' : 'sticky',
+      showStickyBar: narrow && !isAdmin && !is.contact && !st.menuOpen, footerPad: narrow && !is.contact ? '76px' : '0px',
+      year: new Date().getFullYear(),
+
+      loginEmail: st.loginEmail, loginPass: st.loginPass, loginErr: st.loginErr, loggingIn: st.loggingIn, loginLabel: st.loggingIn ? 'Signing in…' : 'Sign in',
+      onLoginEmail: e => this.setState({ loginEmail: e.target.value }), onLoginPass: e => this.setState({ loginPass: e.target.value }), login: e => this.login(e),
+      logout: () => { sessionStorage.removeItem('wp-admin'); this.setState({ authed: false }, () => { window.location.hash = '#/admin/login'; }); },
+      adminDir: w < 900 ? 'column' : 'row', wideAdmin: w >= 900, narrowAdmin: w < 900, newCount: counts['New'],
+      statusTabs: [''].concat(STATUSES).map(s => { const a = st.fStatus === s; return { label: s || 'All', count: counts[s], pressed: a ? 'true' : 'false', border: a ? '#103F43' : '#C9D6D3', bg: a ? '#103F43' : '#fff', fg: a ? '#fff' : '#263238', pick: () => this.setState({ fStatus: s, page: 0 }) }; }),
+      q: st.q, onQ: e => this.setState({ q: e.target.value, page: 0 }),
+      fService: st.fService, onFService: e => this.setState({ fService: e.target.value, page: 0 }),
+      sort: st.sort, onSort: e => this.setState({ sort: e.target.value }), sortText: st.sort === 'new' ? 'newest first' : 'oldest first', ariaSort: st.sort === 'new' ? 'descending' : 'ascending',
+      clearFilters: () => this.setState({ q: '', fStatus: '', fService: '', page: 0 }),
+      adminLoading: busy, skeleton: ['92%', '78%', '86%', '64%', '81%'],
+      showEmpty: !busy && leads.length === 0, showTable: !busy && leads.length > 0 && w >= 900, showCards: !busy && leads.length > 0 && w < 900, showPager: !busy && leads.length > 0,
+      pageLeads, totalText: st.leads.length + ' total · ' + counts['New'] + ' new',
+      rangeText: leads.length ? 'Showing ' + (page * PER + 1) + '–' + Math.min(leads.length, page * PER + PER) + ' of ' + leads.length : '',
+      atFirst: page === 0, atLast: page >= pages - 1, prevOpacity: page === 0 ? 0.45 : 1, nextOpacity: page >= pages - 1 ? 0.45 : 1,
+      prevPage: () => this.setState({ page: Math.max(0, page - 1) }), nextPage: () => this.setState({ page: Math.min(pages - 1, page + 1) }),
+      leadMissing: is.adminLead && !raw, leadFound: !!raw, lead, leadFields, statuses: STATUSES,
+      statusDraft: st.statusDraft, onStatusDraft: e => this.setState({ statusDraft: e.target.value, statusMsg: '' }),
+      statusUnchanged: !raw || st.statusDraft === raw.status, saveBg: !raw || st.statusDraft === raw.status ? '#8FA3A6' : '#103F43',
+      saveStatus: e => { e.preventDefault(); if (!raw) return; const leadsN = st.leads.map(l => l.id === raw.id ? { ...l, status: st.statusDraft } : l); this.saveLeads(leadsN); this.setState({ leads: leadsN, statusMsg: 'Status updated to ' + st.statusDraft + '.' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

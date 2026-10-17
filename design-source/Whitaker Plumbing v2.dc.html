@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFDF9;color:#23201C;font-family:Figtree,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#1F5FAD}
+a:hover{color:#184E8F}
+input,select,textarea,button{font:inherit}
+:focus-visible{outline:3px solid #1F5FAD;outline-offset:3px;border-radius:6px}
+h1,h2,h3,p{text-wrap:pretty}
+@keyframes wpZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes wpSpin{to{transform:rotate(360deg)}}
+@keyframes wpFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</helmet>
+
+<sc-if value="{{ isPublic }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFDF9">
+  <button type="button" onClick="{{ skipToMain }}" style="position:absolute;left:-9999px;top:8px;z-index:100;background:#23201C;color:#fff;border:0;border-radius:999px;padding:12px 18px;font-weight:600" style-focus="left:12px">Skip to main content</button>
+  <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#FFF6E0;border-bottom:1px solid #E9CF95;color:#6B4200;font:500 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">
+      <div style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:8px;padding-bottom:8px;display:flex;flex-wrap:wrap;gap:4px 16px"><strong>PRE-LAUNCH REVIEW</strong><span>Items tagged TO CONFIRM need business approval. Phone area code (602) is an Arizona code; the address is in Charlotte, NC. Verify both before launch.</span></div>
+    </div>
+  </sc-if>
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(255,253,249,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:{{ headerShadow }};transition:box-shadow 200ms ease">
+    <div style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);height:{{ headerH }};display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <a href="#/" aria-label="Whitaker Plumbing, home" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0"><span aria-hidden="true" style="width:36px;height:36px;border-radius:12px;background:#1F5FAD;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="width:13px;height:13px;background:#fff;border-radius:0 50% 50% 50%;transform:translateY(1px) rotate(45deg)"></span></span><span style="font:700 20px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;white-space:nowrap;color:#23201C">Whitaker<span style="font-weight:500;color:#5E5850"> Plumbing</span></span></a>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:#fff;border:1px solid #EAE3D8">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+            <a href="{{ item.href }}" aria-current="{{ item.current }}" style="display:flex;align-items:center;height:40px;padding:0 15px;border-radius:999px;background:{{ item.pill }};text-decoration:none;font:500 15px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:{{ item.color }};white-space:nowrap;transition:background 160ms ease" style-hover="background:#F6F0E7;color:#23201C">{{ item.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;color:#23201C;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap" style-hover="background:#F6F0E7;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>{{ callLabel }}</a>
+          <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;height:44px;padding:0 20px;background:#1F5FAD;border-radius:999px;color:#fff;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap" style-hover="background:#184E8F;color:#fff">Request Service</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:8px">
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;height:44px;padding:0 16px;border:1.5px solid #D9D0C3;border-radius:999px;color:#23201C;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;background:#fff">Call</a>
+          <button type="button" ref="{{ menuBtnRef }}" onClick="{{ toggleMenu }}" aria-expanded="{{ menuExpanded }}" aria-controls="mobile-menu" style="display:flex;align-items:center;gap:9px;height:44px;padding:0 16px;background:#23201C;color:#fff;border:0;border-radius:999px;font:600 15px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer">
+            <span aria-hidden="true" style="display:flex;flex-direction:column;gap:4px;width:16px">
+              <span style="height:2px;border-radius:2px;background:#fff;transition:transform 200ms ease;transform:{{ bar1 }}"></span>
+              <span style="height:2px;border-radius:2px;background:#fff;transition:opacity 150ms ease;opacity:{{ bar2 }}"></span>
+              <span style="height:2px;border-radius:2px;background:#fff;transition:transform 200ms ease;transform:{{ bar3 }}"></span>
+            </span>{{ menuLabel }}
+          </button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuVisible }}">
+      <div id="mobile-menu" style="padding:0 12px 12px;animation:wpFade 180ms ease both">
+        <nav aria-label="Main" style="background:#fff;border:1px solid #EAE3D8;border-radius:24px;padding:10px;box-shadow:0 20px 40px rgba(35,32,28,0.12)">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+            <a href="{{ item.href }}" aria-current="{{ item.current }}" style="display:flex;align-items:center;justify-content:space-between;min-height:54px;padding:0 16px;border-radius:16px;background:{{ item.pill }};text-decoration:none;font:600 18px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">{{ item.label }}<span aria-hidden="true" style="color:#1F5FAD">→</span></a>
+          </sc-for>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+            <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;justify-content:center;height:54px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">Request Service</a>
+            <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;height:54px;border:1.5px solid #D9D0C3;color:#23201C;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">Call +1 (602) 833-3185</a>
+          </div>
+        </nav>
+      </div>
+    </sc-if>
+  </header>
+
+  <main id="main" ref="{{ mainRef }}" tabIndex="-1" style="flex:1;outline:none">
+
+  <sc-if value="{{ is.home }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="Home">
+    <section aria-labelledby="hero-title" style="padding:clamp(8px,1.5vw,16px) clamp(10px,1.6vw,20px) 0">
+      <div style="max-width:1400px;margin:0 auto;background:#F6F0E7;border-radius:clamp(28px,3vw,44px);position:relative;overflow:hidden">
+        <div aria-hidden="true" style="position:absolute;left:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:#F1E8DB"></div>
+        <div style="position:relative;display:flex;flex-wrap:wrap;align-items:stretch">
+          <div style="flex:1 1 480px;min-width:0;padding:clamp(36px,5.5vw,84px) clamp(22px,4.5vw,72px) clamp(36px,5vw,72px);display:flex;flex-direction:column;justify-content:center">
+            <p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>Residential Plumbing Services</p>
+            <h1 id="hero-title" style="margin:0;font:800 clamp(44px,6.6vw,96px)/0.96 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.04em;color:#23201C">Plumbing Problems?<br><span style="background:linear-gradient(transparent 62%,#CFE6DF 62%,#CFE6DF 92%,transparent 92%);padding:0 4px;margin:0 -4px">Let’s Get Them Sorted.</span></h1>
+            <p style="margin:26px 0 0;max-width:500px;font:400 clamp(17px,1.4vw,19.5px)/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">Leaks, slow drains, damaged pipes or a water heater acting up. Explore the services we list, then call or send a request describing the problem.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+              <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease,transform 160ms ease,box-shadow 160ms ease" style-hover="background:#184E8F;color:#fff;transform:translateY(-1px);box-shadow:0 12px 24px rgba(31,95,173,0.28)" style-active="transform:translateY(1px)">Request Service <span aria-hidden="true">→</span></a>
+              <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;background:#fff;color:#23201C;border:1.5px solid #D9D0C3;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;transition:border-color 160ms ease,background 160ms ease" style-hover="border-color:#23201C;background:#fff;color:#23201C">Call +1 (602) 833-3185</a>
+            </div>
+            <p style="margin:18px 0 0;font:400 15px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">The request form takes a couple of minutes: describe the issue and choose a preferred appointment time.</p>
+          </div>
+          <div style="flex:1.05 1 420px;min-width:0;padding:clamp(10px,1.4vw,18px);display:flex;flex-direction:column;gap:14px;position:relative">
+            <div role="img" aria-label="Photo placeholder: a plumber working on pipework beneath a residential sink" style="position:relative;overflow:hidden;background:#EDE6DB;flex:1;min-height:{{ heroMinH }};border-radius:28px 28px 28px 140px">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);animation:wpZoom 16s ease-in-out infinite alternate"></div>
+  <span style="position:absolute;left:16px;bottom:16px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">hero photo · plumber working under a residential sink, natural light (not the owner unless approved)</span>
+</div>
+            <div style="position:{{ heroCardPos }};right:clamp(18px,2.4vw,34px);top:clamp(18px,2.4vw,34px);width:{{ heroCardW }};background:#fff;border-radius:24px;padding:20px;box-shadow:0 24px 48px rgba(35,32,28,0.14);animation:wpFade 420ms 120ms ease both">
+              <p style="margin:0;font:700 17px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">What’s going on?</p>
+              <p style="margin:4px 0 14px;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Pick one to start a request.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+                  <a href="{{ s.requestHref }}" onClick="{{ s.select }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:#F6F0E7;color:#23201C;text-decoration:none;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;transition:background 150ms ease" style-hover="background:#E7EFF9;color:#1F5FAD"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:{{ s.dot }}"></span>{{ s.title }}</a>
+                </sc-for>
+                <a href="#/contact?service=other" style="display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px dashed #D9D0C3;color:#3E3933;text-decoration:none;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="border-color:#1F5FAD;color:#1F5FAD">Something else</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="How to get help" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:28px;padding-bottom:8px">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px">
+        <sc-for list="{{ assurances }}" as="a" hint-placeholder-count="3">
+          <li style="display:flex;align-items:center;gap:10px;font:500 15.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><span aria-hidden="true" style="width:22px;height:22px;border-radius:50%;background:#E3F2EE;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><span style="width:9px;height:5px;border-left:2px solid #1D6B60;border-bottom:2px solid #1D6B60;transform:rotate(-45deg) translate(1px,-1px)"></span></span>{{ a }}</li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <section aria-labelledby="svc-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(64px,8vw,112px);padding-bottom:clamp(56px,7vw,96px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(28px,3.5vw,44px)">
+        <div style="max-width:620px"><h2 id="svc-title" style="margin:0;font:700 clamp(30px,3.8vw,50px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">What can we help with?</h2><p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;">Four services cover the most common household plumbing problems. Not sure which fits? Describe it in your own words.</p></div>
+        <a href="#/services"  style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#1F5FAD;text-decoration:none;border-bottom:2px solid #E7EFF9" style-hover="color:#184E8F;border-bottom-color:#1F5FAD">Explore Services <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+          <a href="{{ s.href }}" style="grid-column:{{ s.col }};grid-row:{{ s.row }};display:flex;flex-direction:{{ s.flexDir }};gap:20px;padding:{{ s.pad }};border-radius:30px;background:{{ s.tileBg }};border:1px solid {{ s.tileBorder }};text-decoration:none;color:#23201C;transition:transform 220ms ease,box-shadow 220ms ease" style-hover="transform:translateY(-4px);box-shadow:0 22px 44px rgba(35,32,28,0.10);color:#23201C">
+            <sc-if value="{{ s.hasImg }}">
+              <div role="img" aria-label="{{ s.alt }}" style="position:relative;overflow:hidden;flex:{{ s.imgFlex }};min-height:{{ s.imgH }};border-radius:22px;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px)">
+                <span style="position:absolute;left:14px;bottom:14px;max-width:80%;padding:6px 11px;border-radius:10px;background:rgba(255,253,249,0.94);font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:#23201C">{{ s.img }}</span>
+              </div>
+            </sc-if>
+            <div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:flex-end;padding:{{ s.textPad }}">
+              <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid #EAE3D8;font:600 13px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:{{ s.dot }}"></span>{{ s.n }}</span>
+              <span style="font:700 clamp(23px,2.3vw,30px)/1.1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em">{{ s.title }}</span>
+              <span style="font:400 16px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ s.short }}</span>
+              <span style="display:inline-flex;align-items:center;gap:8px;margin-top:6px;font:600 15.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#1F5FAD">Learn More<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"> about {{ s.title }}</span> <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(64px,8vw,112px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(36px,6vw,96px)">
+        <div style="flex:1 1 360px;min-width:0;max-width:500px;position:relative">
+          <div role="img" aria-label="Photo placeholder: a plumber inspecting a water heater in a residential utility room" style="position:relative;overflow:hidden;background:#EDE6DB;aspect-ratio:4/5;border-radius:999px 999px 36px 36px">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);animation:wpZoom 16s ease-in-out infinite alternate"></div>
+  <span style="position:absolute;left:16px;bottom:16px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">photo · water heater inspection, utility room</span>
+</div>
+          <div aria-hidden="true" style="position:absolute;right:-14px;top:22%;width:88px;height:88px;border-radius:50%;background:#E3F2EE;z-index:-1"></div>
+        </div>
+        <div style="flex:1.2 1 440px;min-width:0">
+          <p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>Why Whitaker Plumbing</p>
+          <h2 id="why-title" style="margin:0;font:700 clamp(30px,3.8vw,50px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Clear Communication. Practical Plumbing Help.</h2>
+          <ol style="list-style:none;margin:36px 0 0;padding:0;display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+              <li style="display:flex;gap:18px;align-items:flex-start;padding:20px 22px;border-radius:22px;background:{{ b.bg }}">
+                <span aria-hidden="true" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #EAE3D8;display:flex;align-items:center;justify-content:center;font:700 15px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C;flex-shrink:0">{{ b.n }}</span>
+                <div><h3 style="margin:0;font:700 19px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C">{{ b.t }}</h3><p style="margin:6px 0 0;font:400 16px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ b.d }}</p></div>
+              </li>
+            </sc-for>
+          </ol>
+          <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:14px">TO CONFIRM · Licensing, insurance or experience can appear here only once the business provides verifiable details.</p></sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="area-title" style="padding:0 clamp(10px,1.6vw,20px)">
+      <div style="max-width:1400px;margin:0 auto;background:#E3F2EE;border-radius:clamp(28px,3vw,44px);padding:clamp(40px,6vw,88px) clamp(22px,5vw,80px);display:flex;flex-wrap:wrap;align-items:center;gap:32px clamp(32px,6vw,96px);position:relative;overflow:hidden">
+        <div aria-hidden="true" style="position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;border:40px solid rgba(255,255,255,0.45)"></div>
+        <div style="flex:1 1 360px;min-width:0;max-width:520px;position:relative">
+          <h2 id="area-title" style="margin:0;font:700 clamp(30px,3.6vw,48px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Check Our Service Areas</h2>
+          <p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;color:#2F4A45">Before you send a request, check whether your city or ZIP code is listed. If it isn’t, call and we can confirm.</p>
+          <div style="margin-top:20px"><a href="#/service-areas"  style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#1F5FAD;text-decoration:none;border-bottom:2px solid #E7EFF9" style-hover="color:#184E8F;border-bottom-color:#1F5FAD">View service areas <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div style="flex:1 1 380px;min-width:0;position:relative;background:#FFFDF9;border-radius:28px;padding:clamp(22px,3vw,32px);box-shadow:0 18px 40px rgba(29,107,96,0.10)"><form onSubmit="{{ checkArea }}" noValidate="" style="width:100%">
+  <label for="area-q" style="display:block;font:600 16px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">Check your city or ZIP code</label>
+  <p id="area-help" style="margin:6px 0 14px;font:400 15px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Enter a city, town or 5-digit ZIP code.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;padding:6px;background:#fff;border:1.5px solid {{ areaBorder }};border-radius:999px">
+    <input id="area-q" type="text" autoComplete="postal-code" maxLength="60" value="{{ areaQuery }}" onChange="{{ onAreaQuery }}" aria-describedby="area-help area-result" aria-invalid="{{ areaInvalid }}" style="flex:1 1 160px;min-width:0;height:46px;padding:0 16px;border:0;border-radius:999px;background:transparent;font-size:16px;color:#23201C" style-focus="outline:none;box-shadow:inset 0 0 0 2px #1F5FAD">
+    <button type="submit" style="height:46px;padding:0 22px;background:#1F5FAD;color:#fff;border:0;border-radius:999px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer" style-hover="background:#184E8F">Check</button>
+  </div>
+  <div id="area-result" role="status" aria-live="polite">
+    <sc-if value="{{ areaHasResult }}">
+      <div style="margin-top:14px;padding:14px 18px;border-radius:16px;background:{{ areaBg }};border:1px solid {{ areaTone }};animation:wpFade 200ms ease both">
+        <p style="margin:0;font:600 15.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">{{ areaText }}</p>
+        <sc-if value="{{ areaShowActions }}"><p style="margin:6px 0 0;font:400 15px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><a href="tel:+16028333185" onClick="{{ trackCall }}" style="font-weight:600">Call +1 (602) 833-3185</a> or <a href="#/contact" style="font-weight:600">send a request</a> and mention your location.</p></sc-if>
+      </div>
+    </sc-if>
+  </div>
+</form></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-prev-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(64px,8vw,112px);padding-bottom:clamp(64px,8vw,112px)">
+      <div style="display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,96px)">
+        <div style="flex:1 1 300px;min-width:0;max-width:420px">
+          <h2 id="faq-prev-title" style="margin:0;font:700 clamp(30px,3.4vw,44px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Questions before you call?</h2>
+          <p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;">Quick answers to what people usually ask first.</p>
+          <div style="margin-top:18px"><a href="#/about/faqs"  style="display:inline-flex;align-items:center;gap:8px;min-height:44px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#1F5FAD;text-decoration:none;border-bottom:2px solid #E7EFF9" style-hover="color:#184E8F;border-bottom-color:#1F5FAD">View All FAQs <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div style="flex:1.6 1 460px;min-width:0"><div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ faqHome }}" as="f" hint-placeholder-count="4">
+  <div style="background:#fff;border:1px solid #EAE3D8;border-radius:20px;overflow:hidden">
+    <h3 style="margin:0">
+      <button type="button" id="{{ f.btnId }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:18px 22px;background:none;border:0;text-align:left;cursor:pointer;font:600 18px/1.35 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C" style-hover="background:#FFFCF7">
+        <span>{{ f.q }}</span>
+        <span aria-hidden="true" style="position:relative;width:32px;height:32px;border-radius:50%;background:#E7EFF9;flex-shrink:0">
+          <span style="position:absolute;left:10px;right:10px;top:15px;height:2px;border-radius:2px;background:#1F5FAD"></span>
+          <span style="position:absolute;top:10px;bottom:10px;left:15px;width:2px;border-radius:2px;background:#1F5FAD;transition:transform 200ms ease;transform:{{ f.vRot }}"></span>
+        </span>
+      </button>
+    </h3>
+    <sc-if value="{{ f.open }}">
+      <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 70px 22px 22px;animation:wpFade 200ms ease both">
+        <p style="margin:0;font:400 16.5px/1.65 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ f.a }}</p>
+        <sc-if value="{{ f.showTag }}"><p style="display:inline-block;margin:12px 0 0;padding:4px 10px;border:1px dashed #B7791F;border-radius:8px;background:#FFF6E0;color:#6B4200;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace">{{ f.tag }}</p></sc-if>
+      </div>
+    </sc-if>
+  </div>
+</sc-for></div></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="close-title" style="padding:0 clamp(10px,1.6vw,20px) clamp(10px,1.6vw,20px)">
+      <div style="max-width:1400px;margin:0 auto;background:#1F5FAD;color:#fff;border-radius:clamp(28px,3vw,44px);padding:clamp(48px,7vw,104px) clamp(22px,5vw,80px);position:relative;overflow:hidden;text-align:center">
+        <div aria-hidden="true" style="position:absolute;left:50%;bottom:-340px;width:760px;height:460px;margin-left:-380px;border-radius:50%;background:rgba(255,255,255,0.07)"></div>
+        <h2 id="close-title" style="position:relative;margin:0 auto;max-width:780px;font:800 clamp(38px,5.4vw,76px)/1.0 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em">Tell Us What’s Going On.</h2>
+        <p style="position:relative;margin:20px auto 0;max-width:540px;font:400 18.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#E2ECF8">Describe your plumbing issue and share a convenient time for us to contact you.</p>
+        <div style="position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px">
+          <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 28px;background:#fff;color:#1F5FAD;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="background:#E7EFF9;color:#184E8F">Request Service <span aria-hidden="true">→</span></a>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 24px;border:1.5px solid rgba(255,255,255,0.7);color:#fff;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap" style-hover="background:rgba(255,255,255,0.12);color:#fff">Call +1 (602) 833-3185</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ is.services }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Services">
+    <section style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(40px,5vw,72px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:40px clamp(32px,6vw,96px)">
+        <div style="flex:1.3 1 460px;min-width:0">
+          <p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>Services</p>
+          <h1 style="margin:0;font:800 clamp(44px,6.2vw,88px)/0.98 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.04em;color:#23201C">Plumbing Services</h1>
+          <p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;max-width:560px;margin-top:22px">Review the services below, then send a request describing your issue. Choosing a service from this page fills it in on the form for you.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease,transform 160ms ease,box-shadow 160ms ease" style-hover="background:#184E8F;color:#fff;transform:translateY(-1px);box-shadow:0 12px 24px rgba(31,95,173,0.28)" style-active="transform:translateY(1px)">Request Service <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div style="flex:1 1 320px;min-width:0;max-width:480px;position:relative;padding:0 0 40px 40px">
+          <div role="img" aria-label="Photo placeholder: plumbing tools laid out on a work mat" style="position:relative;overflow:hidden;background:#EDE6DB;aspect-ratio:5/4;border-radius:36px">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);"></div>
+  <span style="position:absolute;left:16px;bottom:16px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">photo · tools laid out on a work mat</span>
+</div>
+          <div style="position:absolute;left:0;bottom:0;width:44%;aspect-ratio:1;border-radius:50%;border:8px solid #FFFDF9;overflow:hidden"><div role="img" aria-label="Photo placeholder: close-up of a pipe fitting" style="position:relative;overflow:hidden;background:#EDE6DB;position:absolute;inset:0">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);"></div>
+  <span style="position:absolute;left:16px;bottom:16px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">detail</span>
+</div></div>
+        </div>
+      </div>
+      <nav aria-label="Service categories" style="margin-top:clamp(32px,4vw,48px);display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+          <a href="{{ s.href }}" style="display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid #EAE3D8;color:#23201C;text-decoration:none;font:500 15.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="border-color:#23201C;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:{{ s.dot }}"></span>{{ s.title }}</a>
+        </sc-for>
+      </nav>
+    </section>
+
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+      <section id="{{ s.id }}" aria-labelledby="{{ s.hid }}" style="scroll-margin-top:96px;padding:0 clamp(10px,1.6vw,20px) clamp(10px,1.6vw,16px)">
+        <div style="max-width:1400px;margin:0 auto;background:{{ s.secBg }};border-radius:clamp(28px,3vw,44px);padding:clamp(32px,5vw,72px) clamp(20px,4.5vw,72px);display:flex;flex-wrap:wrap;flex-direction:{{ s.dir }};align-items:center;gap:32px clamp(32px,6vw,88px)">
+          <div style="flex:1 1 420px;min-width:0;max-width:580px">
+            <span style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:#fff;border:1px solid #EAE3D8;font:600 13.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:{{ s.dot }}"></span>{{ s.n }} of 04</span>
+            <h2 id="{{ s.hid }}" style="margin:18px 0 0;font:700 clamp(32px,4vw,54px)/1.02 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em;color:#23201C">{{ s.title }}</h2>
+            <p style="margin:18px 0 0;font:400 17.5px/1.65 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ s.long }}</p>
+            <h3 style="margin:26px 0 12px;font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Common signs</h3>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ s.signs }}" as="sign" hint-placeholder-count="3">
+                <li style="display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;background:#fff;border:1px solid #EAE3D8;font:500 15px/1.35 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#2A8C7E;flex-shrink:0"></span>{{ sign }}</li>
+              </sc-for>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:30px">
+              <a href="{{ s.requestHref }}" onClick="{{ s.select }}" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22)" style-hover="background:#184E8F;color:#fff">Request {{ s.title }} <span aria-hidden="true">→</span></a>
+              <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:44px;font:600 15.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C;text-decoration:none;border-bottom:2px solid #E8DFD2">or call +1 (602) 833-3185</a>
+            </div>
+          </div>
+          <div role="img" aria-label="{{ s.alt }}" style="flex:1 1 380px;min-width:0;position:relative;aspect-ratio:{{ s.ratio }};overflow:hidden;border-radius:{{ s.shape }};background:#EDE6DB">
+            <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);transition:transform 600ms ease" style-hover="transform:scale(1.04)"></div>
+            <span style="position:absolute;left:18px;bottom:18px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">{{ s.img }}</span>
+          </div>
+        </div>
+      </section>
+    </sc-for>
+
+    <section aria-labelledby="other-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(40px,5vw,64px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 48px;padding:clamp(24px,3vw,36px);border:1.5px dashed #D9D0C3;border-radius:28px">
+        <div style="flex:1 1 420px;min-width:0;max-width:700px">
+          <h2 id="other-title" style="margin:0;font:700 25px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.015em;color:#23201C">Other plumbing issues</h2>
+          <p style="margin:10px 0 0;font:400 16.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">If your problem isn’t listed, choose “Other Plumbing Issue” on the form and describe it. We’ll let you know whether it’s something we can help with.</p>
+          <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:12px;display:inline-block">TO CONFIRM · Additional services, once the business lists them</p></sc-if>
+        </div>
+        <a href="#/contact?service=other"  style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;background:#fff;color:#23201C;border:1.5px solid #D9D0C3;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;transition:border-color 160ms ease,background 160ms ease" style-hover="border-color:#23201C;background:#fff;color:#23201C">Request help with another issue <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section aria-labelledby="bridge-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(64px,8vw,112px);text-align:center">
+      <div style="max-width:760px;margin:0 auto">
+        <h2 id="bridge-title" style="margin:0;font:700 clamp(32px,4.4vw,58px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Not Sure Which Service You Need?</h2>
+        <p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;margin-left:auto;margin-right:auto;max-width:600px">You don’t need to diagnose it. Tell us what you’re seeing, hearing or smelling, and where in the house it’s happening.</p>
+        <div style="margin-top:30px;display:flex;justify-content:center"><a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease,transform 160ms ease,box-shadow 160ms ease" style-hover="background:#184E8F;color:#fff;transform:translateY(-1px);box-shadow:0 12px 24px rgba(31,95,173,0.28)" style-active="transform:translateY(1px)">Describe Your Plumbing Issue <span aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ is.about }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="About / FAQs">
+    <section style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(36px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px clamp(32px,6vw,88px);align-items:end">
+        <div><p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>About Whitaker Plumbing</p><h1 style="margin:0;font:800 clamp(44px,6vw,86px)/0.98 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.04em;color:#23201C">Straightforward Plumbing Help.</h1></div>
+        <div>
+          <p style="margin:0;font:400 19.5px/1.65 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Whitaker Plumbing is a small plumbing business handling leak repairs, drain cleaning, pipe repairs and water heater services. You can reach the business directly by phone or email, or send a service request through this website.</p>
+          <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:16px">TO CONFIRM · Approved company story, owner photo and any credentials. Neutral description shown until supplied.</p></sc-if>
+        </div>
+      </div>
+    </section>
+    <div style="padding:0 clamp(10px,1.6vw,20px)"><div role="img" aria-label="Photo placeholder: a clean residential utility space with visible pipework" style="position:relative;overflow:hidden;background:#EDE6DB;max-width:1400px;margin:0 auto;aspect-ratio:{{ wideRatio }};border-radius:clamp(28px,3vw,44px)">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E9E1D4 0 14px,#F1EBE1 14px 28px);"></div>
+  <span style="position:absolute;left:16px;bottom:16px;max-width:78%;padding:7px 12px;border-radius:10px;background:rgba(255,253,249,0.94);color:#23201C;font:500 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">wide photo · clean residential utility room, pipework visible</span>
+</div></div>
+
+    <section aria-labelledby="how-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(64px,8vw,112px);padding-bottom:clamp(56px,7vw,96px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 48px">
+        <h2 id="how-title" style="margin:0;font:700 clamp(30px,3.6vw,48px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">How service requests work</h2>
+        <p style="margin:0;max-width:440px;font:400 16.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">Prefer to talk it through? <a href="tel:+16028333185" onClick="{{ trackCall }}" style="font-weight:600">Call +1 (602) 833-3185</a> instead. Submitting a request does not confirm an appointment.</p>
+      </div>
+      <ol style="list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+          <li style="padding:26px;border-radius:26px;background:{{ st.bg }};display:flex;flex-direction:column;gap:10px">
+            <span aria-hidden="true" style="width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font:800 19px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C;margin-bottom:10px">{{ st.n }}</span>
+            <h3 style="margin:0;font:700 20px/1.25 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C">{{ st.t }}</h3>
+            <p style="margin:0;font:400 15.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ st.d }}</p>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+
+    <section id="faqs" aria-labelledby="faq-title" style="scroll-margin-top:96px;padding:0 clamp(10px,1.6vw,20px)">
+      <div style="max-width:1400px;margin:0 auto;background:#F6F0E7;border-radius:clamp(28px,3vw,44px);padding:clamp(40px,6vw,88px) clamp(20px,5vw,80px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,96px)">
+        <div style="flex:1 1 280px;min-width:0;max-width:380px">
+          <h2 id="faq-title" style="margin:0;font:700 clamp(30px,3.6vw,48px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Frequently asked questions</h2>
+          <div style="display:flex;gap:8px;margin-top:22px;flex-wrap:wrap">
+            <button type="button" onClick="{{ expandAll }}" style="min-height:44px;padding:0 18px;border:1px solid #D9D0C3;background:#fff;border-radius:999px;color:#23201C;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer" style-hover="border-color:#23201C">Expand all</button>
+            <button type="button" onClick="{{ collapseAll }}" style="min-height:44px;padding:0 18px;border:1px solid #D9D0C3;background:#fff;border-radius:999px;color:#23201C;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer" style-hover="border-color:#23201C">Collapse all</button>
+          </div>
+        </div>
+        <div style="flex:1.7 1 480px;min-width:0"><div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ faqAll }}" as="f" hint-placeholder-count="4">
+  <div style="background:#fff;border:1px solid #EAE3D8;border-radius:20px;overflow:hidden">
+    <h3 style="margin:0">
+      <button type="button" id="{{ f.btnId }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:18px 22px;background:none;border:0;text-align:left;cursor:pointer;font:600 18px/1.35 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C" style-hover="background:#FFFCF7">
+        <span>{{ f.q }}</span>
+        <span aria-hidden="true" style="position:relative;width:32px;height:32px;border-radius:50%;background:#E7EFF9;flex-shrink:0">
+          <span style="position:absolute;left:10px;right:10px;top:15px;height:2px;border-radius:2px;background:#1F5FAD"></span>
+          <span style="position:absolute;top:10px;bottom:10px;left:15px;width:2px;border-radius:2px;background:#1F5FAD;transition:transform 200ms ease;transform:{{ f.vRot }}"></span>
+        </span>
+      </button>
+    </h3>
+    <sc-if value="{{ f.open }}">
+      <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 70px 22px 22px;animation:wpFade 200ms ease both">
+        <p style="margin:0;font:400 16.5px/1.65 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">{{ f.a }}</p>
+        <sc-if value="{{ f.showTag }}"><p style="display:inline-block;margin:12px 0 0;padding:4px 10px;border:1px dashed #B7791F;border-radius:8px;background:#FFF6E0;color:#6B4200;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace">{{ f.tag }}</p></sc-if>
+      </div>
+    </sc-if>
+  </div>
+</sc-for></div></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="about-contact-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(64px,8vw,112px)">
+      <h2 id="about-contact-title" style="margin:0;font:700 clamp(28px,3.2vw,40px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Get in touch</h2>
+      <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px">
+        <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;flex-direction:column;gap:10px;padding:26px;border-radius:26px;background:#1F5FAD;color:#fff;text-decoration:none" style-hover="background:#184E8F;color:#fff"><span style="font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#D4E3F6">Phone</span><span style="font:700 24px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em">+1 (602) 833-3185</span></a>
+        <a href="mailto:asher.whitaker@gmail.com" style="display:flex;flex-direction:column;gap:10px;padding:26px;border-radius:26px;background:#fff;border:1px solid #EAE3D8;color:#23201C;text-decoration:none;min-width:0" style-hover="border-color:#23201C;color:#23201C"><span style="font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Email</span><span style="font:700 20px/1.25 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;overflow-wrap:anywhere">asher.whitaker@gmail.com</span></a>
+        <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;flex-direction:column;gap:10px;padding:26px;border-radius:26px;background:#F6F0E7;color:#23201C;text-decoration:none" style-hover="background:#F1E8DB;color:#23201C"><span style="font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Online</span><span style="font:700 22px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif">Request Service →</span></a>
+      </div>
+      <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:16px;display:inline-block">TO CONFIRM · Publish 600 E Trade St, Charlotte, NC 28202 only after the business approves it.</p></sc-if>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ is.areas }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Service Areas">
+    <section style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(48px,6vw,88px)">
+      <div style="display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,88px);align-items:center">
+        <div style="flex:1 1 420px;min-width:0;max-width:600px">
+          <p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>Service Areas</p>
+          <h1 style="margin:0;font:800 clamp(44px,6vw,86px)/0.98 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.04em;color:#23201C">Check Our Service Areas</h1>
+          <p style="margin:16px 0 0;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933;margin-top:22px">Check your city or ZIP code before you send a request. If your location isn’t listed, contact us and we’ll confirm whether we can help.</p>
+        </div>
+        <div style="flex:1 1 400px;min-width:0;background:#E3F2EE;border-radius:32px;padding:clamp(22px,3vw,36px)"><form onSubmit="{{ checkArea }}" noValidate="" style="width:100%">
+  <label for="area-q" style="display:block;font:600 20px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">Check your location</label>
+  <p id="area-help" style="margin:6px 0 14px;font:400 15px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Enter a city, town or 5-digit ZIP code.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;padding:6px;background:#fff;border:1.5px solid {{ areaBorder }};border-radius:999px">
+    <input id="area-q" type="text" autoComplete="postal-code" maxLength="60" value="{{ areaQuery }}" onChange="{{ onAreaQuery }}" aria-describedby="area-help area-result" aria-invalid="{{ areaInvalid }}" style="flex:1 1 160px;min-width:0;height:46px;padding:0 16px;border:0;border-radius:999px;background:transparent;font-size:16px;color:#23201C" style-focus="outline:none;box-shadow:inset 0 0 0 2px #1F5FAD">
+    <button type="submit" style="height:46px;padding:0 22px;background:#1F5FAD;color:#fff;border:0;border-radius:999px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer" style-hover="background:#184E8F">Check</button>
+  </div>
+  <div id="area-result" role="status" aria-live="polite">
+    <sc-if value="{{ areaHasResult }}">
+      <div style="margin-top:14px;padding:14px 18px;border-radius:16px;background:{{ areaBg }};border:1px solid {{ areaTone }};animation:wpFade 200ms ease both">
+        <p style="margin:0;font:600 15.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">{{ areaText }}</p>
+        <sc-if value="{{ areaShowActions }}"><p style="margin:6px 0 0;font:400 15px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><a href="tel:+16028333185" onClick="{{ trackCall }}" style="font-weight:600">Call +1 (602) 833-3185</a> or <a href="#/contact" style="font-weight:600">send a request</a> and mention your location.</p></sc-if>
+      </div>
+    </sc-if>
+  </div>
+</form></div>
+      </div>
+    </section>
+    <section aria-labelledby="dir-title" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-bottom:clamp(56px,7vw,96px)">
+      <h2 id="dir-title" style="margin:0;font:700 clamp(26px,3vw,38px)/1.05 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Listed service locations</h2>
+      <sc-if value="{{ hasAreas }}">
+        <ul style="list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px">
+          <sc-for list="{{ areas }}" as="a"><li style="padding:12px 20px;border-radius:999px;background:#fff;border:1px solid #EAE3D8;font:600 16px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">{{ a.name }}</li></sc-for>
+        </ul>
+      </sc-if>
+      <sc-if value="{{ noAreas }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;padding:clamp(22px,3vw,32px);border-radius:28px;background:#fff;border:1px solid #EAE3D8">
+          <p style="margin:0;max-width:620px;font:500 17px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">No service locations are listed yet. Please contact Whitaker Plumbing to check whether your area is covered.</p>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;background:#fff;color:#23201C;border:1.5px solid #D9D0C3;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;transition:border-color 160ms ease,background 160ms ease" style-hover="border-color:#23201C;background:#fff;color:#23201C">Call +1 (602) 833-3185</a>
+        </div>
+        <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:14px;display:inline-block">TO CONFIRM · Approved cities / ZIP codes. The lookup checks this list only, never distance from the address.</p></sc-if>
+      </sc-if>
+    </section>
+    <section aria-labelledby="area-cta-title" style="padding:0 clamp(10px,1.6vw,20px) clamp(10px,1.6vw,20px)">
+      <div style="max-width:1400px;margin:0 auto;background:#1F5FAD;color:#fff;border-radius:clamp(28px,3vw,44px);padding:clamp(44px,6vw,88px) clamp(22px,5vw,80px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px">
+        <div style="flex:1 1 420px;min-width:0">
+          <h2 id="area-cta-title" style="margin:0;font:800 clamp(32px,4.4vw,58px)/1.02 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.03em">Not Sure If We Cover Your Area?</h2>
+          <p style="margin:16px 0 0;max-width:520px;font:400 18px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#E2ECF8">Call, or send a request with your city or ZIP code and we’ll let you know.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="#/contact" onClick="{{ trackRequest }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 26px;background:#fff;color:#1F5FAD;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="background:#E7EFF9;color:#184E8F">Request Service</a>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 24px;border:1.5px solid rgba(255,255,255,0.7);color:#fff;border-radius:999px;text-decoration:none;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap" style-hover="background:rgba(255,255,255,0.12);color:#fff">Call +1 (602) 833-3185</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ is.contact }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Contact / Request Service" style="max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);padding-top:clamp(32px,5vw,64px);padding-bottom:clamp(64px,8vw,112px)">
+    <p style="display:inline-flex;align-self:flex-start;width:fit-content;align-items:center;gap:8px;margin:0 0 18px;padding:7px 14px 7px 10px;border-radius:999px;background:#fff;border:1px solid #E8DFD2;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2A8C7E"></span>Contact</p>
+    <h1 style="margin:0;max-width:860px;font:800 clamp(42px,5.8vw,80px)/0.98 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.04em;color:#23201C">Request Plumbing Service</h1>
+    <p style="margin:20px 0 0;max-width:620px;font:400 18.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">Tell us a little about the issue, how to reach you, and a time that works for you.</p>
+    <p style="margin:8px 0 0;max-width:620px;font:400 15.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">This form sends a service request. It does not book or confirm an appointment.</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,44px)">
+      <div style="flex:1.7 1 520px;min-width:0">
+        <div role="status" aria-live="polite" style="position:absolute;left:-9999px">{{ liveMsg }}</div>
+        <sc-if value="{{ submitted }}">
+          <div ref="{{ successRef }}" tabIndex="-1" style="background:#fff;border:1px solid #EAE3D8;border-radius:32px;padding:clamp(26px,4vw,48px);outline:none;box-shadow:0 20px 50px rgba(35,32,28,0.06);animation:wpFade 280ms ease both">
+            <div aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:#E3F2E9;display:flex;align-items:center;justify-content:center"><span style="width:20px;height:11px;border-left:3px solid #1E7B4F;border-bottom:3px solid #1E7B4F;transform:rotate(-45deg) translate(2px,-2px)"></span></div>
+            <h2 style="margin:20px 0 0;font:700 clamp(28px,3.2vw,40px)/1.1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.025em;color:#23201C">Your service request has been received.</h2>
+            <p style="margin:12px 0 0;font:400 17px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">Your request has been recorded. Whitaker Plumbing will follow up using the contact details you provided. This is not an appointment confirmation.</p>
+            <dl style="margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px">
+              <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="4">
+                <div style="padding:16px 18px;border-radius:18px;background:#F6F0E7"><dt style="font:500 13px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">{{ r.k }}</dt><dd style="margin:6px 0 0;font:600 16px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C;overflow-wrap:anywhere">{{ r.v }}</dd></div>
+              </sc-for>
+            </dl>
+            <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:18px">TO CONFIRM · Follow-up process and timing. No response time is promised until approved.</p></sc-if>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
+              <a href="#/"  style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease,transform 160ms ease,box-shadow 160ms ease" style-hover="background:#184E8F;color:#fff;transform:translateY(-1px);box-shadow:0 12px 24px rgba(31,95,173,0.28)" style-active="transform:translateY(1px)">Back to Home</a>
+              <button type="button" onClick="{{ newRequest }}" style="min-height:50px;padding:0 22px;border:1.5px solid #D9D0C3;background:#fff;color:#23201C;border-radius:999px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer" style-hover="border-color:#23201C">Submit another request</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" noValidate="" aria-describedby="req-note" style="background:#fff;border:1px solid #EAE3D8;border-radius:32px;padding:clamp(20px,3.6vw,44px);display:flex;flex-direction:column;gap:34px;box-shadow:0 20px 50px rgba(35,32,28,0.05)">
+            <p id="req-note" style="margin:0;font:400 14.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Fields marked <span aria-hidden="true" style="color:#B42318;font-weight:700">*</span> are required.</p>
+            <sc-if value="{{ showSummary }}">
+              <div ref="{{ summaryRef }}" tabIndex="-1" role="alert" aria-labelledby="sum-title" style="border:1.5px solid #E7B4AE;border-radius:20px;background:#FDF1F0;padding:18px 22px;outline:none">
+                <h2 id="sum-title" style="margin:0;font:700 18px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#8A1C12">{{ summaryTitle }}</h2>
+                <ul style="margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:2px">
+                  <sc-for list="{{ errList }}" as="e"><li style="color:#8A1C12"><button type="button" onClick="{{ e.focus }}" style="padding:5px 0;background:none;border:0;color:#8A1C12;text-decoration:underline;text-underline-offset:3px;font:500 15px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer;text-align:left">{{ e.text }}</button></li></sc-for>
+                </ul>
+              </div>
+            </sc-if>
+            <sc-if value="{{ netError }}">
+              <div role="alert" style="border:1.5px solid #E7B4AE;border-radius:20px;background:#FDF1F0;padding:16px 20px">
+                <p style="margin:0;font:700 16px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#8A1C12">We couldn’t send your request.</p>
+                <p style="margin:6px 0 0;font:400 15px/1.55 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5A1A13">Your details are still here. Check your connection and try again, or <a href="tel:+16028333185" onClick="{{ trackCall }}" style="color:#8A1C12;font-weight:600">call +1 (602) 833-3185</a>.</p>
+              </div>
+            </sc-if>
+
+            <fieldset style="border:0;margin:0;padding:0;min-width:0">
+              <legend style="float:left;width:100%;padding:0;margin-bottom:20px;display:flex;align-items:center;gap:12px;font:700 20px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C"><span aria-hidden="true" style="width:32px;height:32px;border-radius:50%;background:#E3F2EE;color:#1D6B60;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">1</span>Your contact details</legend>
+              <div style="clear:both;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;grid-column:1/-1;">
+  <label for="f-name" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Name <span aria-hidden="true" style="color:#B42318">*</span></label>
+  <input id="f-name" name="name" type="text" autoComplete="name" maxLength="80" required="" value="{{ form.name }}" onChange="{{ on.name }}" onBlur="{{ blur.name }}" aria-invalid="{{ inv.name }}" aria-describedby="{{ desc.name }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;border:1.5px solid {{ bc.name }}" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+  <sc-if value="{{ has.name }}"><p id="e-name" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.name }}</p></sc-if>
+</div>
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;">
+  <label for="f-phone" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Phone <span aria-hidden="true" style="color:#B42318">*</span></label>
+  <input id="f-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength="30" required="" value="{{ form.phone }}" onChange="{{ on.phone }}" onBlur="{{ blur.phone }}" aria-invalid="{{ inv.phone }}" aria-describedby="{{ desc.phone }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;border:1.5px solid {{ bc.phone }}" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+  <p id="h-phone" style="margin:0;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">The best number to reach you on.</p><sc-if value="{{ has.phone }}"><p id="e-phone" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.phone }}</p></sc-if>
+</div>
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;">
+  <label for="f-email" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Email <span aria-hidden="true" style="color:#B42318">*</span></label>
+  <input id="f-email" name="email" type="email" inputMode="email" autoComplete="email" maxLength="120" required="" value="{{ form.email }}" onChange="{{ on.email }}" onBlur="{{ blur.email }}" aria-invalid="{{ inv.email }}" aria-describedby="{{ desc.email }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;border:1.5px solid {{ bc.email }}" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+  <sc-if value="{{ has.email }}"><p id="e-email" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.email }}</p></sc-if>
+</div>
+              </div>
+            </fieldset>
+
+            <fieldset style="border:0;margin:0;padding:0;min-width:0">
+              <legend style="float:left;width:100%;padding:0;margin-bottom:20px;display:flex;align-items:center;gap:12px;font:700 20px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C"><span aria-hidden="true" style="width:32px;height:32px;border-radius:50%;background:#E3F2EE;color:#1D6B60;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">2</span>Plumbing issue</legend>
+              <div style="clear:both;display:flex;flex-direction:column;gap:20px">
+                <div style="display:flex;flex-direction:column;gap:7px;max-width:460px">
+                  <label for="f-service" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Service type <span aria-hidden="true" style="color:#B42318">*</span></label>
+                  <select id="f-service" name="service" required="" value="{{ form.service }}" onChange="{{ on.service }}" onBlur="{{ blur.service }}" aria-invalid="{{ inv.service }}" aria-describedby="{{ desc.service }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;padding-right:44px;border:1.5px solid {{ bc.service }};appearance:none;-webkit-appearance:none;background:#FFFEFC linear-gradient(45deg,transparent 50%,#23201C 50%) no-repeat right 22px center/7px 7px" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+                    <option value="">Choose a service</option>
+                    <sc-for list="{{ svcOptions }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                  </select>
+                  <p id="h-service" style="margin:0;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Not sure? Pick the closest match or “Other Plumbing Issue.”</p><sc-if value="{{ has.service }}"><p id="e-service" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.service }}</p></sc-if>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <label for="f-issue" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Describe the issue <span aria-hidden="true" style="color:#B42318">*</span></label>
+                  <p id="h-issue" style="margin:0;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">What you’re noticing, where it is, and when it started.</p>
+                  <textarea id="f-issue" name="issue" rows="5" maxLength="1500" required="" value="{{ form.issue }}" onChange="{{ on.issue }}" onBlur="{{ blur.issue }}" aria-invalid="{{ inv.issue }}" aria-describedby="{{ desc.issue }}" style="min-height:140px;padding:14px 16px;border:1.5px solid {{ bc.issue }};border-radius:18px;background:#FFFEFC;font-size:16px;line-height:1.55;color:#23201C;width:100%;resize:vertical" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none"></textarea>
+                  <div style="display:flex;justify-content:space-between;gap:12px"><sc-if value="{{ has.issue }}"><p id="e-issue" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.issue }}</p></sc-if><span aria-hidden="true" style="margin-left:auto;font:400 13px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">{{ issueCount }}</span></div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset style="border:0;margin:0;padding:0;min-width:0">
+              <legend style="float:left;width:100%;padding:0;margin-bottom:20px;display:flex;align-items:center;gap:12px;font:700 20px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C"><span aria-hidden="true" style="width:32px;height:32px;border-radius:50%;background:#E3F2EE;color:#1D6B60;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">3</span>Location and preferred time</legend>
+              <div style="clear:both;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;">
+  <label for="f-location" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">City or ZIP code <span aria-hidden="true" style="color:#B42318">*</span></label>
+  <input id="f-location" name="location" type="text" autoComplete="postal-code" maxLength="80" required="" value="{{ form.location }}" onChange="{{ on.location }}" onBlur="{{ blur.location }}" aria-invalid="{{ inv.location }}" aria-describedby="{{ desc.location }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;border:1.5px solid {{ bc.location }}" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+  <p id="h-location" style="margin:0;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">A general location helps us check coverage. No street address needed yet.</p><sc-if value="{{ has.location }}"><p id="e-location" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.location }}</p></sc-if>
+</div>
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;">
+  <label for="f-date" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Preferred date <span style="font-weight:400;color:#5E5850">(optional)</span></label>
+  <input id="f-date" name="date" type="date" min="{{ today }}"  value="{{ form.date }}" onChange="{{ on.date }}" onBlur="{{ blur.date }}" aria-invalid="{{ inv.date }}" aria-describedby="{{ desc.date }}" style="height:52px;padding:0 16px;border-radius:14px;background:#FFFEFC;font-size:16px;color:#23201C;width:100%;border:1.5px solid {{ bc.date }}" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none">
+  <sc-if value="{{ has.date }}"><p id="e-date" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.date }}</p></sc-if>
+</div>
+                <div role="radiogroup" aria-labelledby="l-window" aria-describedby="{{ desc.window }}" aria-required="true" style="grid-column:1/-1;display:flex;flex-direction:column;gap:10px">
+                  <span id="l-window" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Preferred time of day <span aria-hidden="true" style="color:#B42318">*</span></span>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <sc-for list="{{ windows }}" as="w" hint-placeholder-count="3">
+                      <label style="display:flex;align-items:center;gap:10px;min-height:50px;padding:0 20px 0 16px;border:1.5px solid {{ w.border }};background:{{ w.bg }};border-radius:999px;cursor:pointer;font:500 15.5px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C;transition:background 150ms ease,border-color 150ms ease">
+                        <input type="radio" id="{{ w.id }}" name="window" value="{{ w.v }}" checked="{{ w.checked }}" onChange="{{ w.pick }}" style="width:18px;height:18px;margin:0;accent-color:#1F5FAD">{{ w.l }}
+                      </label>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ has.window }}"><p id="e-window" style="margin:0;display:flex;align-items:center;gap:8px;font:500 14.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#B42318"><span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#B42318;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 12px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;flex-shrink:0">!</span>{{ err.window }}</p></sc-if>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset style="border:0;margin:0;padding:0;min-width:0">
+              <legend style="float:left;width:100%;padding:0;margin-bottom:20px;display:flex;align-items:center;gap:12px;font:700 20px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em;color:#23201C"><span aria-hidden="true" style="width:32px;height:32px;border-radius:50%;background:#E3F2EE;color:#1D6B60;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">4</span>Additional information</legend>
+              <div style="clear:both;display:flex;flex-direction:column;gap:7px">
+                <label for="f-extra" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Anything else we should know? <span style="font-weight:400;color:#5E5850">(optional)</span></label>
+                <p id="h-extra" style="margin:0;font:400 14px/1.45 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">For example: access instructions, pets at home, or whether you rent.</p>
+                <textarea id="f-extra" name="extra" rows="3" maxLength="1500" value="{{ form.extra }}" onChange="{{ on.extra }}" aria-describedby="h-extra" style="min-height:100px;padding:14px 16px;border:1.5px solid #D9D0C3;border-radius:18px;background:#FFFEFC;font-size:16px;line-height:1.55;color:#23201C;width:100%;resize:vertical" style-focus="border-color:#1F5FAD;box-shadow:0 0 0 4px #E7EFF9;outline:none"></textarea>
+              </div>
+            </fieldset>
+
+            <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden"><label for="f-company">Company (leave blank)</label><input id="f-company" name="company" type="text" tabIndex="-1" autoComplete="off" value="{{ form.company }}" onChange="{{ on.company }}"></div>
+
+            <div style="display:flex;flex-direction:column;gap:16px;padding:22px;border-radius:24px;background:#F6F0E7">
+              <p style="margin:0;font:400 14.5px/1.55 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">We use these details only to respond to your service request. Read the <a href="#/privacy">privacy notice</a>.</p>
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px">
+                <button type="submit" disabled="{{ submitting }}" aria-busy="{{ busyAttr }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;background:{{ submitBg }};color:#fff;border:0;border-radius:999px;font:600 17px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;cursor:{{ submitCursor }};box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease" style-hover="background:#184E8F">
+                  <sc-if value="{{ submitting }}"><span aria-hidden="true" style="width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:wpSpin 800ms linear infinite"></span></sc-if>{{ submitLabel }}
+                </button>
+                <a href="tel:+16028333185" onClick="{{ trackCall }}" style="font:600 15.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Prefer to call? +1 (602) 833-3185</a>
+              </div>
+            </div>
+          </form>
+        </sc-if>
+      </div>
+
+      <aside aria-label="Contact details" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px;position:{{ asidePos }};top:100px">
+        <div style="background:#1F5FAD;color:#fff;border-radius:28px;padding:28px">
+          <p style="margin:0;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#D4E3F6">Call directly</p>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:block;margin-top:12px;font:800 clamp(24px,2.3vw,30px)/1.15 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#fff;text-decoration:none;letter-spacing:-0.015em" style-hover="color:#E2ECF8">+1 (602) 833-3185</a>
+          <p style="margin:20px 0 0;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#D4E3F6">Email</p>
+          <a href="mailto:asher.whitaker@gmail.com" style="display:block;margin-top:10px;font:600 16.5px/1.4 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#fff;overflow-wrap:anywhere" style-hover="color:#E2ECF8">asher.whitaker@gmail.com</a>
+          <sc-if value="{{ flags }}"><p style="margin:18px 0 0;padding:8px 10px;border:1px dashed #FFE1A3;border-radius:10px;color:#FFE9BA;font:500 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">TO CONFIRM · Business hours and emergency availability</p></sc-if>
+        </div>
+        <div style="background:#F6F0E7;border-radius:28px;padding:26px">
+          <h2 style="margin:0;font:700 19px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">Helpful details to include</h2>
+          <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ tips }}" as="t" hint-placeholder-count="4"><li style="display:flex;gap:10px;font:400 15.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933"><span aria-hidden="true" style="width:7px;height:7px;margin-top:8px;border-radius:50%;background:#2A8C7E;flex-shrink:0"></span>{{ t }}</li></sc-for>
+          </ul>
+        </div>
+        <div style="background:#fff;border:1px solid #EAE3D8;border-radius:28px;padding:22px 26px">
+          <h2 style="margin:0;font:700 17px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C">After you submit</h2>
+          <p style="margin:8px 0 0;font:400 15px/1.55 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">You’ll see a confirmation once your request is recorded. Whitaker Plumbing will then contact you to discuss the issue and timing.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ is.privacy }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Privacy notice" style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,56px) clamp(64px,8vw,112px)">
+      <h1 style="margin:0;font:800 clamp(38px,5vw,64px)/1.02 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.035em;color:#23201C">Privacy notice</h1>
+      <p style="margin:22px 0 0;font:400 17.5px/1.7 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">The service request form collects your name, phone, email, service type, issue description, general location and preferred time. This information is used to respond to your request.</p>
+      <p style="margin:14px 0 0;font:400 17.5px/1.7 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C">Questions about your information: <a href="mailto:asher.whitaker@gmail.com">asher.whitaker@gmail.com</a>.</p>
+      <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:22px">TO CONFIRM · Full privacy policy, data retention and deletion terms, reviewed by the business before launch.</p></sc-if>
+    </div>
+  </sc-if>
+  </main>
+
+  <footer style="padding:0 clamp(10px,1.6vw,20px) {{ footerPad }}">
+    <div style="max-width:1400px;margin:0 auto;background:#F6F0E7;border-radius:clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0 0;padding:clamp(44px,6vw,80px) clamp(22px,5vw,80px) 28px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px 48px">
+        <div>
+          <a href="#/" aria-label="Whitaker Plumbing, home" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none"><span aria-hidden="true" style="width:36px;height:36px;border-radius:12px;background:#1F5FAD;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="width:13px;height:13px;background:#fff;border-radius:0 50% 50% 50%;transform:translateY(1px) rotate(45deg)"></span></span><span style="font:700 20px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;white-space:nowrap;color:#23201C">Whitaker<span style="font-weight:500;color:#5E5850"> Plumbing</span></span></a>
+          <p style="margin:16px 0 0;max-width:280px;font:400 15.5px/1.6 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#3E3933">Leak repairs, drain cleaning, pipe repairs and water heater services.</p>
+        </div>
+        <nav aria-label="Footer">
+          <p style="margin:0 0 10px;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Pages</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+            <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5"><li><a href="{{ item.href }}" style="display:inline-flex;align-items:center;min-height:38px;color:#23201C;text-decoration:none;font:500 15.5px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="color:#1F5FAD">{{ item.label }}</a></li></sc-for>
+          </ul>
+        </nav>
+        <div>
+          <p style="margin:0 0 10px;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Contact</p>
+          <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:block;font:700 19px/1.4 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#23201C;text-decoration:none" style-hover="color:#1F5FAD">+1 (602) 833-3185</a>
+          <a href="mailto:asher.whitaker@gmail.com" style="display:block;margin-top:6px;font:500 15.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#23201C;overflow-wrap:anywhere" style-hover="color:#1F5FAD">asher.whitaker@gmail.com</a>
+          <sc-if value="{{ flags }}"><p style="margin:0;padding:8px 12px;border:1px dashed #B7791F;border-radius:10px;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:12px">TO CONFIRM · Address shown only once approved: 600 E Trade St, Charlotte, NC 28202</p></sc-if>
+        </div>
+        <div>
+          <p style="margin:0 0 12px;font:600 14px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">Get help</p>
+          <a href="#/contact"  style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;background:#1F5FAD;color:#fff;border-radius:999px;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 20px rgba(31,95,173,0.22);transition:background 160ms ease,transform 160ms ease,box-shadow 160ms ease" style-hover="background:#184E8F;color:#fff;transform:translateY(-1px);box-shadow:0 12px 24px rgba(31,95,173,0.28)" style-active="transform:translateY(1px)">Request Service</a>
+          <div style="margin-top:10px"><a href="#/service-areas" style="display:inline-flex;align-items:center;min-height:40px;color:#23201C;font:500 15.5px/1.3 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" style-hover="color:#1F5FAD">Check service areas</a></div>
+        </div>
+      </div>
+      <div style="margin-top:44px;padding-top:20px;border-top:1px solid #E8DFD2;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font:400 14.5px/1.5 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#5E5850">
+        <span>© {{ year }} Whitaker Plumbing</span>
+        <a href="#/privacy" style="color:#23201C" style-hover="color:#1F5FAD">Privacy notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showStickyBar }}">
+    <div style="position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:45;background:rgba(255,253,249,0.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #EAE3D8;border-radius:999px;box-shadow:0 12px 30px rgba(35,32,28,0.16);padding:6px;display:grid;grid-template-columns:1fr 1.3fr;gap:6px">
+      <a href="tel:+16028333185" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;color:#23201C;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">Call</a>
+      <a href="#/contact" onClick="{{ trackRequest }}" style="display:flex;align-items:center;justify-content:center;height:48px;background:#1F5FAD;border-radius:999px;color:#fff;text-decoration:none;font:600 16px/1 Figtree,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif">Request Service</a>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- ADMIN -->
+<sc-if value="{{ is.adminLogin }}">
+  <div data-screen-label="Admin login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;background:#EEF3F2;background-image:linear-gradient(#E1E9E7 1px,transparent 1px),linear-gradient(90deg,#E1E9E7 1px,transparent 1px);background-size:48px 48px">
+    <main style="width:100%;max-width:420px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;color:#103F43">
+        <span aria-hidden="true" style="position:relative;width:30px;height:30px;background:#103F43;border-radius:3px">
+          <span style="position:absolute;left:6px;top:8px;width:18px;height:4px;background:#36B7A5"></span>
+          <span style="position:absolute;left:13px;top:8px;width:4px;height:15px;background:#36B7A5"></span>
+        </span>
+        <span style="font:800 18px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif">Whitaker Plumbing <span style="font-weight:600;color:#5B6A6E">· Admin</span></span>
+      </div>
+      <form onSubmit="{{ login }}" noValidate="" style="background:#fff;border:1px solid #D9E2E0;padding:32px;display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 40px rgba(16,63,67,0.06)">
+        <h1 style="margin:0;font:800 26px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">Sign in to manage leads</h1>
+        <sc-if value="{{ loginErr }}"><p role="alert" style="margin:0;padding:12px 14px;border:2px solid #B42318;background:#FDF1F0;color:#8A1C12;font:500 14.5px/1.45 Figtree,ui-sans-serif,system-ui,sans-serif">{{ loginErr }}</p></sc-if>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="a-email" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,sans-serif">Email</label>
+          <input id="a-email" type="email" autoComplete="username" value="{{ loginEmail }}" onChange="{{ onLoginEmail }}" style="height:48px;padding:0 14px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:16px" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="a-pass" style="font:600 15px/1.3 Figtree,ui-sans-serif,system-ui,sans-serif">Password</label>
+          <input id="a-pass" type="password" autoComplete="current-password" value="{{ loginPass }}" onChange="{{ onLoginPass }}" style="height:48px;padding:0 14px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:16px" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+        </div>
+        <button type="submit" disabled="{{ loggingIn }}" style="height:50px;background:#103F43;color:#fff;border:0;border-radius:4px;font:600 16px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer" style-hover="background:#0B2F32">{{ loginLabel }}</button>
+        <p style="margin:0;padding:10px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">DEMO ENVIRONMENT · Password: demo. Production auth is handled server-side with secure sessions; every /api/admin endpoint checks the session.</p>
+      </form>
+      <a href="#/" style="display:inline-flex;margin-top:18px;min-height:44px;align-items:center;font:500 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif">← Back to public website</a>
+    </main>
+  </div>
+</sc-if>
+
+<sc-if value="{{ is.adminApp }}">
+  <div style="min-height:100vh;display:flex;flex-direction:{{ adminDir }};background:#F3F6F5">
+    <sc-if value="{{ wideAdmin }}">
+      <aside style="width:236px;flex-shrink:0;background:#103F43;color:#fff;padding:22px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 8px 22px">
+          <span aria-hidden="true" style="position:relative;width:26px;height:26px;background:#F7F9F7;border-radius:3px">
+            <span style="position:absolute;left:5px;top:7px;width:16px;height:3px;background:#103F43"></span>
+            <span style="position:absolute;left:11px;top:7px;width:3px;height:13px;background:#103F43"></span>
+          </span>
+          <span style="font:800 16px/1.1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif">Whitaker<br><span style="font-weight:600;color:#9FD6CC;font-size:13px">Lead manager</span></span>
+        </div>
+        <nav aria-label="Admin" style="display:flex;flex-direction:column;gap:4px">
+          <a href="#/admin/leads" aria-current="page" style="display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 12px;background:rgba(255,255,255,0.1);border-radius:4px;color:#fff;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif">Leads <span style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:#36B7A5;color:#06282A;padding:4px 7px;border-radius:999px">{{ newCount }}</span></a>
+        </nav>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:4px">
+          <a href="#/" style="display:flex;align-items:center;min-height:44px;padding:0 12px;color:#CFE4E0;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif" style-hover="color:#fff">View public site</a>
+          <button type="button" onClick="{{ logout }}" style="display:flex;align-items:center;min-height:44px;padding:0 12px;background:none;border:1px solid rgba(255,255,255,0.25);border-radius:4px;color:#fff;font:500 14.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer;text-align:left" style-hover="background:rgba(255,255,255,0.08)">Sign out</button>
+        </div>
+      </aside>
+    </sc-if>
+    <sc-if value="{{ narrowAdmin }}">
+      <header style="background:#103F43;color:#fff;padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <a href="#/admin/leads" style="color:#fff;text-decoration:none;font:800 16px/1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif">Whitaker · Leads</a>
+        <button type="button" onClick="{{ logout }}" style="min-height:44px;padding:0 14px;background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:#fff;font:500 14px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Sign out</button>
+      </header>
+    </sc-if>
+
+    <main style="flex:1;min-width:0;padding:clamp(18px,3vw,36px)">
+      <div style="margin-bottom:18px;padding:8px 12px;border:1px dashed #B7791F;background:#FFF6E0;color:#6B4200;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace">DEMO DATA · Sample records stored in this browser only. Production reads real leads from the protected API.</div>
+
+      <sc-if value="{{ is.adminLeads }}">
+        <div data-screen-label="Admin leads">
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px">
+            <div>
+              <h1 style="margin:0;font:800 clamp(26px,3vw,34px)/1.1 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.02em;color:#103F43">Service requests</h1>
+              <p style="margin:6px 0 0;font:400 15px/1.4 Figtree,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ totalText }}</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ statusTabs }}" as="t" hint-placeholder-count="6">
+                <button type="button" aria-pressed="{{ t.pressed }}" onClick="{{ t.pick }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};border-radius:999px;font:500 14px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer">{{ t.label }}<span style="font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;opacity:0.85">{{ t.count }}</span></button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;background:#fff;border:1px solid #D9E2E0;padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px">
+            <div style="display:flex;flex-direction:column;gap:5px;grid-column:span 2;min-width:0">
+              <label for="q" style="font:600 13px/1.2 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Search name, phone or email</label>
+              <input id="q" type="search" value="{{ q }}" onChange="{{ onQ }}" style="height:44px;padding:0 12px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;width:100%" style-focus="border-color:#1F6BB8;box-shadow:0 0 0 3px #CFE1F4;outline:none">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label for="fs" style="font:600 13px/1.2 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Service</label>
+              <select id="fs" value="{{ fService }}" onChange="{{ onFService }}" style="height:44px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;background:#fff">
+                <option value="">All services</option>
+                <sc-for list="{{ svcOptions }}" as="o"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label for="so" style="font:600 13px/1.2 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Sort</label>
+              <select id="so" value="{{ sort }}" onChange="{{ onSort }}" style="height:44px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15px;background:#fff">
+                <option value="new">Newest first</option>
+                <option value="old">Oldest first</option>
+              </select>
+            </div>
+          </div>
+
+          <sc-if value="{{ adminLoading }}">
+            <div role="status" style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;padding:20px;display:flex;flex-direction:column;gap:12px">
+              <span style="position:absolute;left:-9999px">Loading leads</span>
+              <sc-for list="{{ skeleton }}" as="sk"><div style="height:18px;background:linear-gradient(90deg,#EDF2F1,#E1E9E7,#EDF2F1);border-radius:3px;width:{{ sk }}"></div></sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showEmpty }}">
+            <div style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;padding:40px 24px;text-align:center">
+              <p style="margin:0;font:700 18px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">No requests match these filters.</p>
+              <button type="button" onClick="{{ clearFilters }}" style="margin-top:14px;min-height:44px;padding:0 16px;border:1.5px solid #103F43;background:#fff;color:#103F43;border-radius:4px;font:600 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Clear filters</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showTable }}">
+            <div style="margin-top:16px;background:#fff;border:1px solid #D9E2E0;overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font:400 14.5px/1.4 Figtree,ui-sans-serif,system-ui,sans-serif;min-width:820px">
+                <caption style="position:absolute;left:-9999px">Service requests, {{ sortText }}</caption>
+                <thead>
+                  <tr style="background:#F7F9F7;text-align:left">
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0" aria-sort="{{ ariaSort }}">Received</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Customer</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Contact</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Service</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Location</th>
+                    <th scope="col" style="padding:12px 16px;font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E;border-bottom:1px solid #D9E2E0">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ pageLeads }}" as="l" hint-placeholder-count="8">
+                    <tr style="border-bottom:1px solid #E6ECEA" style-hover="background:#F7FBFA">
+                      <td style="padding:14px 16px;color:#3B4A4E;white-space:nowrap">{{ l.created }}</td>
+                      <td style="padding:14px 16px"><a href="{{ l.href }}" style="font-weight:600;color:#1F6BB8">{{ l.name }}</a><div style="font:400 12.5px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E;margin-top:3px">{{ l.id }}</div></td>
+                      <td style="padding:14px 16px;color:#263238"><div>{{ l.phone }}</div><div style="color:#5B6A6E;font-size:13.5px">{{ l.email }}</div></td>
+                      <td style="padding:14px 16px;color:#263238">{{ l.service }}</td>
+                      <td style="padding:14px 16px;color:#263238">{{ l.location }}</td>
+                      <td style="padding:14px 16px"><span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:{{ l.sBg }};color:{{ l.sFg }};font:600 12.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;white-space:nowrap"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:{{ l.sFg }}"></span>{{ l.status }}</span></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showCards }}">
+            <ul style="list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ pageLeads }}" as="l" hint-placeholder-count="6">
+                <li>
+                  <a href="{{ l.href }}" style="display:block;background:#fff;border:1px solid #D9E2E0;padding:16px;text-decoration:none;color:#263238" style-hover="border-color:#103F43;color:#263238">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                      <span style="font:700 16.5px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ l.name }}</span>
+                      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:{{ l.sBg }};color:{{ l.sFg }};font:600 12px/1 Figtree,ui-sans-serif,system-ui,sans-serif;white-space:nowrap"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:{{ l.sFg }}"></span>{{ l.status }}</span>
+                    </div>
+                    <div style="margin-top:6px;font:400 14.5px/1.5 Figtree,ui-sans-serif,system-ui,sans-serif">{{ l.service }} · {{ l.location }}</div>
+                    <div style="margin-top:2px;font:400 13.5px/1.5 Figtree,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ l.created }} · {{ l.phone }}</div>
+                  </a>
+                </li>
+              </sc-for>
+            </ul>
+          </sc-if>
+
+          <sc-if value="{{ showPager }}">
+            <nav aria-label="Pagination" style="margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+              <span style="font:400 14px/1.4 Figtree,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ rangeText }}</span>
+              <div style="display:flex;gap:8px">
+                <button type="button" onClick="{{ prevPage }}" disabled="{{ atFirst }}" style="min-height:44px;padding:0 16px;border:1.5px solid #B7C6C3;background:#fff;border-radius:4px;color:#103F43;font:600 14.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer;opacity:{{ prevOpacity }}">← Previous</button>
+                <button type="button" onClick="{{ nextPage }}" disabled="{{ atLast }}" style="min-height:44px;padding:0 16px;border:1.5px solid #B7C6C3;background:#fff;border-radius:4px;color:#103F43;font:600 14.5px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer;opacity:{{ nextOpacity }}">Next →</button>
+              </div>
+            </nav>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.adminLead }}">
+        <div data-screen-label="Admin lead detail">
+          <a href="#/admin/leads" style="display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif">← All requests</a>
+          <sc-if value="{{ leadMissing }}">
+            <div style="margin-top:12px;background:#fff;border:1px solid #D9E2E0;padding:32px">
+              <h1 style="margin:0;font:800 24px/1.2 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">Request not found</h1>
+              <p style="margin:8px 0 0;color:#3B4A4E">It may have been removed. Return to the list to continue.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ leadFound }}">
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px">
+              <div style="flex:2 1 480px;min-width:0;background:#fff;border:1px solid #D9E2E0">
+                <div style="padding:22px 24px;border-bottom:1px solid #E6ECEA;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px">
+                  <div>
+                    <p style="margin:0;font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5B6A6E">{{ lead.id }} · received {{ lead.created }}</p>
+                    <h1 style="margin:8px 0 0;font:800 clamp(24px,3vw,32px)/1.15 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">{{ lead.name }}</h1>
+                  </div>
+                  <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:{{ lead.sBg }};color:{{ lead.sFg }};font:600 13px/1 Figtree,ui-sans-serif,system-ui,sans-serif"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:{{ lead.sFg }}"></span>{{ lead.status }}</span>
+                </div>
+                <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+                  <sc-for list="{{ leadFields }}" as="d" hint-placeholder-count="6">
+                    <div style="padding:16px 24px;border-bottom:1px solid #EEF2F1;grid-column:{{ d.span }}">
+                      <dt style="font:600 12.5px/1.2 Figtree,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">{{ d.k }}</dt>
+                      <dd style="margin:6px 0 0;font:400 15.5px/1.55 Figtree,ui-sans-serif,system-ui,sans-serif;color:#263238;white-space:pre-wrap;overflow-wrap:anywhere">
+                        <sc-if value="{{ d.isLink }}"><a href="{{ d.href }}" style="font-weight:600">{{ d.v }}</a></sc-if>
+                        <sc-if value="{{ d.isText }}">{{ d.v }}</sc-if>
+                      </dd>
+                    </div>
+                  </sc-for>
+                </dl>
+              </div>
+              <div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:16px">
+                <form onSubmit="{{ saveStatus }}" style="background:#fff;border:1px solid #D9E2E0;padding:20px;display:flex;flex-direction:column;gap:12px">
+                  <label for="st" style="font:700 16px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">Update status</label>
+                  <select id="st" value="{{ statusDraft }}" onChange="{{ onStatusDraft }}" style="height:46px;padding:0 10px;border:1.5px solid #B7C6C3;border-radius:4px;font-size:15.5px;background:#fff">
+                    <sc-for list="{{ statuses }}" as="s"><option value="{{ s }}">{{ s }}</option></sc-for>
+                  </select>
+                  <button type="submit" disabled="{{ statusUnchanged }}" style="height:46px;background:{{ saveBg }};color:#fff;border:0;border-radius:4px;font:600 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif;cursor:pointer">Save status</button>
+                  <div role="status" aria-live="polite">
+                    <sc-if value="{{ statusMsg }}"><p style="margin:0;padding:10px 12px;background:#E3F2E9;color:#14532D;font:500 14px/1.4 Figtree,ui-sans-serif,system-ui,sans-serif;border-left:3px solid #1E7B4F">{{ statusMsg }}</p></sc-if>
+                  </div>
+                  <p style="margin:0;font:400 12.5px/1.45 Figtree,ui-sans-serif,system-ui,sans-serif;color:#5B6A6E">Internal workflow status. Not shown to the customer.</p>
+                </form>
+                <div style="background:#fff;border:1px solid #D9E2E0;padding:20px">
+                  <h2 style="margin:0;font:700 16px/1.3 'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;color:#103F43">Notification</h2>
+                  <p style="margin:8px 0 0;font:400 14.5px/1.5 Figtree,ui-sans-serif,system-ui,sans-serif;color:#3B4A4E">Email provider not configured. The lead is stored; notification outcome is recorded separately so delivery can be retried once a provider is set up.</p>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <a href="{{ lead.tel }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:#103F43;color:#fff;border-radius:4px;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif">Call customer</a>
+                  <a href="{{ lead.mail }}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid #103F43;color:#103F43;border-radius:4px;text-decoration:none;font:600 15px/1 Figtree,ui-sans-serif,system-ui,sans-serif">Email customer</a>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showContentFlags&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Review&quot;},&quot;apiMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;success&quot;,&quot;network-error&quot;,&quot;server-validation&quot;],&quot;default&quot;:&quot;success&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo backend&quot;}}">
+const SERVICES = [
+  { id: 'leak', n: '01', title: 'Leak Repairs', short: 'Dripping fixtures, damp cabinets, water stains, or a water meter that keeps moving when everything is off.', long: 'For water showing up where it shouldn’t: under a sink, around a toilet base, behind a wall or through a ceiling. Tell us where you see water and how long it has been happening.', signs: ['Water under sinks or around fixtures', 'Stains or soft spots on walls and ceilings', 'Higher water use without a clear cause'], img: 'photo · plumber examining a visible leak under a sink', alt: 'Photo placeholder: a plumber examining a leak beneath a sink' },
+  { id: 'drain', n: '02', title: 'Drain Cleaning', short: 'Slow sinks, standing water in tubs and showers, gurgling drains or clogs that keep coming back.', long: 'For drains that empty slowly, back up or keep clogging. Let us know which fixtures are affected and whether more than one drain is slow.', signs: ['Water draining slowly or backing up', 'Gurgling sounds from drains', 'Clogs that return after plunging'], img: 'photo · drain-cleaning equipment at a kitchen drain', alt: 'Photo placeholder: drain-cleaning equipment in use at a kitchen drain' },
+  { id: 'pipe', n: '03', title: 'Pipe Repairs', short: 'Cracked, corroded, noisy or damaged water supply and drain pipes.', long: 'For pipes that are visibly damaged, corroded, noisy or affecting water pressure. Photos aren’t required. A description of what you see or hear is enough to start.', signs: ['Visible corrosion, cracks or drips at joints', 'Banging or rattling when water runs', 'Low pressure at one or more fixtures'], img: 'photo · close-up of copper fittings and a pipe wrench', alt: 'Photo placeholder: copper pipe fittings and a pipe wrench' },
+  { id: 'heater', n: '04', title: 'Water Heater Services', short: 'No hot water, inconsistent temperature, unusual noises, or water around the tank.', long: 'For water heaters that stop producing hot water, run out quickly, make unusual noises or leak. If you know the heater type (tank or tankless, gas or electric), include it.', signs: ['No hot water, or it runs out quickly', 'Rumbling or popping from the tank', 'Water pooling near the heater'], img: 'photo · tank water heater inspected in a utility room', alt: 'Photo placeholder: a tank water heater being inspected in a utility room' }
+];
+const SVC = { leak: 'Leak Repairs', drain: 'Drain Cleaning', pipe: 'Pipe Repairs', heater: 'Water Heater Services', other: 'Other Plumbing Issue' };
+const SVC_OPTIONS = Object.keys(SVC).map(v => ({ v, l: SVC[v] }));
+const STATUSES = ['New', 'Contacted', 'In Progress', 'Completed', 'Closed'];
+const STATUS_STYLE = { 'New': ['#E3EEFA', '#174F87'], 'Contacted': ['#DDF1EC', '#0E5048'], 'In Progress': ['#FFF1D6', '#784600'], 'Completed': ['#E1F1E7', '#17603C'], 'Closed': ['#ECEFEF', '#3F4A4D'] };
+const APPROVED_AREAS = [];
+const WINDOWS = [{ v: 'morning', l: 'Morning' }, { v: 'afternoon', l: 'Afternoon' }, { v: 'flexible', l: 'Flexible' }];
+const LABELS = { name: 'Name', phone: 'Phone', email: 'Email', service: 'Service type', issue: 'Issue description', location: 'City or ZIP code', date: 'Preferred date', window: 'Preferred time of day' };
+const ORDER = ['name', 'phone', 'email', 'service', 'issue', 'location', 'date', 'window'];
+const HELP = { phone: 'h-phone', service: 'h-service', issue: 'h-issue', location: 'h-location' };
+const EMPTY = { name: '', phone: '', email: '', service: '', issue: '', location: '', date: '', window: '', extra: '', company: '' };
+const FAQS = [
+  { q: 'Which plumbing services do you offer?', a: 'Requests can be made for leak repairs, drain cleaning, pipe repairs and water heater services. If your issue doesn’t fit one of these, choose “Other Plumbing Issue” and describe it.' },
+  { q: 'Which locations do you serve?', pending: true },
+  { q: 'How can I request service?', a: 'Call +1 (602) 833-3185 or use the service request form on this website. No account is needed.' },
+  { q: 'What information should I provide?', a: 'Your name, phone and email, the type of service, a short description of the problem, your city or ZIP code, and a preferred time of day.' },
+  { q: 'Can I request a preferred appointment time?', a: 'Yes. The form asks for a preferred date and time of day. Sending a request does not confirm an appointment.' },
+  { q: 'How will I know my request has been received?', a: 'A confirmation appears on screen once your request has been recorded.' },
+  { q: 'Do you provide emergency plumbing services?', pending: true },
+  { q: 'What are your business hours?', pending: true }
+];
+const LEADS_KEY = 'wp-leads-demo-v1';
+const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const fmt = iso => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const track = (name, data) => { try { (window.dataLayer = window.dataLayer || []).push({ event: name, ...(data || {}) }); } catch (e) {} };
+
+function seedLeads() {
+  const rows = [
+    ['Maria Delgado', '(704) 555-0142', 'maria.d@example.com', 'leak', 'Water dripping from the ceiling below the upstairs bathroom.', '28203', 'New', 2],
+    ['James Okafor', '(704) 555-0187', 'jokafor@example.com', 'heater', 'No hot water since last night. Gas tank heater, about 10 years old.', '28205', 'New', 5],
+    ['Priya Raman', '(980) 555-0119', 'priya.raman@example.com', 'drain', 'Kitchen sink drains very slowly, gurgles when the dishwasher runs.', '28209', 'Contacted', 20],
+    ['Tom Brennan', '(704) 555-0163', 'tbrennan@example.com', 'pipe', 'Pipes bang loudly when the washing machine stops filling.', '28204', 'In Progress', 30],
+    ['Lena Fischer', '(704) 555-0108', 'lena.f@example.com', 'other', 'Outdoor spigot won’t shut off fully.', '28207', 'New', 44],
+    ['Marcus Hill', '(980) 555-0131', 'mhill@example.com', 'leak', 'Damp cabinet floor under bathroom vanity.', '28202', 'Completed', 70],
+    ['Grace Liu', '(704) 555-0176', 'grace.liu@example.com', 'drain', 'Shower drain backing up, rental unit. Property manager approves.', '28208', 'Contacted', 96],
+    ['Daniel Ortiz', '(704) 555-0124', 'dortiz@example.com', 'heater', 'Popping noise from water heater, small puddle at base.', '28210', 'Closed', 130],
+    ['Aisha Bello', '(980) 555-0155', 'aisha.bello@example.com', 'pipe', 'Low water pressure in upstairs bathroom only.', '28211', 'New', 150],
+    ['Kevin Park', '(704) 555-0199', 'kpark@example.com', 'leak', 'Toilet base leaking after flush.', '28206', 'In Progress', 180],
+    ['Robert Nguyen', '+44 20 7946 0958', 'r.nguyen@example.com', 'drain', 'Basement floor drain smells and drains slowly.', '28212', 'Completed', 230],
+    ['Sofia Marino', '(704) 555-0110', 'sofia.m@example.com', 'other', 'Garbage disposal hums but doesn’t spin.', '28203', 'Closed', 300]
+  ];
+  const now = Date.now();
+  return rows.map((r, i) => ({ id: 'WP-' + (1100 - i), name: r[0], phone: r[1], email: r[2], service: r[3], issue: r[4], location: r[5], status: r[6], created: new Date(now - r[7] * 3600e3).toISOString(), date: '', window: ['morning', 'afternoon', 'flexible'][i % 3], extra: '' }));
+}
+
+class Component extends DCLogic {
+  state = {
+    w: typeof window !== 'undefined' ? window.innerWidth : 1280,
+    scrolled: false, menuOpen: false,
+    route: { name: 'home' },
+    faqOpen: { 'h0': true, 'a0': true },
+    form: { ...EMPTY }, errors: {}, touched: {}, showSummary: false, serverErr: false, netError: false,
+    submitting: false, submitted: null, liveMsg: '',
+    areaQuery: '', areaResult: null,
+    authed: false, loginEmail: '', loginPass: '', loginErr: '', loggingIn: false,
+    leads: [], adminLoading: false, q: '', fStatus: '', fService: '', sort: 'new', page: 0,
+    statusDraft: '', statusMsg: ''
+  };
+  summaryRef = React.createRef(); successRef = React.createRef(); mainRef = React.createRef(); menuBtnRef = React.createRef();
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onScroll = () => { const s = window.scrollY > 8; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) { this.setState({ menuOpen: false }); this.menuBtnRef.current && this.menuBtnRef.current.focus(); } };
+    this.onHash = () => this.route(false);
+    window.addEventListener('resize', this.onResize); window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKey); window.addEventListener('hashchange', this.onHash);
+    let form = { ...EMPTY };
+    try { const d = JSON.parse(sessionStorage.getItem('wp-draft') || 'null'); if (d) form = { ...form, ...d, company: '' }; } catch (e) {}
+    let leads; try { leads = JSON.parse(localStorage.getItem(LEADS_KEY) || 'null'); } catch (e) {}
+    if (!Array.isArray(leads)) { leads = seedLeads(); this.saveLeads(leads); }
+    this.setState({ form, leads, authed: sessionStorage.getItem('wp-admin') === '1' }, () => this.route(true));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKey); window.removeEventListener('hashchange', this.onHash);
+  }
+  saveLeads(leads) { try { localStorage.setItem(LEADS_KEY, JSON.stringify(leads)); } catch (e) {} }
+  saveDraft(form) { try { const { company, ...rest } = form; sessionStorage.setItem('wp-draft', JSON.stringify(rest)); } catch (e) {} }
+
+  parse() {
+    const raw = (window.location.hash || '#/').replace(/^#/, '');
+    const [path, q] = raw.split('?');
+    const p = path.split('/').filter(Boolean);
+    const params = new URLSearchParams(q || '');
+    let name = 'home', anchor = null, id = null;
+    if (p[0] === 'services') { name = 'services'; anchor = p[1] || null; }
+    else if (p[0] === 'about') { name = 'about'; anchor = p[1] || null; }
+    else if (p[0] === 'service-areas') name = 'service-areas';
+    else if (p[0] === 'contact') name = 'contact';
+    else if (p[0] === 'privacy') name = 'privacy';
+    else if (p[0] === 'admin') { if (p[1] === 'login') name = 'admin-login'; else if (p[1] === 'leads' && p[2]) { name = 'admin-lead'; id = p[2]; } else name = 'admin-leads'; }
+    return { name, anchor, id, service: params.get('service') };
+  }
+  route(initial) {
+    const r = this.parse();
+    if ((r.name === 'admin-leads' || r.name === 'admin-lead') && !this.state.authed) { window.location.replace('#/admin/login'); return; }
+    if (r.name === 'admin-login' && this.state.authed) { window.location.replace('#/admin/leads'); return; }
+    const prev = this.state.route;
+    const upd = { route: r, menuOpen: false };
+    if (r.name === 'contact' && r.service && SVC[r.service] && !this.state.submitted) {
+      const form = { ...this.state.form, service: r.service };
+      upd.form = form; this.saveDraft(form);
+      const errors = { ...this.state.errors }; delete errors.service; upd.errors = errors;
+      track('service_category_selected', { service: r.service });
+    }
+    if (r.name === 'admin-leads' && prev.name !== 'admin-leads' && prev.name !== 'admin-lead') {
+      upd.adminLoading = true; clearTimeout(this.loadT);
+      this.loadT = setTimeout(() => this.setState({ adminLoading: false }), 550);
+    }
+    if (r.name === 'admin-lead') {
+      const l = this.state.leads.find(x => x.id === r.id);
+      upd.statusDraft = l ? l.status : ''; upd.statusMsg = '';
+    }
+    this.setState(upd, () => {
+      requestAnimationFrame(() => {
+        const el = r.anchor && document.getElementById(r.anchor);
+        if (el) { const y = el.getBoundingClientRect().top + window.scrollY - (this.state.w < 960 ? 64 : 80); window.scrollTo({ top: y, behavior: initial ? 'auto' : 'smooth' }); }
+        else if (!initial && (prev.name !== r.name || prev.id !== r.id)) window.scrollTo({ top: 0, behavior: 'auto' });
+        if (!initial && !r.anchor && prev.name !== r.name) { const h = document.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+      });
+    });
+  }
+
+  validateField(k, v) {
+    const s = (v || '').trim();
+    if (k === 'name') { if (!s) return 'Enter your name.'; if (s.length < 2) return 'Name should be at least 2 characters.'; }
+    if (k === 'phone') {
+      if (!s) return 'Enter a phone number so we can reach you.';
+      if (!/^\+?[\d\s().\-]+$/.test(s)) return 'Use digits, spaces, brackets, dashes or a leading +.';
+      const d = s.replace(/\D/g, ''); if (d.length < 7 || d.length > 15) return 'Enter a phone number with 7 to 15 digits.';
+    }
+    if (k === 'email') { if (!s) return 'Enter your email address.'; if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s)) return 'Enter an email address like name@example.com.'; }
+    if (k === 'service' && !SVC[s]) return 'Choose a service type, or “Other Plumbing Issue.”';
+    if (k === 'issue') { if (!s) return 'Describe the issue in a few words.'; if (s.length < 10) return 'Add a little more detail (at least 10 characters).'; }
+    if (k === 'location') { if (!s) return 'Enter your city, town or ZIP code.'; if (s.length < 2) return 'Enter a city, town or 5-digit ZIP code.'; }
+    if (k === 'date' && s && s < today()) return 'Choose today or a later date.';
+    if (k === 'window' && !s) return 'Choose a preferred time of day.';
+    return '';
+  }
+  validateAll(form) { const e = {}; ORDER.forEach(k => { const m = this.validateField(k, form[k]); if (m) e[k] = m; }); return e; }
+
+  setField(k, v) {
+    const form = { ...this.state.form, [k]: v };
+    const errors = { ...this.state.errors };
+    if (errors[k] || this.state.touched[k]) { const m = this.validateField(k, v); if (m) errors[k] = m; else delete errors[k]; }
+    if (!this.started && k !== 'company') { this.started = true; track('form_start'); }
+    this.setState({ form, errors, netError: false }); this.saveDraft(form);
+  }
+  blurField(k) {
+    const errors = { ...this.state.errors }; const m = this.validateField(k, this.state.form[k]);
+    if (m && this.state.form[k]) errors[k] = m; else if (!m) delete errors[k];
+    this.setState({ errors, touched: { ...this.state.touched, [k]: true } });
+  }
+  focusField(k) { const el = document.getElementById(k === 'window' ? 'w-morning' : 'f-' + k); if (el) { el.focus(); const y = el.getBoundingClientRect().top + window.scrollY - 140; window.scrollTo({ top: y, behavior: 'smooth' }); } }
+
+  async submit(e) {
+    e.preventDefault();
+    if (this.state.submitting) return;
+    const form = Object.fromEntries(Object.entries(this.state.form).map(([k, v]) => [k, typeof v === 'string' ? v.trim() : v]));
+    const errors = this.validateAll(form);
+    if (Object.keys(errors).length) {
+      track('form_validation_failed', { fields: Object.keys(errors).join(',') });
+      this.setState({ errors, showSummary: true, serverErr: false, netError: false, liveMsg: 'There are problems with ' + Object.keys(errors).length + ' fields.' }, () => this.summaryRef.current && this.summaryRef.current.focus());
+      return;
+    }
+    if (form.company) { this.setState({ submitted: { id: '—', form }, liveMsg: 'Your service request has been received.' }); return; }
+    this.setState({ submitting: true, showSummary: false, netError: false, form, liveMsg: 'Sending your request…' });
+    const mode = this.props.apiMode ?? 'success';
+    try {
+      const res = await new Promise((resolve, reject) => setTimeout(() => {
+        if (mode === 'network-error') return reject(new Error('network'));
+        if (mode === 'server-validation') return resolve({ ok: false, errors: { location: 'We couldn’t recognise this location. Enter a city name or a 5-digit ZIP code.' } });
+        const id = 'WP-' + (1101 + Math.floor(Math.random() * 8900));
+        const lead = { id, ...form, status: 'New', created: new Date().toISOString(), notification: 'not_configured' };
+        delete lead.company;
+        const leads = [lead, ...this.state.leads]; this.saveLeads(leads); this.setState({ leads });
+        resolve({ ok: true, id });
+      }, 1100));
+      if (!res.ok) { this.setState({ submitting: false, errors: res.errors, showSummary: true, serverErr: true, liveMsg: 'The request needs a correction.' }, () => this.summaryRef.current && this.summaryRef.current.focus()); return; }
+      track('service_request_submitted', { service: form.service });
+      try { sessionStorage.removeItem('wp-draft'); } catch (e) {}
+      this.setState({ submitting: false, submitted: { id: res.id, form }, liveMsg: 'Your service request has been received.' }, () => { window.scrollTo({ top: 0, behavior: 'smooth' }); this.successRef.current && this.successRef.current.focus({ preventScroll: true }); });
+    } catch (err) {
+      this.setState({ submitting: false, netError: true, liveMsg: 'We couldn’t send your request. Your details are still in the form.' });
+    }
+  }
+
+  checkArea(e) {
+    e.preventDefault();
+    const s = this.state.areaQuery.trim();
+    if (!s) return this.setState({ areaResult: { kind: 'error', text: 'Enter a city, town or ZIP code to check.' } });
+    const hit = APPROVED_AREAS.find(a => a.name.toLowerCase() === s.toLowerCase() || (a.zips || []).includes(s));
+    if (hit) return this.setState({ areaResult: { kind: 'ok', text: 'This location is listed as a service area.' } });
+    if (/^\d{5}$/.test(s)) return this.setState({ areaResult: { kind: 'info', text: 'Please contact us to confirm service availability.' } });
+    this.setState({ areaResult: { kind: 'info', text: 'We couldn’t verify that location. Contact us to check.' } });
+  }
+
+  login(e) {
+    e.preventDefault();
+    const { loginEmail, loginPass } = this.state;
+    if (!loginEmail.trim() || !loginPass) return this.setState({ loginErr: 'Enter your email and password.' });
+    this.setState({ loggingIn: true, loginErr: '' });
+    setTimeout(() => {
+      if (loginPass !== 'demo') return this.setState({ loggingIn: false, loginErr: 'Email or password is incorrect.' });
+      sessionStorage.setItem('wp-admin', '1');
+      this.setState({ authed: true, loggingIn: false, loginPass: '' }, () => { window.location.hash = '#/admin/leads'; });
+    }, 600);
+  }
+
+  renderVals() {
+    const st = this.state, r = st.route, w = st.w;
+    const flags = this.props.showContentFlags ?? true;
+    const narrow = w < 960, wide = !narrow;
+    const isAdmin = r.name.startsWith('admin');
+    const pub = { home: 'home', services: 'services', about: 'about', 'service-areas': 'areas', contact: 'contact', privacy: 'privacy' };
+    const is = { home: r.name === 'home', services: r.name === 'services', about: r.name === 'about', areas: r.name === 'service-areas', contact: r.name === 'contact', privacy: r.name === 'privacy', adminLogin: r.name === 'admin-login', adminApp: r.name === 'admin-leads' || r.name === 'admin-lead', adminLeads: r.name === 'admin-leads', adminLead: r.name === 'admin-lead' };
+    const navDefs = [['Home', '#/', 'home'], ['Services', '#/services', 'services'], ['About / FAQs', '#/about', 'about'], ['Service Areas', '#/service-areas', 'service-areas'], ['Contact', '#/contact', 'contact']];
+    const nav = navDefs.map(([label, href, key]) => { const a = r.name === key; return { label, href, active: a, current: a ? 'page' : undefined, color: a ? '#23201C' : '#4A453E', pill: a ? '#F6F0E7' : 'transparent' }; });
+    const bento = w >= 960 ? 'lg' : w >= 680 ? 'md' : 'sm';
+    const DOTS = ['#2A8C7E', '#1F5FAD', '#B7791F', '#C2553A'];
+    const TILE = {
+      lg: [{ col: 'span 7', row: 'span 2', bg: '#FFFFFF', bd: '#EAE3D8', img: true, dir: 'column', imgH: '300px', imgFlex: '1 1 auto', pad: '14px', tp: '10px 16px 18px' },
+           { col: 'span 5', row: 'span 1', bg: '#F6F0E7', bd: '#F6F0E7', img: false, dir: 'column', pad: '30px', tp: '0' },
+           { col: 'span 5', row: 'span 1', bg: '#E7EFF9', bd: '#E7EFF9', img: false, dir: 'column', pad: '30px', tp: '0' },
+           { col: 'span 12', row: 'span 1', bg: '#FFFFFF', bd: '#EAE3D8', img: true, dir: 'row', imgH: '240px', imgFlex: '1.1 1 0', pad: '14px', tp: '18px 24px 18px 8px' }],
+      md: [{ col: 'span 12', row: 'auto', bg: '#FFFFFF', bd: '#EAE3D8', img: true, dir: 'column', imgH: '260px', imgFlex: '1 1 auto', pad: '14px', tp: '8px 14px 16px' },
+           { col: 'span 6', row: 'auto', bg: '#F6F0E7', bd: '#F6F0E7', img: false, dir: 'column', pad: '26px', tp: '0' },
+           { col: 'span 6', row: 'auto', bg: '#E7EFF9', bd: '#E7EFF9', img: false, dir: 'column', pad: '26px', tp: '0' },
+           { col: 'span 12', row: 'auto', bg: '#FFFFFF', bd: '#EAE3D8', img: true, dir: 'column', imgH: '220px', imgFlex: '1 1 auto', pad: '14px', tp: '8px 14px 16px' }]
+    };
+    TILE.sm = TILE.md.map((t, i) => ({ ...t, col: 'span 12', imgH: i === 0 ? '220px' : '180px' }));
+    const trackCall = () => track('phone_click');
+    const trackRequest = () => track('request_service_click');
+
+    const faqItems = (prefix, list) => list.map((f, i) => {
+      const key = prefix + i, open = !!st.faqOpen[key];
+      return { q: f.q, a: f.pending ? 'Answer to be provided by Whitaker Plumbing.' : f.a, open, expanded: open ? 'true' : 'false', vRot: open ? 'scaleY(0)' : 'scaleY(1)', btnId: 'fq-' + key, panelId: 'fp-' + key, toggle: () => this.setState(s => ({ faqOpen: { ...s.faqOpen, [key]: !s.faqOpen[key] } })), showTag: flags, tag: f.pending ? 'TO CONFIRM · Answer pending business approval' : 'DRAFT · Describes website behaviour; approve before launch' };
+    });
+    const visibleFaqs = FAQS.filter(f => flags || !f.pending);
+
+    const form = st.form, errors = st.errors;
+    const on = {}, blur = {}, err = {}, has = {}, inv = {}, bc = {}, desc = {};
+    Object.keys(EMPTY).forEach(k => { on[k] = e => this.setField(k, e.target.value); blur[k] = () => this.blurField(k); });
+    ORDER.forEach(k => {
+      err[k] = errors[k] || ''; has[k] = !!errors[k]; inv[k] = errors[k] ? 'true' : 'false';
+      const valid = !errors[k] && st.touched[k] && form[k] && !this.validateField(k, form[k]);
+      bc[k] = errors[k] ? '#B42318' : valid ? '#1E7B4F' : '#D9D0C3';
+      desc[k] = [HELP[k], errors[k] ? 'e-' + k : null].filter(Boolean).join(' ') || undefined;
+    });
+    const errKeys = ORDER.filter(k => errors[k]);
+    const errList = errKeys.map(k => ({ text: LABELS[k] + ': ' + errors[k], focus: () => this.focusField(k) }));
+    const sub = st.submitted;
+    const winLabel = (WINDOWS.find(x => x.v === (sub && sub.form.window)) || {}).l || '—';
+    const receipt = sub ? [
+      { k: 'Reference', v: sub.id },
+      { k: 'Service', v: SVC[sub.form.service] || '—' },
+      { k: 'Location', v: sub.form.location },
+      { k: 'Preferred time', v: (sub.form.date ? new Date(sub.form.date + 'T12:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ', ' : '') + winLabel }
+    ] : [];
+
+    const ar = st.areaResult;
+    const tone = ar ? { error: ['#E7B4AE', '#FDF1F0'], ok: ['#A9D6BC', '#E3F2E9'], info: ['#BBD0EC', '#E7EFF9'] }[ar.kind] : ['#B7C6C3', '#fff'];
+
+    let leads = st.leads.slice();
+    const counts = { '': leads.length }; STATUSES.forEach(s => counts[s] = leads.filter(l => l.status === s).length);
+    const qq = st.q.trim().toLowerCase();
+    if (qq) leads = leads.filter(l => [l.name, l.email, l.phone, l.phone.replace(/\D/g, ''), l.id].some(v => (v || '').toLowerCase().includes(qq)));
+    if (st.fStatus) leads = leads.filter(l => l.status === st.fStatus);
+    if (st.fService) leads = leads.filter(l => l.service === st.fService);
+    leads.sort((a, b) => st.sort === 'new' ? b.created.localeCompare(a.created) : a.created.localeCompare(b.created));
+    const PER = 8, pages = Math.max(1, Math.ceil(leads.length / PER)), page = Math.min(st.page, pages - 1);
+    const mapLead = l => ({ ...l, created: fmt(l.created), service: SVC[l.service] || l.service, href: '#/admin/leads/' + l.id, sBg: STATUS_STYLE[l.status][0], sFg: STATUS_STYLE[l.status][1], tel: 'tel:' + l.phone.replace(/[^\d+]/g, ''), mail: 'mailto:' + l.email });
+    const pageLeads = leads.slice(page * PER, page * PER + PER).map(mapLead);
+    const raw = is.adminLead ? st.leads.find(l => l.id === r.id) : null;
+    const lead = raw ? mapLead(raw) : {};
+    const leadFields = raw ? [
+      { k: 'Phone', v: raw.phone, href: lead.tel, isLink: true },
+      { k: 'Email', v: raw.email, href: lead.mail, isLink: true },
+      { k: 'Service', v: lead.service, isText: true },
+      { k: 'Location', v: raw.location, isText: true },
+      { k: 'Preferred time', v: (raw.date ? raw.date + ', ' : '') + ((WINDOWS.find(x => x.v === raw.window) || {}).l || '—'), isText: true },
+      { k: 'Received', v: lead.created, isText: true },
+      { k: 'Issue description', v: raw.issue, isText: true, span: '1 / -1' },
+      { k: 'Additional details', v: raw.extra || 'None provided', isText: true, span: '1 / -1' }
+    ] : [];
+    const busy = st.adminLoading;
+
+    return {
+      flags, isPublic: !isAdmin, is, nav, wide, narrow, trackCall, trackRequest,
+      headerH: narrow ? '64px' : '76px', headerShadow: st.scrolled ? '0 1px 0 #EAE3D8, 0 8px 24px rgba(35,32,28,0.06)' : 'none',
+      callLabel: w >= 1220 ? 'Call +1 (602) 833-3185' : 'Call',
+      menuVisible: narrow && st.menuOpen, menuExpanded: st.menuOpen ? 'true' : 'false', menuLabel: st.menuOpen ? 'Close' : 'Menu',
+      bar1: st.menuOpen ? 'translateY(6px) rotate(45deg)' : 'none', bar2: st.menuOpen ? 0 : 1, bar3: st.menuOpen ? 'translateY(-6px) rotate(-45deg)' : 'none',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      skipToMain: () => { const m = this.mainRef.current; if (m) m.focus(); },
+      mainRef: this.mainRef, menuBtnRef: this.menuBtnRef,
+      heroRatio: w < 720 ? '4 / 3' : '4 / 4.4', wideRatio: w < 720 ? '4 / 3' : '21 / 8',
+      services: SERVICES.map((s, i) => { const t = TILE[bento][i]; return { ...s, href: '#/services/' + s.id, hid: 'svc-' + s.id, requestHref: '#/contact?service=' + s.id, dir: i % 2 ? 'row-reverse' : 'row', secBg: i % 2 ? '#FFFFFF' : '#F6F0E7', ratio: i === 0 ? '1 / 1' : '4 / 3', shape: ['36px 36px 36px 160px', '999px 999px 36px 36px', '36px 160px 36px 36px', '36px'][i], dot: DOTS[i], col: t.col, row: t.row, tileBg: t.bg, tileBorder: t.bd, hasImg: t.img, flexDir: t.dir, imgH: t.imgH, imgFlex: t.imgFlex, pad: t.pad, textPad: t.tp, select: () => track('service_category_selected', { service: s.id }) }; }),
+      assurances: ['Call or request online', 'No account needed', 'Choose a preferred time'],
+      heroMinH: w < 720 ? '300px' : '520px', heroCardPos: w < 720 ? 'relative' : 'absolute', heroCardW: w < 720 ? 'auto' : 'min(340px, 70%)',
+      benefits: [
+        { n: '1', bg: '#F6F0E7', t: 'Describe it your way', d: 'The request form asks plain questions, so you can explain the problem without plumbing terminology.' },
+        { n: '2', bg: '#E7EFF9', t: 'Call or send a request', d: 'Phone directly or submit a request online. No account needed.' },
+        { n: '3', bg: '#E3F2EE', t: 'An organised request', d: 'Your issue, location and preferred time arrive together, so the follow-up conversation can start from the details.' },
+        { n: '4', bg: '#F6F0E7', t: 'Clear service information', d: 'Each service lists common signs to help you choose, or pick “Other” and describe it.' }
+      ],
+      faqHome: faqItems('h', visibleFaqs.slice(0, 4)), faqAll: faqItems('a', visibleFaqs),
+      expandAll: () => { const o = { ...st.faqOpen }; visibleFaqs.forEach((_, i) => o['a' + i] = true); this.setState({ faqOpen: o }); },
+      collapseAll: () => { const o = { ...st.faqOpen }; visibleFaqs.forEach((_, i) => o['a' + i] = false); this.setState({ faqOpen: o }); },
+      steps: [
+        { n: '1', bg: '#F6F0E7', t: 'Tell us about the issue', d: 'Choose a service type and describe what’s happening in your own words.' },
+        { n: '2', bg: '#E7EFF9', t: 'Share your contact and general location', d: 'Your name, phone, email and city or ZIP code.' },
+        { n: '3', bg: '#E3F2EE', t: 'Provide a preferred time', d: 'Pick a date if you have one and a time of day that suits you.' },
+        { n: '4', bg: '#F6F0E7', t: 'Submit your request', d: 'You’ll see a confirmation once it’s recorded. This doesn’t book an appointment.' }
+      ],
+      areaQuery: st.areaQuery, onAreaQuery: e => this.setState({ areaQuery: e.target.value, areaResult: null }), checkArea: e => this.checkArea(e),
+      areaHasResult: !!ar, areaText: ar ? ar.text : '', areaTone: tone[0], areaBg: tone[1], areaShowActions: !!ar && ar.kind !== 'error',
+      areaInvalid: ar && ar.kind === 'error' ? 'true' : 'false', areaBorder: ar && ar.kind === 'error' ? '#B42318' : '#E0D7CA',
+      hasAreas: APPROVED_AREAS.length > 0, noAreas: APPROVED_AREAS.length === 0, areas: APPROVED_AREAS,
+      form, on, blur, err, has, inv, bc, desc, today: today(), svcOptions: SVC_OPTIONS,
+      windows: WINDOWS.map(x => { const c = form.window === x.v; return { ...x, id: 'w-' + x.v, checked: c, border: c ? '#1F5FAD' : (errors.window ? '#B42318' : '#D9D0C3'), bg: c ? '#E7EFF9' : '#FFFEFC', pick: () => { this.setField('window', x.v); } }; }),
+      issueCount: (form.issue || '').length + ' / 1500',
+      showSummary: st.showSummary && errKeys.length > 0, summaryRef: this.summaryRef, errList,
+      summaryTitle: st.serverErr ? 'Please check the highlighted field' : 'Please fix ' + errKeys.length + (errKeys.length === 1 ? ' problem' : ' problems') + ' before sending',
+      netError: st.netError, submitting: st.submitting, busyAttr: st.submitting ? 'true' : 'false',
+      submitLabel: st.submitting ? 'Sending request…' : st.netError ? 'Try again' : 'Send Service Request',
+      submitBg: st.submitting ? '#6B8FBF' : '#1F5FAD', submitCursor: st.submitting ? 'progress' : 'pointer',
+      submit: e => this.submit(e), submitted: !!sub, notSubmitted: !sub, receipt, successRef: this.successRef, liveMsg: st.liveMsg,
+      newRequest: () => { const f = { ...EMPTY }; this.saveDraft(f); this.started = false; this.setState({ submitted: null, form: f, errors: {}, touched: {}, liveMsg: '' }); },
+      tips: ['Where the problem is (kitchen, bathroom, basement, outside)', 'What you notice: water, noise, smell, slow drainage', 'When it started and whether it’s getting worse', 'Whether you own or rent the property'],
+      asidePos: narrow ? 'static' : 'sticky',
+      showStickyBar: narrow && !isAdmin && !is.contact && !st.menuOpen, footerPad: narrow && !is.contact ? '84px' : '0px',
+      year: new Date().getFullYear(),
+
+      loginEmail: st.loginEmail, loginPass: st.loginPass, loginErr: st.loginErr, loggingIn: st.loggingIn, loginLabel: st.loggingIn ? 'Signing in…' : 'Sign in',
+      onLoginEmail: e => this.setState({ loginEmail: e.target.value }), onLoginPass: e => this.setState({ loginPass: e.target.value }), login: e => this.login(e),
+      logout: () => { sessionStorage.removeItem('wp-admin'); this.setState({ authed: false }, () => { window.location.hash = '#/admin/login'; }); },
+      adminDir: w < 900 ? 'column' : 'row', wideAdmin: w >= 900, narrowAdmin: w < 900, newCount: counts['New'],
+      statusTabs: [''].concat(STATUSES).map(s => { const a = st.fStatus === s; return { label: s || 'All', count: counts[s], pressed: a ? 'true' : 'false', border: a ? '#103F43' : '#C9D6D3', bg: a ? '#103F43' : '#fff', fg: a ? '#fff' : '#263238', pick: () => this.setState({ fStatus: s, page: 0 }) }; }),
+      q: st.q, onQ: e => this.setState({ q: e.target.value, page: 0 }),
+      fService: st.fService, onFService: e => this.setState({ fService: e.target.value, page: 0 }),
+      sort: st.sort, onSort: e => this.setState({ sort: e.target.value }), sortText: st.sort === 'new' ? 'newest first' : 'oldest first', ariaSort: st.sort === 'new' ? 'descending' : 'ascending',
+      clearFilters: () => this.setState({ q: '', fStatus: '', fService: '', page: 0 }),
+      adminLoading: busy, skeleton: ['92%', '78%', '86%', '64%', '81%'],
+      showEmpty: !busy && leads.length === 0, showTable: !busy && leads.length > 0 && w >= 900, showCards: !busy && leads.length > 0 && w < 900, showPager: !busy && leads.length > 0,
+      pageLeads, totalText: st.leads.length + ' total · ' + counts['New'] + ' new',
+      rangeText: leads.length ? 'Showing ' + (page * PER + 1) + '–' + Math.min(leads.length, page * PER + PER) + ' of ' + leads.length : '',
+      atFirst: page === 0, atLast: page >= pages - 1, prevOpacity: page === 0 ? 0.45 : 1, nextOpacity: page >= pages - 1 ? 0.45 : 1,
+      prevPage: () => this.setState({ page: Math.max(0, page - 1) }), nextPage: () => this.setState({ page: Math.min(pages - 1, page + 1) }),
+      leadMissing: is.adminLead && !raw, leadFound: !!raw, lead, leadFields, statuses: STATUSES,
+      statusDraft: st.statusDraft, onStatusDraft: e => this.setState({ statusDraft: e.target.value, statusMsg: '' }),
+      statusUnchanged: !raw || st.statusDraft === raw.status, saveBg: !raw || st.statusDraft === raw.status ? '#8FA3A6' : '#103F43',
+      saveStatus: e => { e.preventDefault(); if (!raw) return; const leadsN = st.leads.map(l => l.id === raw.id ? { ...l, status: st.statusDraft } : l); this.saveLeads(leadsN); this.setState({ leads: leadsN, statusMsg: 'Status updated to ' + st.statusDraft + '.' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
